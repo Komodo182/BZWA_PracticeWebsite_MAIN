@@ -1,0 +1,80 @@
+﻿@using PracticeWebsite.Models
+@page "/register"
+@rendermode InteractiveServer
+@using PracticeWebsite.Services
+@inject CustomerServices CustomerService
+@using Microsoft.AspNetCore.Components
+
+<style>
+    .nAlert {
+            padding: 10px;
+            background-color: #f44336;
+            color: white;
+            }
+    .pAlert {
+        padding: 10px;
+        background-color: #00FF00;
+        color: white;
+    }
+</style>
+<title>Register</title>
+<h3>Register</h3>
+
+<form>
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="username" @bind-value=customer.Username><br>
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" @bind-value=customer.Password><br>
+    <label for="rpassword">Confirm Password:</label><br>
+    <input type="password" id="rpassword" name="rpassword" @bind="rpassword"><br>
+    @if (!PasswordsMatch && customer.Password != "" && rpassword != "")
+    {
+            <label class="nAlert"><strong>Danger!</strong> Passwords do not match! Please fix this to continue.</label><br>
+    }
+    <label for="fname">First Name:</label><br>
+    <input type="text" id="fname" name="fname" @bind-value=customer.FirstName><br>
+    <label for="lname">Last Name:</label><br>
+    <input type="text" id="lname" name="lname" @bind-value=customer.LastName><br>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" @bind-value=customer.Email><br>
+    <label for="postcode">PostCode:</label><br>
+    <input type="text" id="postcode" name="postcode" @bind-value=customer.Postcode><br>
+    <label for="telnum">Phone Number:</label><br>
+    <input type="tel" id="telnum" name="telnum" @bind-value=customer.PhoneNumber><br>
+    <label for="dob">Date of Birth:</label><br>
+    <input type="date" id="dob" name="dob" @bind-value=customer.DateOfBirth><br>
+    <label class="form-check-label" for="employeeInputCheckbox">Are you an employee of our organisation?</label><br>
+    <input type="checkbox" @bind="isChecked" class="form-check-input" id="employeeInputCheckbox" /><br>
+    @if (isChecked)
+    {
+        <label for="employeeIDInput" class="form-label">Please provide your employee ID:</label><br>
+        <input type="text" @bind-value=customer.EmployeeId id="employeeIDInput" placeholder="123456789..." /><br>
+    }
+    <button @onclick=testButton>Register</button>
+</form>
+
+@code {
+    private Customer customer = new Customer();
+    private async Task testButton()
+    {
+        Console.WriteLine("Register button has been clicked");
+        Console.WriteLine(customer.Username);
+        Console.WriteLine(customer.Password);
+        Console.WriteLine(customer.FirstName);
+        Console.WriteLine(customer.LastName);
+        Console.WriteLine(customer.Email);
+        Console.WriteLine(customer.Postcode);
+        Console.WriteLine(customer.PhoneNumber);
+        Console.WriteLine(customer.DateOfBirth);
+        Console.WriteLine(customer.EmployeeId);
+        if (!PasswordsMatch && customer.Password != "" && rpassword != "")
+            await CustomerService.AddCustomerAsync(customer);
+            //<label class="pAlert"><strong>Danger!</strong> Passwords do not match! Please fix this to continue.</label><br>
+            
+    }
+    private bool isChecked = false;
+    private string employeeInfo = string.Empty;
+    private string password = string.Empty;
+    private string rpassword = string.Empty;
+    private bool PasswordsMatch => customer.Password == rpassword;
+}

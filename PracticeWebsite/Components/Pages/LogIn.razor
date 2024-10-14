@@ -1,0 +1,31 @@
+﻿@using PracticeWebsite.Models
+@page "/login"
+@rendermode InteractiveServer
+@using PracticeWebsite.Services
+@inject CustomerServices CustomerService
+
+<title>Register</title>
+<h3>LogIn</h3>
+
+<form> 
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="username" @bind-value=customer.Username><br>
+
+    <label for="username">Password:</label><br>
+    <input type="password" id="password" name="password" @bind-value=customer.Password><br>
+
+    <button @onclick=testButton>Log In</button>
+</form>
+
+@code {
+    private Customer customer = new Customer();
+
+    private async Task testButton()
+    {
+        Console.WriteLine("Register button has been clicked");
+        Console.WriteLine(customer.Username);
+        Console.WriteLine(customer.Password);
+        
+        await CustomerService.LogInCustomerAsync(customer);
+    }
+}
