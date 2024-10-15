@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using PracticeWebsite.Components;
 using PracticeWebsite.Models;
 using PracticeWebsite.Services;
+using MudBlazor.Services;
 
 namespace PracticeWebsite
 {
@@ -14,6 +15,8 @@ namespace PracticeWebsite
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
+
+            builder.Services.AddMudServices();
 
             builder.Services.AddDbContext<TlS2301171RzaContext>(options =>
                 options.UseMySql(builder.Configuration.GetConnectionString("MySqlConnection"),
