@@ -37,7 +37,7 @@
         <MudIconButton Icon="@Icons.Material.Filled.Login" Color="Color.Inherit" OnClick="@((e) => LoginToggle())" />
         <MudPopover Open="@_login" Fixed="true" Class="px-4 pt-4">
             <div class="d-flex flex-column">
-                <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
+                <MudForm @ref="LoginTicket" @bind-IsValid="@success" @bind-Errors="@errors">
                     <MudTextField T="string" Label="Username/Email" Required="true" RequiredError="Username or an Email is required!" />
                     <MudTextField T="string" Label="Password" Required="true" HelperText="Please input the password to the account." @ref="pwField1" InputType="InputType.Password" RequiredError="Password is required!"/>
                     <div class="d-flex align-center justify-space-between">
@@ -45,7 +45,7 @@
                     </div>
                 </MudForm>
                 Dont have an account? 
-                <a href="">Sign up!</a>
+                <a href="/register"> Sign up!</a>
             </div>
         </MudPopover>
     </MudAppBar>
@@ -63,31 +63,31 @@
     bool success;
     string[] errors = { };
     MudTextField<string> pwField1;
-    MudForm form;
+    MudForm LoginTicket;
 
-    private IEnumerable<string> PasswordStrength(string pw)
-    {
-        if (string.IsNullOrWhiteSpace(pw))
-        {
-            yield return "Password is required!";
-            yield break;
-        }
-        if (pw.Length < 8)
-            yield return "Password must be at least of length 8";
-        if (!Regex.IsMatch(pw, @"[A-Z]"))
-            yield return "Password must contain at least one capital letter";
-        if (!Regex.IsMatch(pw, @"[a-z]"))
-            yield return "Password must contain at least one lowercase letter";
-        if (!Regex.IsMatch(pw, @"[0-9]"))
-            yield return "Password must contain at least one digit";
-    }
+    // private IEnumerable<string> PasswordStrength(string pw)
+    // {
+    //     if (string.IsNullOrWhiteSpace(pw))
+    //     {
+    //         yield return "Password is required!";
+    //         yield break;
+    //     }
+    //     if (pw.Length < 8)
+    //         yield return "Password must be at least of length 8";
+    //     if (!Regex.IsMatch(pw, @"[A-Z]"))
+    //         yield return "Password must contain at least one capital letter";
+    //     if (!Regex.IsMatch(pw, @"[a-z]"))
+    //         yield return "Password must contain at least one lowercase letter";
+    //     if (!Regex.IsMatch(pw, @"[0-9]"))
+    //         yield return "Password must contain at least one digit";
+    // }
 
-    private string PasswordMatch(string arg)
-    {
-        if (pwField1.Value != arg)
-            return "Passwords don't match";
-        return null;
-    }
+    // private string PasswordMatch(string arg)
+    // {
+    //     if (pwField1.Value != arg)
+    //         return "Passwords don't match";
+    //     return null;
+    // }
 
     void DrawerToggle()
     {
