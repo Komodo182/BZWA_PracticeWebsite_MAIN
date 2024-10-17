@@ -35,7 +35,7 @@
         The Zoooooooo heheheh
         <MudSpacer />
         <MudIconButton Icon="@Icons.Material.Filled.Login" Color="Color.Inherit" OnClick="@((e) => LoginToggle())" />
-        <MudPopover Open="@_login" Fixed="true" Class="px-4 pt-4">
+        <MudPopover Open="@_login" Fixed="true" Class="px-4 pt-4" AnchorOrigin = "Origin.TopRight" TransformOrigin = "Origin.TopRight">
             <div class="d-flex flex-column">
                 <MudForm @ref="LoginTicket" @bind-IsValid="@success" @bind-Errors="@errors">
                     <MudTextField T="string" Label="Username/Email" Required="true" RequiredError="Username or an Email is required!" />
