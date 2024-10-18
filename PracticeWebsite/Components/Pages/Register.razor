@@ -2,9 +2,11 @@
 @page "/register"
 @rendermode InteractiveServer
 @using PracticeWebsite.Services
+@using PracticeWebsite.Utilities
 @inject CustomerServices CustomerService
 @using Microsoft.AspNetCore.Components
 @using System.ComponentModel.DataAnnotations
+@using MudBlazor.Interfaces
 
 <title>Register</title>
 <h3>Register</h3>
@@ -14,30 +16,41 @@
         <MudItem xs="12" sm="7">
             <MudCard>
                 <MudCardContent>
-                    <MudTextField Label="First name" HelperText="Max. 15 characters"
-                                  @bind-Value="model.FirstName" For="@(() => model.FirstName)" />
-                    <MudTextField Label="Last name" HelperText="Max. 20 characters"
-                                  @bind-Value="model.LastName" For="@(() => model.LastName)" />
-                    <MudTextField Label="Email" Class="mt-3"
-                                  @bind-Value="model.Email" For="@(() => model.Email)" InputType="InputType.Email" />
-                    <MudTextField Label="Username" HelperText="Max. 8 characters"
-                                  @bind-Value="model.Username" For="@(() => model.Username)" />
-                    <MudTextField Label="Password" HelperText="Choose a strong password" Class="mt-3"
-                                  @bind-Value="model.Password" For="@(() => model.Password)" InputType="InputType.Password" />
-                    <MudTextField Label="Repeat Password" HelperText="Repeat the password" Class="mt-3"
-                                  @bind-Value="model.Password2" For="@(() => model.Password2)" InputType="InputType.Password" />
-                    <MudTextField Label="Post Code" HelperText="Please provide your postcode. Max. 8 characters"
-                                  @bind-Value="model.PostCode" For="@(() => model.PostCode)" />
-                    <MudTextField Label="Phone Number" HelperText="Please provide your phone number. Max. 11 characters" .
-                                  @bind-Value="model.PhoneNumber" For="@(() => model.PhoneNumber)" InputType="InputType.Telephone" />
-                    <MudTextField Label="Date Of Birth" HelperText="Please provide your date of birth."
-                                  @bind-Value="model.DoB" For="@(() => model.DoB)" InputType="InputType.Date" />
+                    <MudTextField ShrinkLabel Label="First name" HelperText="Max. 15 characters" HelperTextOnFocus="true"
+                                  Counter="15" MaxLength="15" Immediate="true" @bind-Value="model.FirstName" For="@(() => model.FirstName)" Variant="Variant.Outlined" />
+
+                    <MudTextField ShrinkLabel Label="Last name" HelperText="Max. 20 characters" HelperTextOnFocus="true"
+                                  Counter="20" MaxLength="20" Immediate="true" @bind-Value="model.LastName" For="@(() => model.LastName)" Variant="Variant.Outlined" />
+
+                    <MudTextField ShrinkLabel Label="Email" Class="mt-3" HelperText="Input your email." HelperTextOnFocus="true"
+                                  @bind-Value="model.Email" For="@(() => model.Email)" InputType="InputType.Email" Variant="Variant.Outlined" />
+
+                    <MudTextField ShrinkLabel Label="Username" HelperText="Max. 10 characters" HelperTextOnFocus="true"
+                                  Counter="10" MaxLength="10" Immediate="true" @bind-Value="model.Username" For="@(() => model.Username)" Variant="Variant.Outlined" />
+
+                    <MudTextField ShrinkLabel Label="Password" Class="mt-3" HelperText="Choose a strong password" HelperTextOnFocus="true"
+                                  Counter="30" MaxLength="30" Immediate="true" @bind-Value="model.Password" For="@(() => model.Password)" Variant="Variant.Outlined" 
+                                  InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ShowPasswordToggle" AdornmentAriaLabel="Show Password" />
+
+                    <MudTextField ShrinkLabel Label="Repeat Password" Class="mt-3" HelperText="Repeat the password" HelperTextOnFocus="true"
+                                  Counter="30" MaxLength="30" Immediate="true" @bind-Value="model.Password2" For="@(() => model.Password2)" Variant="Variant.Outlined" 
+                                  InputType="@PasswordInput2" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon2" OnAdornmentClick="ShowPasswordToggle2" AdornmentAriaLabel="Show Repeated Password" />
+
+                    <MudTextField ShrinkLabel Label="Post Code" Class="mt-3" HelperText="Please provide your postcode. Max. 8 characters" HelperTextOnFocus="true"
+                                  Counter="8" MaxLength="8" Immediate="true" @bind-Value="model.PostCode" For="@(() => model.PostCode)" Variant="Variant.Outlined" />
+
+                    <MudTextField ShrinkLabel Label="Phone Number" Class="mt-3" HelperText="Please provide your phone number. Max. 11 characters" HelperTextOnFocus="true"
+                                  Counter="11" MaxLength="11" Immediate="true" @bind-Value="model.PhoneNumber" For="@(() => model.PhoneNumber)" InputType="InputType.Telephone" Variant="Variant.Outlined" />
+
+                    <MudTextField ShrinkLabel Label="Date Of Birth" HelperText="Please provide your date of birth." HelperTextOnFocus="true"
+                                  @bind-Value="model.DoB" For="@(() => model.DoB)" InputType="InputType.Date" Variant="Variant.Outlined" />
+
                     <MudCheckBox T="bool" Label="Are you an employee?" @bind-Value="model.employeeStatus" For="@(() => model.employeeStatus)" />
                     @if (model.employeeStatus)
                     {
-                        <MudTextField Label="Employee ID" HelperText="Please input your employee identification code."
-                                      @bind-Value="model.EmployeeID" For="@(() => model.EmployeeID)" />
-                    }
+                        <MudTextField ShrinkLabel Label="Employee ID" HelperText="Please input your employee identification code."
+                                      @bind-Value="model.EmployeeID" For="@(() => model.EmployeeID)" Variant="Variant.Outlined"/>
+                    } 
                 </MudCardContent>
                 <MudCardActions>
                     <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
@@ -68,45 +81,47 @@
 </EditForm>
 
 @code {
-    
     RegisterAccountForm model = new RegisterAccountForm();
     bool success;
 
-    public class RegisterAccountForm
+    bool isShow;
+    bool isShow2;
+    InputType PasswordInput = @InputType.Password;
+    InputType PasswordInput2 = @InputType.Password;
+    string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+    string PasswordInputIcon2 = Icons.Material.Filled.VisibilityOff;
+
+    private void ShowPasswordToggle()
     {
-        
-        [Required]
-        [StringLength(15, ErrorMessage = "Length of the name can't be more than 15 characters long.")]
-        public string FirstName { get; set; }
-        [Required]
-        [StringLength(20, ErrorMessage = "Length of the name can't be more than 20 characters long.")]
-        public string LastName { get; set; }
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
-        [Required]
-        [StringLength(8, ErrorMessage = "Username length can't be more than 8 charcaters long.")]
-        public string Username { get; set; }
-        [Required]
-        [StringLength(30, ErrorMessage = "Password must be at least 8 characters long.", MinimumLength = 8)]
-        public string Password { get; set; }
-        [Required]
-        [Compare(nameof(Password))]
-        public string Password2 { get; set; }
-        [Required]
-        [StringLength(8, ErrorMessage = "The postcode is invalid length.", MinimumLength = 8)]
-        public string PostCode { get; set; }
-        [Required]
-        [StringLength(11, ErrorMessage = "Invalid phone number length.", MinimumLength = 11)]
-        public string PhoneNumber { get; set; }
-        [Required]
-        [StringLength(8, ErrorMessage = "Invalid date has been provided.")]
-        public string DoB { get; set; }
-        public bool employeeStatus { get; set; }
-        [StringLength(12, ErrorMessage = "Please input your Employee identification code.", MinimumLength = 12)]
-        public string EmployeeID { get; set; }
+        @if (isShow)
+        {
+            isShow = false;
+            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+            PasswordInput = InputType.Password;
+        }
+        else
+        {
+            isShow = true;
+            PasswordInputIcon = Icons.Material.Filled.Visibility;
+            PasswordInput = InputType.Text;
+        }
     }
 
+    private void ShowPasswordToggle2()
+    {
+        @if (isShow2)
+        {
+            isShow2 = false;
+            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+            PasswordInput = InputType.Password;
+        }
+        else
+        {
+            isShow2 = true;
+            PasswordInputIcon = Icons.Material.Filled.Visibility;
+            PasswordInput = InputType.Text;
+        }
+    }
     private void OnValidSubmit(EditContext context)
     {
         success = true;
@@ -124,4 +139,3 @@
         Console.WriteLine(model.EmployeeID);
     }
 }
-
