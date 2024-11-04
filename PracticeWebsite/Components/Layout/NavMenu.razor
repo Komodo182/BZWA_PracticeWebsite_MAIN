@@ -41,11 +41,13 @@
 </div> *@
 
 <MudNavMenu>
-    <MudNavLink Href="/" Match="NavLinkMatch.All">Dashboard</MudNavLink>
-    <MudNavLink Href="/servers" Match="NavLinkMatch.Prefix">Servers</MudNavLink>
-    <MudNavGroup Title="Settings" Expanded="true">
-        <MudNavLink Href="/users" Match="NavLinkMatch.Prefix">Users</MudNavLink>
-        <MudNavLink Href="/security" Match="NavLinkMatch.Prefix">Security</MudNavLink>
+    <MudText Typo="Typo.h6" Class="px-4">Employee ToolBox</MudText>
+    <MudDivider Class="my-2" />
+    <MudNavLink Href="/servers" Icon="@Icons.Material.Filled.Storage" >Server Connections</MudNavLink>
+    <MudNavGroup Title="Settings" Icon="@Icons.Material.Filled.Settings" Expanded="true">
+        <MudNavLink Href="/userman" Icon="@Icons.Material.Filled.People" >User Management</MudNavLink>
+        <MudNavLink Href="/securityman" Icon="@Icons.Material.Filled.AdminPanelSettings" >Security Management</MudNavLink>
     </MudNavGroup>
-    <MudNavLink Href="/about" Match="NavLinkMatch.Prefix">About</MudNavLink>
+    <MudNavLink Href="/dataman" Icon="@Icons.Material.Filled.Equalizer">Data Records</MudNavLink>
+    <MudNavLink Href="/about" Icon="@Icons.Material.Filled.Build" >About</MudNavLink>
 </MudNavMenu>

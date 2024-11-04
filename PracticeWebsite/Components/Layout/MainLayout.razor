@@ -2,38 +2,98 @@
 @using System.Text.RegularExpressions
 @using System.ComponentModel.DataAnnotations
 
-@* <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
-
-<div id="blazor-error-ui">
-    An unhandled error has occurred.
-    <a href="" class="reload">Reload</a>
-    <a class="dismiss">🗙</a>
-</div> *@
-
 <MudThemeProvider />
 <MudPopoverProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar Elevation = "10">
+    <MudAppBar Elevation = "10" Style="@($"background:{Colors.LightGreen.Darken2};")">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        The Zoo
+        <a href="/">The Zoo!</a>
         <MudSpacer />
+
+        <MudMenu Label="Book/Buy" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+            <ActivatorContent>
+                <MudChip T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">Book/Buy</MudChip>
+            </ActivatorContent>
+            <ChildContent>
+                <MudMenuItem Href="/">Park Admission Tickets</MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/">Memberships</MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/">Members Admission</MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/">The Real Ranger Experience</MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/">Gift Shop</MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/">Adobt an Animal</MudMenuItem>
+            </ChildContent>
+        </MudMenu>
+        <MudSpacer />
+
+        <MudMenu Label="Explore" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+            <ActivatorContent>
+                <MudChip T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">Explore</MudChip>
+            </ActivatorContent>
+            <ChildContent>
+                <MudMenuItem Href="/animals"> Animals </MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/animals/experience"> Animal Experiences </MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/events"> Shows & Ranger Talks </MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/events/special"> Special Events </MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/map"> Park Map </MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/hotel/experience"> Stay at the Hotel </MudMenuItem>
+            </ChildContent>
+        </MudMenu>
+        <MudSpacer />
+
+        <MudMenu Label="Venue Hire" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+            <ActivatorContent>
+                <MudChip T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">Venue Hire</MudChip>
+            </ActivatorContent>
+            <ChildContent>
+                <MudMenuItem Href="/">Weddings</MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/">Corporate Hospitality</MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/">Team Building</MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/">Meetings & Conferences</MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/">Private Parties</MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/">Educational Visits</MudMenuItem>
+            </ChildContent>
+        </MudMenu>
+        <MudSpacer />
+
+        <MudMenu Label="More" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+            <ActivatorContent>
+                <MudChip T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">More</MudChip>
+            </ActivatorContent>
+            <ChildContent>
+                <MudMenuItem Href="/">Opening Times</MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/">How to get here</MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/">Accessibility</MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/">Policies</MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/">Contact</MudMenuItem>
+                <MudDivider />
+                <MudMenuItem Href="/">FAQs</MudMenuItem>
+            </ChildContent>
+        </MudMenu>
+        <MudSpacer />
+        
+        <MudButton Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White} ; background:{Colors.Green.Darken3};")" Href="/">Book Tickets!</MudButton>
         <MudIconButton Icon="@Icons.Material.Filled.Login" Color="Color.Inherit" OnClick="@((e) => LoginToggle())" />
         <MudPopover Open="@_login" Fixed="true" Class="px-4 pt-4" AnchorOrigin = "Origin.TopRight" TransformOrigin = "Origin.TopRight">
             <div class="d-flex flex-column">
@@ -47,7 +107,7 @@
                 Dont have an account? 
                 <a href="/register"> Sign up!</a>
             </div>
-        </MudPopover>
+        </MudPopover>    
     </MudAppBar>
     <MudDrawer @bind-Open="@_drawerOpen">
         <NavMenu/>
@@ -59,7 +119,7 @@
 @code {
     bool _drawerOpen = false;
     private bool _login;
-    bool employee = false;
+    bool employee = true;
     bool success;
     string[] errors = { };
     MudTextField<string> pwField1;
