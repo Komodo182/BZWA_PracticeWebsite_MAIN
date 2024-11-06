@@ -18,17 +18,17 @@
                 <MudChip T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">Book/Buy</MudChip>
             </ActivatorContent>
             <ChildContent>
-                <MudMenuItem Href="/">Park Admission Tickets</MudMenuItem>
+                <MudMenuItem Href="/tickets">Park Admission Tickets</MudMenuItem>
                 <MudDivider />
-                <MudMenuItem Href="/">Memberships</MudMenuItem>
+                <MudMenuItem Href="/membership">Memberships</MudMenuItem>
                 <MudDivider />
-                <MudMenuItem Href="/">Members Admission</MudMenuItem>
+                <MudMenuItem Href="/membership/requirements">Members Admission</MudMenuItem>
                 <MudDivider />
-                <MudMenuItem Href="/">The Real Ranger Experience</MudMenuItem>
+                <MudMenuItem Href="/animals/rangerexperience">The Real Ranger Experience</MudMenuItem>
                 <MudDivider />
-                <MudMenuItem Href="/">Gift Shop</MudMenuItem>
+                <MudMenuItem Href="/gifts">Gift Shop</MudMenuItem>
                 <MudDivider />
-                <MudMenuItem Href="/">Adobt an Animal</MudMenuItem>
+                <MudMenuItem Href="/gifts/adoptananimal">Adobt an Animal</MudMenuItem>
             </ChildContent>
         </MudMenu>
         <MudSpacer />
@@ -58,17 +58,17 @@
                 <MudChip T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">Venue Hire</MudChip>
             </ActivatorContent>
             <ChildContent>
-                <MudMenuItem Href="/">Weddings</MudMenuItem>
+                <MudMenuItem Href="/venue/wedding">Weddings</MudMenuItem>
                 <MudDivider />
-                <MudMenuItem Href="/">Corporate Hospitality</MudMenuItem>
+                <MudMenuItem Href="/venue/hospitality">Corporate Hospitality</MudMenuItem>
                 <MudDivider />
                 <MudMenuItem Href="/">Team Building</MudMenuItem>
                 <MudDivider />
-                <MudMenuItem Href="/">Meetings & Conferences</MudMenuItem>
+                <MudMenuItem Href="/venue/business">Meetings & Conferences</MudMenuItem>
                 <MudDivider />
-                <MudMenuItem Href="/">Private Parties</MudMenuItem>
+                <MudMenuItem Href="/venue">Private Parties</MudMenuItem>
                 <MudDivider />
-                <MudMenuItem Href="/">Educational Visits</MudMenuItem>
+                <MudMenuItem Href="/educationalvisit">Educational Visits</MudMenuItem>
             </ChildContent>
         </MudMenu>
         <MudSpacer />
@@ -78,22 +78,23 @@
                 <MudChip T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">More</MudChip>
             </ActivatorContent>
             <ChildContent>
-                <MudMenuItem Href="/">Opening Times</MudMenuItem>
+                <MudMenuItem Href="/openingtimes">Opening Times</MudMenuItem>
                 <MudDivider />
-                <MudMenuItem Href="/">How to get here</MudMenuItem>
+                <MudMenuItem Href="/howtogethere">How to get here</MudMenuItem>
                 <MudDivider />
-                <MudMenuItem Href="/">Accessibility</MudMenuItem>
+                <MudMenuItem Href="/policies/accessibility">Accessibility</MudMenuItem>
                 <MudDivider />
-                <MudMenuItem Href="/">Policies</MudMenuItem>
+                <MudMenuItem Href="/policies">Policies</MudMenuItem>
                 <MudDivider />
-                <MudMenuItem Href="/">Contact</MudMenuItem>
+                <MudMenuItem Href="/contact">Contact</MudMenuItem>
                 <MudDivider />
-                <MudMenuItem Href="/">FAQs</MudMenuItem>
+                <MudMenuItem Href="/faqs">FAQs</MudMenuItem>
             </ChildContent>
         </MudMenu>
         <MudSpacer />
-        
-        <MudButton Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White} ; background:{Colors.Green.Darken3};")" Href="/">Book Tickets!</MudButton>
+
+        <MudButton Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White} ; background:{Colors.Green.Darken3};")" Href="/tickets">Book Tickets!</MudButton>
+
         <MudIconButton Icon="@Icons.Material.Filled.Login" Color="Color.Inherit" OnClick="@((e) => LoginToggle())" />
         <MudPopover Open="@_login" Fixed="true" Class="px-4 pt-4" AnchorOrigin = "Origin.TopRight" TransformOrigin = "Origin.TopRight">
             <div class="d-flex flex-column">
@@ -116,6 +117,7 @@
         @Body
     </MudMainContent>
 </MudLayout>
+
 @code {
     bool _drawerOpen = false;
     private bool _login;

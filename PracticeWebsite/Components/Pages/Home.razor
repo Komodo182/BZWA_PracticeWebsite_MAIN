@@ -1,8 +1,34 @@
-﻿@page "/"
+﻿@using PracticeWebsite.Models
+@page "/"
+@rendermode InteractiveServer
+@using PracticeWebsite.Services
+@using PracticeWebsite.Utilities
+@inject CustomerServices CustomerService
+@using Microsoft.AspNetCore.Components
+@using System.ComponentModel.DataAnnotations
+@using MudBlazor.Interfaces
 
 <PageTitle>Home</PageTitle>
 
-<h1>Welcome To the Zoo!</h1>
+@* <h1>Welcome To the Zoo!</h1>
 <p>Welcome to the zoo how may we help you?</p>
 
-<a href="register">register link</a>
+<a href="register">register link</a> *@
+
+<MudCarousel Class="mud-width-full" Style="height:900px;" ShowArrows="false" ShowBullets="false" EnableSwipeGesture="false" AutoCycle="true" TData="object">
+    <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Primary">
+        <div class="d-flex" style="height:100%">
+            <MudIcon Class="mx-auto my-auto" Icon="@Icons.Custom.Brands.MudBlazor" Size="@Size.Large" />
+        </div>
+    </MudCarouselItem>
+    <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Secondary">
+        <div class="d-flex" style="height:100%">
+            <MudIcon Class="mx-auto my-auto" Icon="@Icons.Custom.Brands.MudBlazor" Size="@Size.Large" />
+        </div>
+    </MudCarouselItem>
+    <MudCarouselItem Transition="@Transition.Slide">
+        <div class="d-flex" style="height:100%">
+            <MudIcon Class="mx-auto my-auto" Icon="@Icons.Custom.Brands.MudBlazor" Color="@Color.Primary" Size="@Size.Large" />
+        </div>
+    </MudCarouselItem>
+</MudCarousel> 
