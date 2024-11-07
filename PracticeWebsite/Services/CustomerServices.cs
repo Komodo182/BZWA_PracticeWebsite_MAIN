@@ -1,5 +1,7 @@
 ﻿using PracticeWebsite.Models;
+using Microsoft.EntityFrameworkCore;
 namespace PracticeWebsite.Services
+
 {
     public class CustomerServices
     {

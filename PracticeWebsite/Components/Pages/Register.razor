@@ -1,9 +1,9 @@
-﻿@using PracticeWebsite.Models
-@page "/register"
+﻿@page "/register"
 @rendermode InteractiveServer
+@inject CustomerServices CustomerService
+@using PracticeWebsite.Models
 @using PracticeWebsite.Services
 @using PracticeWebsite.Utilities
-@inject CustomerServices CustomerService
 @using Microsoft.AspNetCore.Components
 @using System.ComponentModel.DataAnnotations
 @using MudBlazor.Interfaces
@@ -138,4 +138,6 @@
         Console.WriteLine(model.employeeStatus);
         Console.WriteLine(model.EmployeeID);
     }
+    //private async Task OnValidSubmit()
+    //{await CustomerService.AddCutomerAsync(newCustomer);}
 }

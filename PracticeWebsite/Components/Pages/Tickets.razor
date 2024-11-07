@@ -1,37 +1,33 @@
 ﻿@page "/tickets"
 
-<h3>Tickets</h3>
-
 <MudContainer Class="mt-16">
-    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Pricing</MudText>
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Prici g</MudText>
     <MudText Align="Align.Center">Some long pricing text should go here maybe? who knows what text you would want here, i guess i cant fill it in for you.</MudText>
     <MudGrid Class="mt-8">
         <MudItem xs="12" sm="6" md="4">
             <MudCard Elevation="25" Class="rounded-lg pb-4">
                 <MudCardHeader>
                     <CardHeaderContent>
-                        <MudText Typo="Typo.h5" Align="Align.Center">Beginner</MudText>
+                        <MudText Typo="Typo.h5" Align="Align.Center">Admission Tickets</MudText>
                     </CardHeaderContent>
                 </MudCardHeader>
                 <MudCardContent>
                     <div class="d-flex justify-center">
-                        <MudText Typo="Typo.h3">$5</MudText>
-                        <MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">/Monthly</MudText>
+                        <MudText Typo="Typo.h6" Class="ml-1 mt-5">Prices from</MudText>
+                        <MudText Typo="Typo.h4" Class="ml-1 mt-5" Color="Color.Secondary">£19.99</MudText>
+                        <MudText Typo="Typo.h6" Class="ml-1 mt-5">per person.</MudText>
                     </div>
                     <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
-                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-                            Unlimited something
+                        <MudListItem Icon="@Icons.Material.Filled.Check">
+                            Save almost £5 per ticket when booking up until midnight the day before your planned visit.
                         </MudListItem>
-                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-                            10 something
-                        </MudListItem>
-                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-                            No something
+                        <MudListItem Icon="@Icons.Material.Filled.Check">
+                            Hundreds of animals to see at our zoo!
                         </MudListItem>
                     </MudList>
                 </MudCardContent>
                 <MudCardActions Class="d-flex justify-center">
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Start Now</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;" Href="/tickets/processing">Explore Now</MudButton>
                 </MudCardActions>
             </MudCard>
         </MudItem>
@@ -39,28 +35,32 @@
             <MudCard Elevation="25" Class="rounded-lg pb-4">
                 <MudCardHeader>
                     <CardHeaderContent>
-                        <MudText Typo="Typo.h5" Align="Align.Center">Starter</MudText>
+                        <MudText Typo="Typo.h5" Align="Align.Center">Annual Membership</MudText>
                     </CardHeaderContent>
                 </MudCardHeader>
                 <MudCardContent>
                     <div class="d-flex justify-center">
-                        <MudText Typo="Typo.h3">$10</MudText>
-                        <MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">/Monthly</MudText>
+                        <MudText Typo="Typo.h6" Class="ml-1 mt-5">Prices from</MudText>
+                        <MudText Typo="Typo.h4" Class="ml-1 mt-5" Color="Color.Secondary">£81.99</MudText>
+                        <MudText Typo="Typo.h6" Class="ml-1 mt-5">per person.</MudText>
                     </div>
                     <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
-                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-                            Unlimited something
+                        <MudListItem Icon="@Icons.Material.Filled.Check">
+                            Choose from variation of levels of memberships to choose from.
                         </MudListItem>
-                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-                            10 something
+                        <MudListItem Icon="@Icons.Material.Filled.Check">
+                            Unlimited  visits for 12 months.
                         </MudListItem>
-                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-                            No something
+                        <MudListItem Icon="@Icons.Material.Filled.Check">
+                            Exclusive Food & Drink discounts as well as gifts!
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.Check">
+                            And many more perks available.
                         </MudListItem>
                     </MudList>
                 </MudCardContent>
                 <MudCardActions Class="d-flex justify-center">
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Start Now</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;" Href="/memberships">Explore Now</MudButton>
                 </MudCardActions>
             </MudCard>
         </MudItem>
@@ -68,28 +68,32 @@
             <MudCard Elevation="25" Class="rounded-lg pb-4">
                 <MudCardHeader>
                     <CardHeaderContent>
-                        <MudText Typo="Typo.h5" Align="Align.Center">Professional</MudText>
+                        <MudText Typo="Typo.h5" Align="Align.Center">The Ranger Experience</MudText>
                     </CardHeaderContent>
                 </MudCardHeader>
                 <MudCardContent>
                     <div class="d-flex justify-center">
-                        <MudText Typo="Typo.h3">$15</MudText>
-                        <MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">/Monthly</MudText>
+                        <MudText Typo="Typo.h6" Class="ml-1 mt-5">Prices from</MudText>
+                        <MudText Typo="Typo.h4" Class="ml-1 mt-5" Color="Color.Secondary">£120</MudText>
+                        <MudText Typo="Typo.h6" Class="ml-1 mt-5">per 2 people.</MudText>
                     </div>
                     <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
-                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-                            Unlimited something
+                        <MudListItem Icon="@Icons.Material.Filled.Check">
+                            Get up close and play with many of our incredible animals.
                         </MudListItem>
-                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-                            10 something
+                        <MudListItem Icon="@Icons.Material.Filled.Check">
+                            Go behind the scenes of the park and see what it is truely about.
                         </MudListItem>
-                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-                            No something
+                        <MudListItem Icon="@Icons.Material.Filled.Check">
+                            Learn all the in and outs with our animals with experienced rangers.
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.Check">
+                            Park entry included.
                         </MudListItem>
                     </MudList>
                 </MudCardContent>
                 <MudCardActions Class="d-flex justify-center">
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Start Now</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;" Href="/animals/rangerexperience">Explore Now</MudButton>
                 </MudCardActions>
             </MudCard>
         </MudItem>
