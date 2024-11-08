@@ -1,4 +1,10 @@
 ﻿@inherits LayoutComponentBase
+@inject PracticeWebsite.Services.CustomerServices CustomerService
+@inject NavigationManager NavigationManager
+@using PracticeWebsite.Utilities
+@inject UserSession UserSession
+@rendermode InteractiveServer
+@using PracticeWebsite.Models
 @using System.Text.RegularExpressions
 @using System.ComponentModel.DataAnnotations
 
@@ -98,13 +104,15 @@
         <MudIconButton Icon="@Icons.Material.Filled.Login" Color="Color.Inherit" OnClick="@((e) => LoginToggle())" />
         <MudPopover Open="@_login" Fixed="true" Class="px-4 pt-4" AnchorOrigin = "Origin.TopRight" TransformOrigin = "Origin.TopRight">
             <div class="d-flex flex-column">
-                <MudForm @ref="LoginTicket" @bind-IsValid="@success" @bind-Errors="@errors">
-                    <MudTextField T="string" Label="Username/Email" Required="true" RequiredError="Username or an Email is required!" />
-                    <MudTextField T="string" Label="Password" Required="true" HelperText="Please input the password to the account." @ref="pwField1" InputType="InputType.Password" RequiredError="Password is required!"/>
+                <EditForm Model = "LogInCustomer" OnValidSubmit="HandleValidSubmit" FormName="LogInTicket" @* @ref="LoginTicket" @bind-IsValid="@success" @bind-Errors="@errors" *@>
+                    <DataAnnotationsValidator/>
+                    <ValidationSummary/>
+                    <MudTextField T="string" Label="Username/Email" Required="true" @bind-Value="LogInCustomer.Username" RequiredError=" Username or an Email is required!" />
+                    <MudTextField T="string" Label="Password" Required="true" HelperText="Please input the password to the account." @bind-Value="password" @ref="pwField1" InputType="InputType.Password" RequiredError="Password is required!"/>
                     <div class="d-flex align-center justify-space-between">
                         <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success)" Class="ml-auto">Log in</MudButton>
                     </div>
-                </MudForm>
+                </EditForm>
                 Dont have an account? 
                 <a href="/register"> Sign up!</a>
             </div>
@@ -119,6 +127,8 @@
 </MudLayout>
 
 @code {
+    private Customer LogInCustomer = new Customer();
+    private string password;
     bool _drawerOpen = false;
     private bool _login;
     bool employee = true;
@@ -164,4 +174,18 @@
     }
 
     private void LoginToggle() => _login = !_login;
+    private async Task HandleValidSubmit()
+    {
+        LogInCustomer.Password = password; //await PasswordUtils.HashPassword(password);
+        LogInCustomer = await CustomerService.LogIn(LogInCustomer);
+        if (LogInCustomer == null)
+        {
+            Console.WriteLine("Could not log in");
+        }
+        else
+        {
+            UserSession.UserId = LogInCustomer.CustomerId;
+            NavigationManager.NavigateTo("/");
+        }
+    }
 }

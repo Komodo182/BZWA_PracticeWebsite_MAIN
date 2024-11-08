@@ -53,7 +53,7 @@
                     } 
                 </MudCardContent>
                 <MudCardActions>
-                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+                    <MudButton ButtonType ="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
                 </MudCardActions>
             </MudCard>
         </MudItem>
@@ -81,7 +81,7 @@
 </EditForm>
 
 @code {
-    RegisterAccountForm model = new RegisterAccountForm();
+    private RegisterAccountForm model = new RegisterAccountForm();
     bool success;
 
     bool isShow;
@@ -112,32 +112,46 @@
         @if (isShow2)
         {
             isShow2 = false;
-            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
-            PasswordInput = InputType.Password;
+            PasswordInputIcon2 = Icons.Material.Filled.VisibilityOff;
+            PasswordInput2 = InputType.Password;
         }
         else
         {
             isShow2 = true;
-            PasswordInputIcon = Icons.Material.Filled.Visibility;
-            PasswordInput = InputType.Text;
+            PasswordInputIcon2 = Icons.Material.Filled.Visibility;
+            PasswordInput2 = InputType.Text;
         }
     }
-    private void OnValidSubmit(EditContext context)
+    // private void OnValidSubmit(EditContext context)
+    // {
+    //     success = true;
+    //     StateHasChanged();
+    //     Console.WriteLine("Register button has been clicked");
+    //     Console.WriteLine(model.Username);
+    //     Console.WriteLine(model.Password);
+    //     Console.WriteLine(model.FirstName);
+    //     Console.WriteLine(model.LastName);
+    //     Console.WriteLine(model.Email);
+    //     Console.WriteLine(model.PostCode);
+    //     Console.WriteLine(model.PhoneNumber);
+    //     Console.WriteLine(model.DoB);
+    //     Console.WriteLine(model.employeeStatus);
+    //     Console.WriteLine(model.EmployeeID);
+    // }
+    private async Task OnValidSubmit()
     {
-        success = true;
-        StateHasChanged();
-        Console.WriteLine("Register button has been clicked");
-        Console.WriteLine(model.Username);
-        Console.WriteLine(model.Password);
-        Console.WriteLine(model.FirstName);
-        Console.WriteLine(model.LastName);
-        Console.WriteLine(model.Email);
-        Console.WriteLine(model.PostCode);
-        Console.WriteLine(model.PhoneNumber);
-        Console.WriteLine(model.DoB);
-        Console.WriteLine(model.employeeStatus);
-        Console.WriteLine(model.EmployeeID);
+        bool usernameTaken = await CustomerService.CheckUsernameExistsAsync(model.Username);
+        if (usernameTaken)
+        {
+            Console.WriteLine("username taken");
+            success = false;
+        }
+        else
+        {
+            await CustomerService.AddCustomerAsync(model);
+            model = new RegisterAccountForm();
+            success = true;
+        }
+        
     }
-    //private async Task OnValidSubmit()
-    //{await CustomerService.AddCutomerAsync(newCustomer);}
 }

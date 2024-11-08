@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using PracticeWebsite.Components;
 using PracticeWebsite.Models;
 using PracticeWebsite.Services;
+using PracticeWebsite.Utilities;
 using MudBlazor.Services;
 
 namespace PracticeWebsite
@@ -23,6 +24,8 @@ namespace PracticeWebsite
                 new MySqlServerVersion(new Version(8, 0, 29))));
 
             builder.Services.AddScoped<CustomerServices>();
+            builder.Services.AddScoped<UserSession>();
+            builder.Services.AddSingleton<UserSession>();
 
             var app = builder.Build();
 
