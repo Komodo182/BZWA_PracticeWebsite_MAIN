@@ -103,20 +103,35 @@
 
         <MudIconButton Icon="@Icons.Material.Filled.Login" Color="Color.Inherit" OnClick="@((e) => LoginToggle())" />
         <MudPopover Open="@_login" Fixed="true" Class="px-4 pt-4" AnchorOrigin = "Origin.TopRight" TransformOrigin = "Origin.TopRight">
-            <div class="d-flex flex-column">
-                <EditForm Model = "LogInCustomer" OnValidSubmit="HandleValidSubmit" FormName="LogInTicket" @* @ref="LoginTicket" @bind-IsValid="@success" @bind-Errors="@errors" *@>
-                    <DataAnnotationsValidator/>
-                    <ValidationSummary/>
-                    <MudTextField T="string" Label="Username/Email" Required="true" @bind-Value="LogInCustomer.Username" RequiredError=" Username or an Email is required!" />
-                    <MudTextField T="string" Label="Password" Required="true" HelperText="Please input the password to the account." @bind-Value="password" @ref="pwField1" InputType="InputType.Password" RequiredError="Password is required!"/>
-                    <div class="d-flex align-center justify-space-between">
-                        <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success)" Class="ml-auto">Log in</MudButton>
-                    </div>
-                </EditForm>
-                Dont have an account? 
-                <a href="/register"> Sign up!</a>
-            </div>
-        </MudPopover>    
+            <MudCard Elevation="0">
+                <div class="d-flex flex-column">
+                    <EditForm Model="@LogInCustomer" OnValidSubmit="HandleValidSubmit" FormName="LogInTicket">
+                        <DataAnnotationsValidator/>
+                        <ValidationSummary/>
+                        <MudGrid>
+                            <MudItem>
+                                <MudCard Elevation="0">
+                                    <MudCardContent>
+                                        <MudTextField T="string" ShrinkLabel Label="Username" Required="true" 
+                                            @bind-Value="LogInCustomer.Username" RequiredError=" Username or an Email is required!" />
+                                        <MudTextField T="string" ShrinkLabel Label="Password" Required="true"
+                                            @bind-Value="password" @ref="pwField1" InputType="InputType.Password" RequiredError="Password is required!"/>
+                                        <MudCardActions>
+                                            <div class="d-flex align-center justify-space-between">
+                                                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success)" Class="ml-auto">Log in</MudButton>
+                                            </div>
+                                        </MudCardActions>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudItem>
+                        </MudGrid>
+                    </EditForm>
+                    Dont have an account? 
+                    <a href="/register"> Sign up!</a>
+                </div>
+            </MudCard>
+        </MudPopover> 
+        
     </MudAppBar>
     <MudDrawer @bind-Open="@_drawerOpen">
         <NavMenu/>

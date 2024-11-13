@@ -1,8 +1,42 @@
 ﻿@page "/tickets"
 
 <MudContainer Class="mt-16">
-    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Prici g</MudText>
-    <MudText Align="Align.Center">Some long pricing text should go here maybe? who knows what text you would want here, i guess i cant fill it in for you.</MudText>
+    <MudText Typo="Typo.h2" Align="Align.Center" GutterBottom="true"><b>Book a Visit!</b></MudText>
+    <MudItem>
+        <MudCard Elevation="0">
+            <MudText Typo="Typo.h4" Align="Align.Center">Why Book Online?</MudText>
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudCard Elevation="25" Class="rounded-lg pb-4">
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.h5" Align="Align.Center">Pick your arrival time.</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                    </MudCard>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudCard Elevation="25" Class="rounded-lg pb-4">
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.h5" Align="Align.Center">E-Tickets delivered dircetly to your inbox.</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                    </MudCard>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudCard Elevation="25" Class="rounded-lg pb-4">
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.h5" Align="Align.Center">Save £5 per ticket!</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                    </MudCard>
+                </MudItem>
+            </MudGrid>
+        </MudCard>
+    </MudItem>
+    <MudText Typo="Typo.h4" Align="Align.Center">Our Available Offers!</MudText>
     <MudGrid Class="mt-8">
         <MudItem xs="12" sm="6" md="4">
             <MudCard Elevation="25" Class="rounded-lg pb-4">
@@ -60,7 +94,7 @@
                     </MudList>
                 </MudCardContent>
                 <MudCardActions Class="d-flex justify-center">
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;" Href="/memberships">Explore Now</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;" Href="/membership">Explore Now</MudButton>
                 </MudCardActions>
             </MudCard>
         </MudItem>
