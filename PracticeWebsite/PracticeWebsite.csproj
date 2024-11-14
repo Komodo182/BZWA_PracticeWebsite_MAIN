@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Components\Pages\Memberships.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
       <PrivateAssets>all</PrivateAssets>
@@ -42,10 +38,6 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Components\Pages\Memberships.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Components\Pages\Memberships.razor" />
   </ItemGroup>
 
 </Project>

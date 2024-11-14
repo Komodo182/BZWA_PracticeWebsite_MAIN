@@ -1,5 +1,7 @@
 ﻿@page "/tickets"
 
+<PageTitle>Book Now!</PageTitle>
+
 <MudContainer Class="mt-16">
     <MudText Typo="Typo.h2" Align="Align.Center" GutterBottom="true"><b>Book a Visit!</b></MudText>
     <MudItem>
@@ -36,6 +38,8 @@
             </MudGrid>
         </MudCard>
     </MudItem>
+</MudContainer>
+<MudContainer>
     <MudText Typo="Typo.h4" Align="Align.Center">Our Available Offers!</MudText>
     <MudGrid Class="mt-8">
         <MudItem xs="12" sm="6" md="4">
@@ -133,6 +137,58 @@
         </MudItem>
     </MudGrid>
 </MudContainer>
+
+<MudContainer>
+    <MudItem>
+        <MudCard Elevation="0">
+            <MudText Typo="Typo.h4" Align="Align.Center">Other Ways to Visit?</MudText>
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudCard Elevation="25" Class="rounded-lg pb-4">
+                        <MudCardMedia Image="images/RedPanda(1).jpg" Height="200" />
+                        <MudCardContent>
+                            <MudText Typo="Typo.h5">Memberships</MudText>
+                            <MudText Typo="Typo.body2">Already a memeber?</MudText>
+                            <MudText Typo="Typo.body2">Book a visit right now!</MudText>
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudButton Variant="Variant.Text" Color="Color.Primary">Explore Now!</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudCard Elevation="25" Class="rounded-lg pb-4">
+                        <MudCardMedia Image="images/SchoolTrip(1).jpg" Height="200" />
+                        <MudCardContent>
+                            <MudText Typo="Typo.h5">Educational Visits</MudText>
+                            <MudText Typo="Typo.body2">Planning for a school trip?</MudText>
+                            <MudText Typo="Typo.body2">Get a enquiry now!</MudText>
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudButton Variant="Variant.Text" Color="Color.Primary">Explore Now!</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudCard Elevation="25" Class="rounded-lg pb-4">
+                        <MudCardMedia Image="images/TourGuide(1).jpg" Height="200" />
+                        <MudCardContent>
+                            <MudText Typo="Typo.h5">Tour Groups</MudText>
+                            <MudText Typo="Typo.body2">Want a tour operator to walk you through?</MudText>
+                            <MudText Typo="Typo.body2">Get a booking right now!</MudText>
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudButton Variant="Variant.Text" Color="Color.Primary">Explore Now!</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+            </MudGrid>
+        </MudCard>
+    </MudItem>
+</MudContainer>
+
+
+
 @code {
 
 }

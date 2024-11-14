@@ -1,2 +1,9 @@
 ﻿BrownBear(1).jpg == https://safesearch.pixabay.com/photos/bear-grizzly-animal-fauna-zoo-8845470/
 Meerkats(1).jpg == https://safesearch.pixabay.com/photos/meerkat-animal-mammal-zoo-cute-4821484/
+Wolf(1).jpg == https://safesearch.pixabay.com/photos/wolf-wild-canids-carnivorous-mammal-8089783/
+RedPanda(1).jpg == https://safesearch.pixabay.com/photos/little-panda-red-panda-cat-bear-3508116/
+SchoolTrip(1).jpg == https://safesearch.pixabay.com/photos/people-girls-women-students-2557399/
+TourGuide(1).jpg == https://safesearch.pixabay.com/photos/tour-guide-demonstrator-nature-6816049/
+
+
+

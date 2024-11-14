@@ -14,22 +14,31 @@
 <p>Welcome to the zoo how may we help you?</p>
 
 <a href="register">register link</a> *@
+<MudContainer Fixed="true">
+    <MudCard>
+        <MudCarousel Class="mud-width-full" Style="height:600px;" ShowArrows="false" ShowBullets="false" EnableSwipeGesture="false" AutoCycle="true" TData="object">
+            <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Primary">
+                <div class="d-flex" style="height:100%">
+                    <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center" 
+                    Height="1280" Width="1920" Src="images/BrownBear(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
+                </div>
+            </MudCarouselItem>
+            <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Secondary">
+                <div class="d-flex" style="height:100%">
+                    <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center" 
+                    Height="1280" Width="1920" Src="images/Meerkats(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
+                </div>
+            </MudCarouselItem>
+            <MudCarouselItem Transition="@Transition.Slide">
+                <div class="d-flex" style="height:100%">
+                    <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center" 
+                    Height="1280" Width="1920" Src="images/Wolf(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
+                </div>
+            </MudCarouselItem>
+        </MudCarousel> 
+    </MudCard>
+</MudContainer>
 
-<MudCarousel Class="mud-width-full" Style="height:900px;" ShowArrows="false" ShowBullets="false" EnableSwipeGesture="false" AutoCycle="true" TData="object">
-    <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Primary">
-        <div class="d-flex" style="height:100%">
-            <MudImage ObejctFit="ObjectFit.Cover" Height="1279" Width="1920" Src="BrownBear(1).jpg" Alt="Örebro Slott" Elevation="25"/>
-        </div>
-    </MudCarouselItem>
-    <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Secondary">
-        <div class="d-flex" style="height:100%">
-            <MudImage ObejctFit="ObjectFit.Cover" Height="1279" Width="1920" Src="BrownBear(1).jpg" Alt="Örebro Slott" Elevation="25" />
-        </div>
-    </MudCarouselItem>
-    <MudCarouselItem Transition="@Transition.Slide">
-        <div class="d-flex" style="height:100%">
-            <MudImage ObejctFit="ObjectFit.Cover" Height="1279" Width="1920" Src="BrownBear(1).jpg" Alt="Örebro Slott" Elevation="25" />
-        </div>
-    </MudCarouselItem>
-</MudCarousel> 
 
+@code {
+}
