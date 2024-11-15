@@ -3,24 +3,85 @@
 <PageTitle>Membership</PageTitle>
 
 <MudCard>
-    <MudCardMedia height="600px" Image="images/BrownBear(1).jpg"/>
+    <MudCardMedia Height="600" Image="images/BrownBear(1).jpg"/>
 </MudCard>
-<MudCard>
+<MudCard Class="mx-auto pa-6 ">
     <MudCardHeader>
         <MudGrid>
-            <MudItem xs="12">
-                <MudPaper Class="d-flex align-center justify-center mud-width-full py-8">Memberships</MudPaper>
+            <MudItem xs="8">
+                <MudCard Style="@($"background:{Colors.Brown.Default};")" Class="d-flex align-center justify-center mud-width-full py-8">
+                   <MudCardHeader>
+                       <CardHeaderContent>
+                            <MudText Typo="Typo.h2">Memberships</MudText>
+                       </CardHeaderContent>
+                   </MudCardHeader>
+                   <MudCardContent>
+                        <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
+                   </MudCardContent>
+                </MudCard>
+            </MudItem>
+            <MudDivider/>
+            <MudItem xs="10">
+                <MudCard>
+                    <MudCardContent>
+                        <MudText Typo="Typo.h5">Become a part of the Zoo's community and visit time and time again!</MudText>
+                    </MudCardContent>
+                </MudCard>
             </MudItem>
         </MudGrid>
     </MudCardHeader>
-    <MudCardContent>
-        <MudCard>
-            <MudText>Become a Part of Our Community at the Zoo! And Visit Any Time!</MudText>
-        </MudCard>
-    </MudCardContent>
 </MudCard>
+<MudContainer>
+    <MudItem>
+        <MudCard Elevation="3">
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudCard Elevation="0" Class="rounded-lg pb-4">
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudIcon Color="Color.Dark" Class="mx-auto my-auto" Icon="@Icons.Material.Filled.CardMembership" Style="font-size: 4rem;" />
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudText Align="Align.Center" Typo="Typo.h6">Unlimited Visits for 12 Months</MudText>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudCard Elevation="0" Class="rounded-lg pb-4">
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudIcon Color="Color.Dark" Class="mx-auto my-auto" Icon="@Icons.Material.Outlined.ShoppingBag" Style="font-size: 4rem;" />
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudText Align="Align.Center" Typo="Typo.h6">Discounts on our Food, Drinks & Retail</MudText>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudCard Elevation="0" Class="rounded-lg pb-4">
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudIcon Color="Color.Dark" Class="mx-auto my-auto" Icon="@Icons.Material.Filled.Hotel" Style="font-size: 4rem;" />
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudText Align="Align.Center" Typo="Typo.h6">Discounts on our Hotel Stays.</MudText>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            </MudGrid>
+        </MudCard>
+    </MudItem>
+</MudContainer>
 
 
 @code {
-
+    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "/"),
+        new BreadcrumbItem("Memberships", href: "/membership"),
+    };
 }
+
