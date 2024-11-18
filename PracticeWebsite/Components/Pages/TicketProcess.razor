@@ -1,6 +1,9 @@
 ﻿@page "/tickets/processing"
 @rendermode InteractiveServer
-
+@* @inject AttractionService AttractionService
+@using PracticeWebsite.Models
+@using PracticeWebsite.
+ *@
 
 
 <PageTitle>Ticket Purchasing...</PageTitle>
@@ -54,6 +57,31 @@
         </MudStepper>
     </MudPaper>
 </MudContainer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @code 
 {
     [Inject]
@@ -128,6 +156,29 @@
     }
     public class DataSubmitForm
     {
-        
+
     }
+
+    // List<Attraction> attractions;
+    // List<Tickets> tickets;
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     attractions = awat AttractionService.GetAttractionasync();
+    //     tickets = new List<Tickets>();
+    // }
+    // priavte void AddTicket(int attractionId)
+    // priate void BookTickets()
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

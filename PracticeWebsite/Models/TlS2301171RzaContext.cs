@@ -46,9 +46,7 @@ public partial class TlS2301171RzaContext : DbContext
             entity.Property(e => e.AttractionId)
                 .ValueGeneratedNever()
                 .HasColumnName("attractionID");
-            entity.Property(e => e.AttractionName)
-                .HasMaxLength(30)
-                .HasColumnName("attractionName");
+            entity.Property(e => e.Name).HasMaxLength(200);
         });
 
         modelBuilder.Entity<Customer>(entity =>
