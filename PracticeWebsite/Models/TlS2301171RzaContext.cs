@@ -28,6 +28,8 @@ public partial class TlS2301171RzaContext : DbContext
 
     public virtual DbSet<Ticket> Tickets { get; set; }
 
+    public virtual DbSet<Ticketbooking> Ticketbookings { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseMySql("name=MySqlConnection", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.29-mysql"));
 
@@ -92,28 +94,6 @@ public partial class TlS2301171RzaContext : DbContext
             entity.Property(e => e.Username)
                 .HasMaxLength(20)
                 .HasColumnName("username");
-
-            entity.HasMany(d => d.Tickets).WithMany(p => p.Customers)
-                .UsingEntity<Dictionary<string, object>>(
-                    "Ticktbooking",
-                    r => r.HasOne<Ticket>().WithMany()
-                        .HasForeignKey("TicketId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("ticktbooking_ibfk_2"),
-                    l => l.HasOne<Customer>().WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("ticktbooking_ibfk_1"),
-                    j =>
-                    {
-                        j.HasKey("CustomerId", "TicketId")
-                            .HasName("PRIMARY")
-                            .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-                        j.ToTable("ticktbooking");
-                        j.HasIndex(new[] { "TicketId" }, "ticketID");
-                        j.IndexerProperty<int>("CustomerId").HasColumnName("customerID");
-                        j.IndexerProperty<int>("TicketId").HasColumnName("ticketID");
-                    });
         });
 
         modelBuilder.Entity<Eduvisit>(entity =>
@@ -180,19 +160,44 @@ public partial class TlS2301171RzaContext : DbContext
         {
             entity.HasKey(e => e.TicketId).HasName("PRIMARY");
 
-            entity.ToTable("tickets");
+            entity.ToTable("ticket");
 
-            entity.HasIndex(e => e.AttractionId, "attractionID");
+            entity.HasIndex(e => e.AttractionId, "ticket_fk1_idx");
 
-            entity.Property(e => e.TicketId)
-                .ValueGeneratedNever()
-                .HasColumnName("ticketID");
+            entity.HasIndex(e => e.TicketbookingId, "ticket_fk2_idx");
+
+            entity.Property(e => e.TicketId).HasColumnName("ticketID");
             entity.Property(e => e.AttractionId).HasColumnName("attractionID");
-            entity.Property(e => e.ValidDate).HasColumnName("validDate");
+            entity.Property(e => e.TicketbookingId).HasColumnName("ticketbookingID");
 
             entity.HasOne(d => d.Attraction).WithMany(p => p.Tickets)
                 .HasForeignKey(d => d.AttractionId)
-                .HasConstraintName("tickets_ibfk_1");
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("ticket_fk1");
+
+            entity.HasOne(d => d.Ticketbooking).WithMany(p => p.Tickets)
+                .HasForeignKey(d => d.TicketbookingId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("ticket_fk2");
+        });
+
+        modelBuilder.Entity<Ticketbooking>(entity =>
+        {
+            entity.HasKey(e => e.TicketbookingId).HasName("PRIMARY");
+
+            entity.ToTable("ticketbooking");
+
+            entity.HasIndex(e => e.CustomerId, "ticketbooking_fk1_idx");
+
+            entity.Property(e => e.TicketbookingId).HasColumnName("ticketbookingID");
+            entity.Property(e => e.CustomerId).HasColumnName("customerID");
+            entity.Property(e => e.Date).HasColumnName("date");
+            entity.Property(e => e.DateBooked).HasColumnName("dateBooked");
+
+            entity.HasOne(d => d.Customer).WithMany(p => p.Ticketbookings)
+                .HasForeignKey(d => d.CustomerId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("ticketbooking_fk1");
         });
 
         OnModelCreatingPartial(modelBuilder);

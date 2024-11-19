@@ -5,249 +5,237 @@
 <MudCard>
     <MudCardMedia Height="600" Image="images/BrownBear(1).jpg"/>
 </MudCard>
-<MudCard Class="mx-auto pa-6">
-    <MudCardHeader>
-        <MudGrid Justify="Justify.Center">
-            <MudItem xs="8">
-                <MudCard Style="@($"Background:{Colors.Brown.Default};")" Class="pa-md-6 mx-lg-auto d-flex align-center flex-grow-1 gap-4">
-                   <MudCardHeader>
-                       <CardHeaderContent>
-                            <MudText Align="Align.Center" Typo="Typo.h2">Memberships</MudText>
-                       </CardHeaderContent>
-                   </MudCardHeader>
-                   <MudCardContent>
-                        <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
-                   </MudCardContent>
-                </MudCard>
-            </MudItem> 
-            <MudFlexBreak/>
-            <MudDivider/>
-            <MudItem xs="10">
-                <MudCard>
-                    <MudCardContent>
-                        <MudText Align="Align.Center" Typo="Typo.h5">Become a part of the Zoo's community and visit time and time again!</MudText>
-                    </MudCardContent>  
+<MudCard Style="@($"Background:{Colors.LightGreen.Darken3};")">
+    <MudContainer Class="mx-auto pa-6">
+        <MudCardHeader>
+            <MudGrid Justify="Justify.Center">
+                <MudItem xs="8">
+                    <MudCard Style="@($"Background:{Colors.Brown.Lighten1};")" Class="pa-md-6 mx-lg-auto d-flex align-center flex-grow-1 gap-4">
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Align="Align.Center" Typo="Typo.h2">Memberships</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudDivider/>
+                        <MudCardContent>
+                            <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem> 
+                <MudDivider/>
+                <MudItem xs="10">
+                    <MudCard Style="@($"Background:{Colors.LightGreen.Darken1};")">
+                        <MudCardContent>
+                            <MudText Align="Align.Center" Typo="Typo.h5">Become a part of the Zoo's community and visit time and time again!</MudText>
+                        </MudCardContent>  
+                    </MudCard>
+                </MudItem>
+            </MudGrid>
+        </MudCardHeader>
+        <MudContainer>
+            <MudItem>
+                <MudCard Style="@($"Background:{Colors.LightGreen.Darken3};")" Elevation="0">
+                    <MudGrid>
+                        <MudItem xs="12" sm="6" md="4">
+                            <MudCard Style="@($"Background:{Colors.LightGreen.Darken1};")" Elevation="5" Class="rounded-lg pb-4">
+                                <MudCardHeader>
+                                    <CardHeaderContent>
+                                        <MudIcon Color="Color.Dark" Class="mx-auto my-auto d-flex align-center" Icon="@Icons.Material.Filled.CardMembership" Style="font-size: 4rem;" />
+                                    </CardHeaderContent>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    <MudText Align="Align.Center" Typo="Typo.h6">Unlimited Visits for 12 Months</MudText>
+                                </MudCardContent>
+                            </MudCard>
+                        </MudItem>
+                        <MudItem xs="12" sm="6" md="4">
+                            <MudCard Style="@($"Background:{Colors.LightGreen.Darken1};")" Elevation="5" Class="rounded-lg pb-4">
+                                <MudCardHeader>
+                                    <CardHeaderContent>
+                                        <MudIcon Color="Color.Dark" Class="mx-auto my-auto d-flex align-center" Icon="@Icons.Material.Outlined.ShoppingBag" Style="font-size: 4rem;" />
+                                    </CardHeaderContent>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    <MudText Align="Align.Center" Typo="Typo.h6">Discounts on our Food, Drinks & Retail</MudText>
+                                </MudCardContent>
+                            </MudCard>
+                        </MudItem>
+                        <MudItem xs="12" sm="6" md="4">
+                            <MudCard Style="@($"Background:{Colors.LightGreen.Darken1};")" Elevation="5" Class="rounded-lg pb-4">
+                                <MudCardHeader>
+                                    <CardHeaderContent>
+                                        <MudIcon Color="Color.Dark" Class="mx-auto my-auto d-flex align-center" Icon="@Icons.Material.Filled.Hotel" Style="font-size: 4rem;" />
+                                    </CardHeaderContent>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    <MudText Align="Align.Center" Typo="Typo.h6">Discounts on our Hotel Stays.</MudText>
+                                </MudCardContent>
+                            </MudCard>
+                        </MudItem>
+                    </MudGrid>
                 </MudCard>
             </MudItem>
-        </MudGrid>
-    </MudCardHeader>
+        </MudContainer>
+    </MudContainer>
+    <MudContainer Style="@($"Background:{Colors.LightGreen.Darken3};")" Class="mx-auto pa-6">
+        <MudCardHeader>
+            <MudGrid>
+                <MudItem xs="8">
+                    <MudCard Style="@($"Background:{Colors.LightGreen.Darken1};")" Class="pa-md-6 mx-lg-auto d-flex align-center flex-grow-1 gap-4">
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Align="Align.Start" Typo="Typo.h6">No Two Visits Are The Same With Annual Membership</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudText Align="Align.Start" Typo="Typo.body1">Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah</MudText>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+                <MudItem xs="4">
+                    <MudCard Style="@($"Background:{Colors.LightGreen.Darken1};")">
+                        <MudCardContent>
+                            <MudImage Src="images/BrownBear(1).jpg" Alt="Brown Bear" Elevation="25" Class="rounded-lg" Fluid="true" ObjectFit="ObjectFit.Cover" />
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            </MudGrid>
+        </MudCardHeader>
+    </MudContainer>
     <MudContainer>
-        <MudItem>
-            <MudCard Elevation="3">
-                <MudGrid>
-                    <MudItem xs="12" sm="6" md="4">
-                        <MudCard Elevation="0" Class="rounded-lg pb-4">
-                            <MudCardHeader>
-                                <CardHeaderContent>
-                                    <MudIcon Color="Color.Dark" Class="mx-auto my-auto d-flex align-center" Icon="@Icons.Material.Filled.CardMembership" Style="font-size: 4rem;" />
-                                </CardHeaderContent>
-                            </MudCardHeader>
-                            <MudCardContent>
-                                <MudText Align="Align.Center" Typo="Typo.h6">Unlimited Visits for 12 Months</MudText>
-                            </MudCardContent>
-                        </MudCard>
-                    </MudItem>
-                    <MudItem xs="12" sm="6" md="4">
-                        <MudCard Elevation="0" Class="rounded-lg pb-4">
-                            <MudCardHeader>
-                                <CardHeaderContent>
-                                    <MudIcon Color="Color.Dark" Class="mx-auto my-auto d-flex align-center" Icon="@Icons.Material.Outlined.ShoppingBag" Style="font-size: 4rem;" />
-                                </CardHeaderContent>
-                            </MudCardHeader>
-                            <MudCardContent>
-                                <MudText Align="Align.Center" Typo="Typo.h6">Discounts on our Food, Drinks & Retail</MudText>
-                            </MudCardContent>
-                        </MudCard>
-                    </MudItem>
-                    <MudItem xs="12" sm="6" md="4">
-                        <MudCard Elevation="0" Class="rounded-lg pb-4">
-                            <MudCardHeader>
-                                <CardHeaderContent>
-                                    <MudIcon Color="Color.Dark" Class="mx-auto my-auto d-flex align-center" Icon="@Icons.Material.Filled.Hotel" Style="font-size: 4rem;" />
-                                </CardHeaderContent>
-                            </MudCardHeader>
-                            <MudCardContent>
-                                <MudText Align="Align.Center" Typo="Typo.h6">Discounts on our Hotel Stays.</MudText>
-                            </MudCardContent>
-                        </MudCard>
-                    </MudItem>
-                </MudGrid>
-            </MudCard>
-        </MudItem>
+        <MudCard Elevation="0" Style="@($"Background:{Colors.LightGreen.Darken3};")">
+            <MudGrid>
+                <MudItem xs="15" sm="8" md="12">
+                    <MudCard Style="@($"Background:{Colors.Orange.Accent2};")" Elevation="25" Class="rounded-lg pb-4">
+                        <MudCardMedia Image="images/Meerkats(1).jpg" Height="400"/> 
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.h5" Align="Align.Center">Premium Membership</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudList T="string" Class="mx-auto mt-auto">
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    Unlimited Visits for 12 Months.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    No Pre-Booking Required for Day Admission.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    Early Access to New Attractions & Animal Reserves.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    Dedicated Email Address Direct to our Guest Services Team.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    20% off Food and Drink within our Zoo.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    20% off Retail at Safari Store.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    10% off Food & Drink at The Yorkshire Hive Eateries.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    10% off Afternoon Teas at Wilds Café Bistro.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    10% off All Animal Experiences.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    One Standard ticket to a WILD Live Concert of your choice.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    Entry to Winter Illuminations on a day of your choice.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    Entry to select Events with No Extra Charge.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    Early access to Seasonal Offers and Events.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    20% off Stays at the Wildlife Hotel.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    10% off Wildlife Clothing Co.
+                                </MudListItem>
+                            </MudList>
+                        </MudCardContent>
+                        <MudCardActions Class="d-flex justify-start">
+                            <MudButton Style="@($"Background:{Colors.LightGreen.Darken1};")" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Href="/membership">SEE MEMBERSHIP OFFERS</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+                <MudItem xs="15" sm="8" md="12">
+                    <MudCard Style="@($"Background:{Colors.Orange.Accent2};")" Elevation="25" Class="rounded-lg pb-4">
+                        <MudCardMedia Image="images/Meerkats(1).jpg" Height="400"/>
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.h5" Align="Align.Center">Standard Membership</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudList T="string" Class="mx-auto mt-auto">
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    Unlimited Visits for 12 Months.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    10% off Food & Drink at the Zoo.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    10% off retail at Safari Store.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    10% off food & drink at The Yorkshire Hive eateries.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    10% off Afternoon Teas at Wilds Café Bistro.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    10% off stays at the Wildlife Hotel.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    10% off Wildlife Clothing Co.
+                                </MudListItem>
+                            </MudList>
+                            <MudText></MudText>
+                        </MudCardContent>
+                        <MudCardActions Class="d-flex justify-start">
+                            <MudButton Style="@($"Background:{Colors.LightGreen.Darken1};")" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Href="/membership">SEE MEMBERSHIP OFFERS</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+                <MudItem xs="15" sm="8" md="12">
+                    <MudCard Style="@($"Background:{Colors.Orange.Accent2};")" Elevation="25" Class="rounded-lg pb-4">
+                        <MudCardMedia Image="images/Meerkats(1).jpg" Height="400"/>
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.h5" Align="Align.Center">Little Tiger Membership (Under 6s)</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudList T="string" Class="mx-auto mt-auto">
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    Unlimited Visits for 12 Months.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    No Pre-Booking Required for Day Admission.
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Check">
+                                    Early Access to New Attractions & Animal Reserves.
+                                </MudListItem>
+                            </MudList>
+                        </MudCardContent>
+                        <MudCardActions Class="d-flex justify-start">
+                            <MudButton Style="@($"Background:{Colors.LightGreen.Darken1};")" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Href="/membership">SIGN UP TO LITTLE TIGER MEMBERSHIP</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+            </MudGrid>
+        </MudCard>
     </MudContainer>
 </MudCard>
-<MudCard Class="mx-auto pa-6">
-    <MudCardHeader>
-        <MudGrid>
-            <MudItem xs="8">
-                <MudCard Class="pa-md-6 mx-lg-auto d-flex align-center flex-grow-1 gap-4">
-                    <MudCardHeader>
-                        <CardHeaderContent>
-                            <MudText Align="Align.Start" Typo="Typo.h6">No Two Visits Are The Same With Annual Membership</MudText>
-                        </CardHeaderContent>
-                    </MudCardHeader>
-                    <MudCardContent>
-                        <MudText Inline="false" Align="Align.Start" Typo="Typo.body1">BlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlah</MudText>
-                        <MudText Inline="false" Align="Align.Start" Typo="Typo.body1">BlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlah</MudText>
-                        <MudText Inline="false" Align="Align.Start" Typo="Typo.body1">BlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlah</MudText>
-                        <MudText Inline="false" Align="Align.Start" Typo="Typo.body1">BlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlah</MudText>
-                        <MudText Inline="false" Align="Align.Start" Typo="Typo.body1">BlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlah</MudText>
-                        <MudText Inline="false" Align="Align.Start" Typo="Typo.body1">BlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlah</MudText>
-                        <MudText Inline="false" Align="Align.Start" Typo="Typo.body1">BlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlahBlah</MudText>
-                    </MudCardContent>
-                </MudCard>
-            </MudItem>
-            <MudItem xs="4">
-                <MudCard>
-                    <MudCardContent>
-                        <MudImage Src="images/BrownBear(1).jpg" Alt="Brown Bear" Elevation="25" Class="rounded-lg" Fluid="true" ObjectFit="ObjectFit.Cover" />
-                    </MudCardContent>
-                </MudCard>
-            </MudItem>
-        </MudGrid>
-    </MudCardHeader>
-</MudCard>
-
-<MudContainer>
-    <MudCard>
-        <MudGrid>
-            <MudItem xs="15" sm="8" md="12">
-                <MudCard Elevation="25" Class="rounded-lg pb-4">
-                    <MudCardMedia>
-                        <MudImage Src="images/BrownBear(1).jpg" Height="300" Alt="Brown Bear" Elevation="25" Class="rounded-lg" Fluid="true" ObjectFit="ObjectFit.Cover" />
-                    </MudCardMedia>  
-                    <MudCardHeader>
-                        <CardHeaderContent>
-                            <MudText Typo="Typo.h5" Align="Align.Center">Premium Membership</MudText>
-                        </CardHeaderContent>
-                    </MudCardHeader>
-                    <MudCardContent>
-                        <MudList T="string" Class="mx-auto mt-auto">
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                Unlimited Visits for 12 Months.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                No Pre-Booking Required for Day Admission.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                Early Access to New Attractions & Animal Reserves.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                Dedicated Email Address Direct to our Guest Services Team.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                20% off Food and Drink within our Zoo.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                20% off Retail at Safari Store.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                10% off Food & Drink at The Yorkshire Hive Eateries.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                10% off Afternoon Teas at Wilds Café Bistro.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                10% off All Animal Experiences.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                One Standard ticket to a WILD Live Concert of your choice.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                Entry to Winter Illuminations on a day of your choice.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                Entry to select Events with No Extra Charge.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                Early access to Seasonal Offers and Events.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                20% off Stays at the Wildlife Hotel.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                10% off Wildlife Clothing Co.
-                            </MudListItem>
-                        </MudList>
-                    </MudCardContent>
-                    <MudCardActions Class="d-flex justify-start">
-                        <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Href="/membership">SEE MEMBERSHIP OFFERS</MudButton>
-                    </MudCardActions>
-                </MudCard>
-            </MudItem>
-            <MudItem xs="15" sm="8" md="12">
-                <MudCard Elevation="25" Class="rounded-lg pb-4">
-                    <MudCardMedia>
-                        <MudImage Src="images/BrownBear(1).jpg" Height="300" Alt="Brown Bear" Class="rounded-lg" Fluid="true" ObjectFit="ObjectFit.Cover" />
-                    </MudCardMedia>
-                    <MudCardHeader>
-                        <CardHeaderContent>
-                            <MudText Typo="Typo.h5" Align="Align.Center">Standard Membership</MudText>
-                        </CardHeaderContent>
-                    </MudCardHeader>
-                    <MudCardContent>
-                        <MudList T="string" Class="mx-auto mt-auto">
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                Unlimited Visits for 12 Months.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                10% off Food & Drink at the Zoo.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                10% off retail at Safari Store.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                10% off food & drink at The Yorkshire Hive eateries.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                10% off Afternoon Teas at Wilds Café Bistro.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                10% off stays at the Wildlife Hotel.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                10% off Wildlife Clothing Co.
-                            </MudListItem>
-                        </MudList>
-                        <MudText></MudText>
-                    </MudCardContent>
-                    <MudCardActions Class="d-flex justify-start">
-                        <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Href="/membership">SEE MEMBERSHIP OFFERS</MudButton>
-                    </MudCardActions>
-                </MudCard>
-            </MudItem>
-            <MudItem xs="15" sm="8" md="12">
-                <MudCard Elevation="25" Class="rounded-lg pb-4">
-                    <MudCardMedia>
-                        <MudImage Src="images/BrownBear(1).jpg" Height="300" Alt="Brown Bear" Elevation="25" Class="rounded-lg" Fluid="true" ObjectFit="ObjectFit.Cover" />
-                    </MudCardMedia>
-                    <MudCardHeader>
-                        <CardHeaderContent>
-                            <MudText Typo="Typo.h5" Align="Align.Center">Little Tiger Membership (Under 6s)</MudText>
-                        </CardHeaderContent>
-                    </MudCardHeader>
-                    <MudCardContent>
-                        <MudList T="string" Class="mx-auto mt-auto">
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                Unlimited Visits for 12 Months.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                No Pre-Booking Required for Day Admission.
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                Early Access to New Attractions & Animal Reserves.
-                            </MudListItem>
-                        </MudList>
-                    </MudCardContent>
-                    <MudCardActions Class="d-flex justify-start">
-                        <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Href="/membership">SIGN UP TO LITTLE TIGER MEMBERSHIP</MudButton>
-                    </MudCardActions>
-                </MudCard>
-            </MudItem>
-        </MudGrid>
-    </MudCard>
-</MudContainer>
-
 
 
 
