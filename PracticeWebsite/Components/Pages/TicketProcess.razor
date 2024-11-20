@@ -8,7 +8,7 @@
 
 <PageTitle>Ticket Purchasing...</PageTitle>
 <MudContainer Fixed="true">
-    <MudPaper Class="flex-auto d-flex py-8 mud-theme-white" Elevation="6">
+    <MudCard Class="flex-auto d-flex py-8 mud-theme-white" Elevation="6">
         <MudStepper NonLinear ShowResetButton OnPreviewInteraction="OnPreviewInteraction">
 
             <MudStep Title="Date" SecondaryText="When are you visiting?" HasError="@(_step1Complete==false)">
@@ -18,47 +18,40 @@
                         <MudText Typo="Typo.h4">Please select what day you would like to book...</MudText>
                     </MudCardHeader>
                     <MudCardContent>
-                        <MudSelect>
-                            <MudDatePicker @bind-Value="_datechosen" MinDate="_minDate" PickerVariant="PickerVariant.Static" Date="@(DateTime.Today.AddDays(1))" />
-                            <MudHidden Breakpoint="@Breakpoint.Xs">
-                            </MudHidden>
-                            <MudButton @bind-Value="_step1Complete" Variant="Variant.Outlined" Color="Color.Primary">Select the date</MudButton>
-                        </MudSelect>
+                        <MudDatePicker @bind-Date="_datechosen" MinDate="_minDate" PickerVariant="PickerVariant.Static"/>
+                        <MudHidden Breakpoint="@Breakpoint.Xs">
+                        </MudHidden>
+                        <MudButton Disabled="@_processing1" OnClick="ProcessSomething" @bind-Completed="_step1Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                            @if (_processing1)
+                            {
+                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                <MudText Class="ms-2">Processing</MudText>
+                            }
+                            else
+                            {
+                                <MudText>Confirm Date</MudText>
+                            }
+                        </MudButton>
                     </MudCardContent>
                 </MudCard>
             </MudStep>
-            <MudStep Title="Step 2" SecondaryText="Whos coming?" HasError="@(_step2Complete==false)">
-                @* <MudTextField @bind-Value="_step2TextInput" Variant="Variant.Filled" Clearable /> *@
-                @* <EditFrom>
-                    <MudCard>
-                        <MudCardContent>
-                            <MudTable Items="@order.OrderTicketDetails" Hover="true" Breakpoint="Bearkpoint.None" Dense="@true" Elevation="0">
-                                <HeaderContent>
-                                    <MudTh>Ticket Description</MudTh>
-                                    <MudTh>Quantity</MudTh>
-                                </HeaderContent>
-                                <RowTemplate>
-                                    <MudTd DataLabel="Description">
 
-                                    </MudTd>
-                                </RowTemplate>
-                            </MudTable>
-                        </MudCardContent>
-                    </MudCard>
-                </EditFrom> *@
+            <MudStep Title="Step 2" SecondaryText="Whos coming?" HasError="@(_step2Complete==false)">
+                <MudDataGrid Items="@admissiontickets" Filterable="false" SortMode="@SortMode.None" Groupable="false">
+                    <Columns>
+                        <PropertyColumn Property = "x => x.tickets" Title="Admission Tickets"/>
+                        <PropertyColumn Property = "x => x.prices" Title="Prices" />
+                        <PropertyColumn Property = "x => x.quantity" Title="Quantity" />
+                    </Columns>
+                </MudDataGrid>
             </MudStep>
 
             <MudStep Title="Step 3" SecondaryText="Choose a timeslot" HasError="@(_step3Complete==false)">
                 @* <MudTextField Label="Enter some text" @bind-Value="_step2TextInput" Variant="Variant.Filled" Clearable /> *@
-                <MudCard>
-                    <MudCardContent>
-
-                    </MudCardContent>
-                </MudCard>
             </MudStep>
 
         </MudStepper>
-    </MudPaper>
+    </MudCard>
 </MudContainer>
 
 
@@ -68,7 +61,20 @@
 
 @code 
 {
-    private DateTime _minDate = DateTime.Now.Date;
+
+    //Admission Ticket list
+    public record admissionticketlist(string tickets, float prices, int quantity);
+    public IEnumerable<admissionticketlist> admissiontickets;
+    protected override void OnInitialized()
+    {
+        admissiontickets = new List<admissionticketlist>
+        {
+            new admissionticketlist("Standard Adult", 19.99 ,0),
+        };
+    }
+
+
+
 
     [Inject]
     IDialogService DialogService { get; set; }
@@ -80,10 +86,20 @@
     private bool? _step2Complete;
     private bool? _step3Complete;
     //private string _step2TextInput;
-    private DateOnly _datechosen;
+    private DateTime? _date;
+    private DateTime? _datechosen = DateTime.Today;
+    private DateTime _minDate = DateTime.Now.Date;
 
-
-
+    //Date button processing
+    private bool _processing1 = false;
+    private async Task ProcessSomething()
+    {
+        _processing1 = true;
+        _date = _datechosen;
+        _step1Complete = true;
+        await Task.Delay(2000);
+        _processing1 = false;
+    }
 
     private async Task OnPreviewInteraction(StepperInteractionEventArgs arg)
     {
@@ -104,16 +120,16 @@
         switch (arg.StepIndex)
         {
             case 0:
-                if (_step1Complete != true)
+                if ((_step1Complete != true) || (_date < _minDate) || (_date == null))
                 {
                     await DialogService.ShowMessageBox("Error", "You have not selected a date in the step 'Date'.");
                     arg.Cancel = true;
                 }
                 break;
             case 1:
-                if ((_step2TextInput?.Length ?? 0) == 0)
+                if ((_step2Complete != true))
                 {
-                    await DialogService.ShowMessageBox("Error", "You have not ...");
+                    await DialogService.ShowMessageBox("Error", "You have not...");
                     arg.Cancel = true;
                 }
                 break;
@@ -132,7 +148,7 @@
                 }
                 break;
             case 2:
-                if (_step1Complete != true || (_step2TextInput?.Length ?? 0) == 0)
+                if ((_step1Complete != true) || (_step2Complete != true))
                 {
                     await DialogService.ShowMessageBox("Error", "Finish step 1 and 2 first.");
                     arg.Cancel = true;
@@ -149,16 +165,6 @@
 
     }
 
-    // List<Attraction> attractions;
-    // List<Tickets> tickets;
-    //DateOnly ticketDate;
-    // protected override async Task OnInitializedAsync()
-    // {
-    //     attractions = awat AttractionService.GetAttractionasync();
-    //     tickets = new List<Tickets>();
-    // }
-    // priavte void AddTicket(int attractionId)
-    // priate void BookTickets()
 
 
 
