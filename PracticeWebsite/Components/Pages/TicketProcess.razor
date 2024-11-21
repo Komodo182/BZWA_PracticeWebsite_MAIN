@@ -21,7 +21,7 @@
                         <MudDatePicker @bind-Date="_datechosen" MinDate="_minDate" PickerVariant="PickerVariant.Static"/>
                         <MudHidden Breakpoint="@Breakpoint.Xs">
                         </MudHidden>
-                        <MudButton Disabled="@_processing1" OnClick="ProcessSomething" @bind-Completed="_step1Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                        <MudButton Disabled="@_processing1" OnClick="ProcessSomething1" @bind-Completed="_step1Complete" Variant="Variant.Outlined" Color="Color.Primary">
                             @if (_processing1)
                             {
                                 <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
@@ -37,13 +37,30 @@
             </MudStep>
 
             <MudStep Title="Step 2" SecondaryText="Whos coming?" HasError="@(_step2Complete==false)">
-                <MudDataGrid Items="@admissiontickets" Filterable="false" SortMode="@SortMode.None" Groupable="false">
+                <MudDataGrid Items="@admissiontickets" Filterable="false" SortMode="@SortMode.None" Groupable="false" ReadOnly="false">
                     <Columns>
-                        <PropertyColumn Property = "x => x.tickets" Title="Admission Tickets"/>
-                        <PropertyColumn Property = "x => x.prices" Title="Prices" />
-                        <PropertyColumn Property = "x => x.quantity" Title="Quantity" />
+                        <PropertyColumn Property="x => x.tickets" Title="Admission Tickets" Editable="false" />
+                        <PropertyColumn Property="x => x.prices" Title="Prices" Editable="false" />
+                        <TemplateColumn Title="Quantity" Editable="true">
+                            <CellTemplate>
+                                <MudStack Row>
+                                    <MudNumericField Min="0" Max="20" />
+                                </MudStack>
+                            </CellTemplate>
+                        </TemplateColumn>
                     </Columns>
                 </MudDataGrid>
+                <MudButton Disabled="@_processing2" OnClick="ProcessSomething2" @bind-Completed="_step2Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                    @if (_processing2)
+                    {
+                        <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                        <MudText Class="ms-2">Processing</MudText>
+                    }
+                    else
+                    {
+                        <MudText>Confirm Tickets</MudText>
+                    }
+                </MudButton>
             </MudStep>
 
             <MudStep Title="Step 3" SecondaryText="Choose a timeslot" HasError="@(_step3Complete==false)">
@@ -63,18 +80,24 @@
 {
 
     //Admission Ticket list
-    public record admissionticketlist(string tickets, float prices, int quantity);
+    public record admissionticketlist(string tickets, double prices, int quantitychose);
     public IEnumerable<admissionticketlist> admissiontickets;
     protected override void OnInitialized()
     {
         admissiontickets = new List<admissionticketlist>
         {
-            new admissionticketlist("Standard Adult", 19.99 ,0),
+            new admissionticketlist("Admission - Adult (16+)", 19.99 ,_quantitychosen_1),
+            new admissionticketlist("Admission - Child (6-15)", 14.99 ,_quantitychosen_2),
+            new admissionticketlist("Admission - Senior (65+)", 17.99 ,_quantitychosen_3),
+            new admissionticketlist("Admission - Student", 17.99 ,_quantitychosen_4),
+            new admissionticketlist("Admission - Under 6s", 0 ,_quantitychosen_5),
+            new admissionticketlist("Admission - Disabled Adult (16+)", 14.99 ,_quantitychosen_6),
+            new admissionticketlist("Admission - Disabled Child (6-15)", 9.99 ,_quantitychosen_7),
+            new admissionticketlist("Admission - Disabled Senior (65+)", 11.99 ,_quantitychosen_8),
+            new admissionticketlist("Admission - Disabled Student", 11.99 ,_quantitychosen_9),
+            new admissionticketlist("Admission - Disabled Carer", 8 ,_quantitychosen_10),
         };
     }
-
-
-
 
     [Inject]
     IDialogService DialogService { get; set; }
@@ -89,16 +112,54 @@
     private DateTime? _date;
     private DateTime? _datechosen = DateTime.Today;
     private DateTime _minDate = DateTime.Now.Date;
+    private int _quantitychosen_1;
+    private int _quantitychosen_2;
+    private int _quantitychosen_3;
+    private int _quantitychosen_4;
+    private int _quantitychosen_5;
+    private int _quantitychosen_6;
+    private int _quantitychosen_7;
+    private int _quantitychosen_8;
+    private int _quantitychosen_9; 
+    private int _quantitychosen_10;
 
     //Date button processing
     private bool _processing1 = false;
-    private async Task ProcessSomething()
+    private async Task ProcessSomething1()
     {
         _processing1 = true;
         _date = _datechosen;
         _step1Complete = true;
         await Task.Delay(2000);
         _processing1 = false;
+    }
+    private bool _processing2 = false;
+    private async Task ProcessSomething2()
+    {
+        Console.WriteLine("pressed");
+        // _processing2 = true;
+        // _step2Complete = true;
+        // await TicketProcessing();
+        // await Task.Delay(2000);
+        // _processing2 = false;
+    }
+
+    private async Task TicketProcessing()
+    {
+        // if (_quantitychosen_1 > 0)
+        // {
+        //     _quantitychosen_1 = Adm_Adult_Norm(_quantitychosen_1)
+        // }
+        // private int _quantitychosen_1;
+        // private int _quantitychosen_2;
+        // private int _quantitychosen_3;
+        // private int _quantitychosen_4;
+        // private int _quantitychosen_5;
+        // private int _quantitychosen_6;
+        // private int _quantitychosen_7;
+        // private int _quantitychosen_8;
+        // private int _quantitychosen_9; 
+        // private int _quantitychosen_10;
     }
 
     private async Task OnPreviewInteraction(StepperInteractionEventArgs arg)
@@ -129,7 +190,7 @@
             case 1:
                 if ((_step2Complete != true))
                 {
-                    await DialogService.ShowMessageBox("Error", "You have not...");
+                    await DialogService.ShowMessageBox("Error", "You have not submitted any tickets.");
                     arg.Cancel = true;
                 }
                 break;
@@ -164,18 +225,5 @@
     {
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
