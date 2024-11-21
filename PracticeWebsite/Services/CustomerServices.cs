@@ -22,13 +22,13 @@ namespace PracticeWebsite.Services
             _customer.PhoneNumber = customer.PhoneNumber;
             _customer.Postcode = customer.PostCode;
             _customer.DateOfBirth = DateOnly.Parse(customer.DoB);
-            _customer.EmployeeId = customer.EmployeeID;
+            _customer.EmployeeId = customer.EmployeeID;                                                                                           
 
             await _context.Customers.AddAsync(_customer);
             await _context.SaveChangesAsync();
         }
         public async Task LogInCustomerAsync(Customer customer)
-        {
+        { 
             await _context.Customers.AddAsync(customer);
         }
         public async Task<bool> CheckUsernameExistsAsync(string Username)

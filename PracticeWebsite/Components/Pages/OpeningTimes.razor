@@ -1,0 +1,45 @@
+﻿@page "/openingtimes"
+
+<MudContainer>
+    <MudGrid>
+        <MudItem xs="12" sm="12" md="4">
+            <MudCard>
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h3">Our Opening Times!</MudText>
+                        <MudText Typo="Typo.body1">
+                            Here are our usual times we are open and welcome visitors we do have to be at times closed whether it is because of maintenance work, events (Where you're still welcome if u posses tickets to the event.) or private hired parties.
+                            We are sorry if any of these are on the day you'd like to visit however this information can always be found on our page. However, here are our usual times we are open...
+                        </MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudDataGrid Items="@openingtimes" Filterable="false" SortMode="@SortMode.None" Groupable="false">
+                        <Columns>
+                            <PropertyColumn Property="x => x.dotw" />
+                            <PropertyColumn Property="x => x.times" />
+                        </Columns>
+                    </MudDataGrid>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+@code {
+    public record OpeningTimesTable(string dotw, string times);
+    public IEnumerable<OpeningTimesTable> openingtimes;
+    protected override void OnInitialized()
+    {
+        openingtimes = new List<OpeningTimesTable>
+        {
+            new OpeningTimesTable("Monday", "09:30 - 14:30"),
+            new OpeningTimesTable("Tuesday", "09:00 - 15:00"),
+            new OpeningTimesTable("Wednesday", "09:00 - 15:00"),
+            new OpeningTimesTable("Thursday", "09:00 - 15:00"),
+            new OpeningTimesTable("Friday", "09:30 - 14:30"),
+            new OpeningTimesTable("Saturday", "10:00 - 14:00"),
+            new OpeningTimesTable("Sunday", "10:00 - 14:00"),
+        };
+    }
+}

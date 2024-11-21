@@ -137,11 +137,12 @@
     private async Task ProcessSomething2()
     {
         Console.WriteLine("pressed");
-        // _processing2 = true;
-        // _step2Complete = true;
-        // await TicketProcessing();
-        // await Task.Delay(2000);
-        // _processing2 = false;
+        _processing2 = true;
+        _step2Complete = true;
+        Console.WriteLine(_quantitychosen_1);
+        await TicketProcessing();
+        await Task.Delay(2000);
+        _processing2 = false;
     }
 
     private async Task TicketProcessing()
