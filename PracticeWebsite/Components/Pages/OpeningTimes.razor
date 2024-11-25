@@ -2,8 +2,8 @@
 
 <MudContainer>
     <MudGrid>
-        <MudItem xs="12" sm="12" md="4">
-            <MudCard>
+        <MudItem xs="8">
+            <MudCard Class="pa-md-6 mx-lg-auto d-flex align-center flex-grow-1 gap-4">
                 <MudCardHeader>
                     <CardHeaderContent>
                         <MudText Typo="Typo.h3">Our Opening Times!</MudText>
@@ -16,10 +16,13 @@
                 <MudCardContent>
                     <MudDataGrid Items="@openingtimes" Filterable="false" SortMode="@SortMode.None" Groupable="false">
                         <Columns>
-                            <PropertyColumn Property="x => x.dotw" />
-                            <PropertyColumn Property="x => x.times" />
+                            <PropertyColumn Property="x => x.dotw" title="Day of the Week" />
+                            <PropertyColumn Property="x => x.times" Title="Entrance Times"/>
                         </Columns>
                     </MudDataGrid>
+                    <MudText Typo="Typo.body1">
+                        For any question please follow through the link to <a href="/contactus"> Contact Us!</a>
+                    </MudText>
                 </MudCardContent>
             </MudCard>
         </MudItem>

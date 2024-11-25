@@ -16,12 +16,12 @@
 <MudLayout>
     <MudAppBar Elevation = "10" Style="@($"background:{Colors.LightGreen.Darken2};")">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <a href="/">The Zoo!</a>
+        <MudLink Class="pa-4 mud-dark-text" Typo="Typo.h6" href="/">The Zoo!</MudLink>
         <MudSpacer />
 
         <MudMenu Label="Book/Buy" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
             <ActivatorContent>
-                <MudChip T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">Book/Buy</MudChip>
+                <MudButton T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">Book/Buy</MudButton>
             </ActivatorContent>
             <ChildContent>
                 <MudMenuItem Disabled="false" Href="/tickets">Park Admission Tickets</MudMenuItem>
@@ -41,7 +41,7 @@
 
         <MudMenu Label="Explore" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
             <ActivatorContent>
-                <MudChip T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">Explore</MudChip>
+                <MudButton T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">Explore</MudButton>
             </ActivatorContent>
             <ChildContent>
                 <MudMenuItem Disabled="false" Href="/animals"> Animals </MudMenuItem>
@@ -61,7 +61,7 @@
 
         <MudMenu Label="Venue Hire" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
             <ActivatorContent>
-                <MudChip T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">Venue Hire</MudChip>
+                <MudButton T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">Venue Hire</MudButton>
             </ActivatorContent>
             <ChildContent>
                 <MudMenuItem Disabled="true" Href="/venue/wedding">Weddings</MudMenuItem>
@@ -81,7 +81,7 @@
 
         <MudMenu Label="More" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
             <ActivatorContent>
-                <MudChip T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">More</MudChip>
+                <MudButton T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">More</MudButton>
             </ActivatorContent>
             <ChildContent>
                 <MudMenuItem Disabled="false" Href="/openingtimes">Opening Times</MudMenuItem>

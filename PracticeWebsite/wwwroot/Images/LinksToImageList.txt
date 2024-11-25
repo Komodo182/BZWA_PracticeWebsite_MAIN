@@ -4,6 +4,25 @@ Wolf(1).jpg == https://safesearch.pixabay.com/photos/wolf-wild-canids-carnivorou
 RedPanda(1).jpg == https://safesearch.pixabay.com/photos/little-panda-red-panda-cat-bear-3508116/
 SchoolTrip(1).jpg == https://safesearch.pixabay.com/photos/people-girls-women-students-2557399/
 TourGuide(1).jpg == https://safesearch.pixabay.com/photos/tour-guide-demonstrator-nature-6816049/
+Lemurs(1).jpg == https://safesearch.pixabay.com/photos/lemurs-animals-zoo-1010643/
+Iguana(1).jpg == https://safesearch.pixabay.com/photos/iguana-lizard-scaly-scales-branch-8283668/
+Penguins(1).jpg == https://safesearch.pixabay.com/photos/penguins-birds-river-nature-zoo-6981054/
+SnowLeopards(1).jpg == https://safesearch.pixabay.com/photos/leopards-snow-leopardss-wild-cats-1994499/
+Parrot(1).jpg == https://safesearch.pixabay.com/photos/parrot-blue-and-yellow-macaw-3695678/
+PolarBear(1).jpg == https://safesearch.pixabay.com/photos/polar-bear-zoo-captivity-6951677/
+Capybara(1).jpg == https://safesearch.pixabay.com/photos/capybara-adventure-zoo-zoo-hanover-8209095/
+Spider(1).jpg == https://safesearch.pixabay.com/photos/spider-insect-estonia-bug-nature-8453990/
+Tiger(1).jpg == https://safesearch.pixabay.com/photos/tiger-cat-big-cat-animal-predator-3264048/
+Snake(1).jpg == https://safesearch.pixabay.com/photos/snake-reptile-animal-detroit-zoo-4917390/
+Panda(1).jpg == https://safesearch.pixabay.com/photos/panda-adelaide-zoo-male-4883433/
+Crocodile(1).jpg == https://safesearch.pixabay.com/photos/crocodile-freshwater-crocodile-2010207/
+Tiger(2).jpg == https://safesearch.pixabay.com/photos/berlin-zoo-tiger-2709774/
+Zoo.png == https://www.freepik.com/premium-vector/elephant_358979244.htm#fromView=keyword&page=1&position=18&uuid=ca43f5b5-a437-47ad-9667-53be698993ce
+
+
+
+
+
 
 
 
