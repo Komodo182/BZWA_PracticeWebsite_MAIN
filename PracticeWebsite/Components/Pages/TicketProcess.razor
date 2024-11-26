@@ -5,14 +5,12 @@
 @using PracticeWebsite.
  *@
 
-
 <PageTitle>Ticket Purchasing...</PageTitle>
+
 <MudContainer Fixed="true">
     <MudCard Class="flex-auto d-flex py-8 mud-theme-white" Elevation="6">
         <MudStepper NonLinear ShowResetButton OnPreviewInteraction="OnPreviewInteraction">
-
             <MudStep Title="Date" SecondaryText="When are you visiting?" HasError="@(_step1Complete==false)">
-                @* <MudSwitch @bind-Value="_step1Complete" Color="Color.Primary">Flip the switch to be able to advance to step 2</MudSwitch> *@
                 <MudCard>
                     <MudCardHeader>
                         <MudText Typo="Typo.h4">Please select what day you would like to book...</MudText>
@@ -37,34 +35,100 @@
             </MudStep>
 
             <MudStep Title="Step 2" SecondaryText="Whos coming?" HasError="@(_step2Complete==false)">
-                <MudDataGrid Items="@admissiontickets" Filterable="false" SortMode="@SortMode.None" Groupable="false" ReadOnly="false">
-                    <Columns>
-                        <PropertyColumn Property="x => x.tickets" Title="Admission Tickets" Editable="false" />
-                        <PropertyColumn Property="x => x.prices" Title="Prices" Editable="false" />
-                        <TemplateColumn Title="Quantity" Editable="true">
-                            <CellTemplate>
-                                <MudStack Row>
-                                    <MudNumericField Min="0" Max="20" />
-                                </MudStack>
-                            </CellTemplate>
-                        </TemplateColumn>
-                    </Columns>
-                </MudDataGrid>
-                <MudButton Disabled="@_processing2" OnClick="ProcessSomething2" @bind-Completed="_step2Complete" Variant="Variant.Outlined" Color="Color.Primary">
-                    @if (_processing2)
+                <MudTable Items="Tickets" Dense="true" Bordered="true" Hover="true">
+                    <HeaderContent>
+                        <MudTh>Ticket Name</MudTh>
+                        <MudTh>Price</MudTh>
+                        <MudTh>Quantity</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd>@context.Name</MudTd>
+                        <MudTd>@($"£{context.Price:F2}")</MudTd>
+                        <MudTd>
+                            <MudNumericField @bind-Value="@context.Quantity" Min="0" Max="10" />
+                        </MudTd>
+                    </RowTemplate>
+                </MudTable>
+
+                <MudText Typo="Typo.h6" Class="mt-4">Selected Quantities</MudText>
+                <ul>
+                    @foreach (var ticket in Tickets)
                     {
-                        <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                        <MudText Class="ms-2">Processing</MudText>
+                        <li>@($"{ticket.Name}: {ticket.Quantity}")</li>
                     }
-                    else
-                    {
-                        <MudText>Confirm Tickets</MudText>
-                    }
+                </ul>
+
+                <MudButton Disabled="@_processing2" OnClick="ProcessSomething2" Variant="Variant.Filled" Color="Color.Primary" Class="mt-4">
+                    Confirm Selection
                 </MudButton>
+
+                @if (_processing2)
+                {
+                    <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                    <MudText Class="ms-2">Processing</MudText>
+                }
+                else
+                {
+                    <MudText>Confirm Selection</MudText>
+                }
+
+                <MudText Typo="Typo.h6" Class="mt-4">Selected Tickets</MudText>
+                @if (ConfirmedTickets?.Any() == true)
+                {
+                    <ul>
+                        @foreach (var ticket in ConfirmedTickets)
+                        {
+                            <li>@($"{ticket.Name}: {ticket.Quantity}")</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <MudText Typo="Typo.body2" Class="mt-2">No tickets selected yet.</MudText>
+                }
             </MudStep>
 
+
             <MudStep Title="Step 3" SecondaryText="Choose a timeslot" HasError="@(_step3Complete==false)">
-                @* <MudTextField Label="Enter some text" @bind-Value="_step2TextInput" Variant="Variant.Filled" Clearable /> *@
+                <MudGrid>
+                    <!-- Ticket Summary -->
+                    <MudItem xs="12" md="6">
+                        <MudText Typo="Typo.h6" Class="mb-2">Selected Tickets</MudText>
+                        @if (ConfirmedTickets?.Any() == true)
+                        {
+                            <MudTable Items="ConfirmedTickets" Dense="true" Bordered="true">
+                                <HeaderContent>
+                                    <MudTh>Ticket Name</MudTh>
+                                    <MudTh>Quantity</MudTh>
+                                    <MudTh>Date</MudTh>
+                                </HeaderContent>
+                                <RowTemplate>
+                                    <MudTd>@context.Name</MudTd>
+                                    <MudTd>@context.Quantity</MudTd>
+                                    <MudTd>@context.Date?.ToString("d")</MudTd>
+                                </RowTemplate>
+                            </MudTable>
+                        }
+                        else
+                        {
+                            <MudText Typo="Typo.body2">No tickets selected.</MudText>
+                        }
+                    </MudItem>
+
+                    <!-- Input Fields -->
+                    <MudItem xs="12" md="6">
+                        <MudText Typo="Typo.h6" Class="mb-2">Personal Information</MudText>
+                        <MudTextField Label="First Name" @bind-Value="fName" Required="true" />
+                        <MudTextField Label="Last Name" @bind-Value="lName" Required="true" />
+                        <MudTextField Label="Email" @bind-Value="email" Required="true" />
+                        <MudTextField Label="Telephone" @bind-Value="phone" Required="true" />
+                        <MudTextField Label="Address" @bind-Value="address" Required="true" />
+
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveCheckoutData" Class="mt-4">
+                            Save and Complete
+                        </MudButton>
+                    </MudItem>
+                </MudGrid>
             </MudStep>
 
         </MudStepper>
@@ -78,37 +142,13 @@
 
 @code 
 {
-
-    //Admission Ticket list
-    public record admissionticketlist(string tickets, double prices, int quantitychose);
-    public IEnumerable<admissionticketlist> admissiontickets;
-    protected override void OnInitialized()
-    {
-        admissiontickets = new List<admissionticketlist>
-        {
-            new admissionticketlist("Admission - Adult (16+)", 19.99 ,_quantitychosen_1),
-            new admissionticketlist("Admission - Child (6-15)", 14.99 ,_quantitychosen_2),
-            new admissionticketlist("Admission - Senior (65+)", 17.99 ,_quantitychosen_3),
-            new admissionticketlist("Admission - Student", 17.99 ,_quantitychosen_4),
-            new admissionticketlist("Admission - Under 6s", 0 ,_quantitychosen_5),
-            new admissionticketlist("Admission - Disabled Adult (16+)", 14.99 ,_quantitychosen_6),
-            new admissionticketlist("Admission - Disabled Child (6-15)", 9.99 ,_quantitychosen_7),
-            new admissionticketlist("Admission - Disabled Senior (65+)", 11.99 ,_quantitychosen_8),
-            new admissionticketlist("Admission - Disabled Student", 11.99 ,_quantitychosen_9),
-            new admissionticketlist("Admission - Disabled Carer", 8 ,_quantitychosen_10),
-        };
-    }
-
     [Inject]
     IDialogService DialogService { get; set; }
 
-    //DataSubmitForm ticketdate = new DataSubmitForm();
     bool success;
-
     private bool? _step1Complete;
     private bool? _step2Complete;
     private bool? _step3Complete;
-    //private string _step2TextInput;
     private DateTime? _date;
     private DateTime? _datechosen = DateTime.Today;
     private DateTime _minDate = DateTime.Now.Date;
@@ -122,45 +162,24 @@
     private int _quantitychosen_8;
     private int _quantitychosen_9; 
     private int _quantitychosen_10;
-
-    //Date button processing
     private bool _processing1 = false;
     private async Task ProcessSomething1()
     {
         _processing1 = true;
         _date = _datechosen;
-        _step1Complete = true;
-        await Task.Delay(2000);
+        await Task.Delay(1);
         _processing1 = false;
+        _step1Complete = true;
     }
     private bool _processing2 = false;
     private async Task ProcessSomething2()
     {
         Console.WriteLine("pressed");
         _processing2 = true;
-        _step2Complete = true;
-        Console.WriteLine(_quantitychosen_1);
-        await TicketProcessing();
-        await Task.Delay(2000);
+        await ConfirmSelectionAsync();
+        await Task.Delay(1);
         _processing2 = false;
-    }
-
-    private async Task TicketProcessing()
-    {
-        // if (_quantitychosen_1 > 0)
-        // {
-        //     _quantitychosen_1 = Adm_Adult_Norm(_quantitychosen_1)
-        // }
-        // private int _quantitychosen_1;
-        // private int _quantitychosen_2;
-        // private int _quantitychosen_3;
-        // private int _quantitychosen_4;
-        // private int _quantitychosen_5;
-        // private int _quantitychosen_6;
-        // private int _quantitychosen_7;
-        // private int _quantitychosen_8;
-        // private int _quantitychosen_9; 
-        // private int _quantitychosen_10;
+        _step2Complete = true;
     }
 
     private async Task OnPreviewInteraction(StepperInteractionEventArgs arg)
@@ -226,5 +245,64 @@
     {
 
     }
+
+    public class Ticket
+    {
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public int Quantity { get; set; }
+        public DateTime? Date { get; set; }
+    }
+
+    private List<Ticket> Tickets = new List<Ticket>
+    {
+        new Ticket { Name = "Admission - Adult (16+)", Price = 19.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Child (6-15)", Price = 14.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Senior (65+)", Price = 17.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Student", Price = 17.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Under 6s", Price = 0.00M, Quantity = 0 },
+        new Ticket { Name = "Admission - Disabled Adult (16+)", Price = 14.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Disabled Child (6-15)", Price = 9.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Disabled Senior (65+)", Price = 11.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Disabled Student", Price = 11.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Disabled Carer", Price = 8.00M, Quantity = 0 }
+    };
+    private List<Ticket> ConfirmedTickets = new();
+
+    private async Task ConfirmSelectionAsync()
+    {
+        // Save only tickets with quantity > 0
+        ConfirmedTickets = Tickets
+            .Where(ticket => ticket.Quantity > 0)
+            .Select(ticket => new Ticket
+                {
+                    Name = ticket.Name,
+                    Quantity = ticket.Quantity,
+                    Date = _datechosen
+                })
+            .ToList();
+    }
+
+    private string fName { get; set; }
+    private string lName { get; set; }
+    private string email { get; set; }
+    private string phone { get; set; }
+    private string address { get; set; }
+
+    private async Task SaveCheckoutData()
+    {
+        // Simulate saving Name and Email
+        await Task.Delay(500); // Simulate processing delay
+        Snackbar?.Add($"Checkout complete! Name: {fName}, Email: {email}", Severity.Success);
+    }
+
+    [Inject]
+    private ISnackbar Snackbar { get; set; }
+
+
+
+
+
+
 
 }

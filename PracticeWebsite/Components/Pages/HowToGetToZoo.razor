@@ -1,7 +1,48 @@
 ﻿@page "/howtogethere"
 
-
+<MudContainer>
+    <MudGrid>
+        <MudItem xs="12">
+            <MudCard Class="pa-md-6 mx-auto d-flex align-center flex-grow-1">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h3">Help on How to Visit Us!</MudText>
+                        <MudText Typo="Typo.body1">
+                            If you're looking for help on how to find your way to us here it is here we provide information as well as services that will help you find your way to us or plan ahead.
+                            In addition it's all free! Below we will provide a table of information of the address of our Zoo as well as a plug-in to redirect you to google.
+                        </MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudPaper Outlined="true" Class="border-dashed pa-4">
+                        <MudStack Wrap="Wrap.Wrap" Spacing="4" Row Style="width: 500px" AlignItems="AlignItems.Start">
+                            <MudPaper>Address:</MudPaper>
+                            <MudPaper>Notre Dame Catholic Sixth Form College, St Mark's Ave</MudPaper>
+                            <MudFlexBreak />
+                            <MudPaper>PostCode:</MudPaper>
+                            <MudPaper>Leeds, LS2 9BL</MudPaper>
+                            <MudFlexBreak />
+                            <MudPaper>To find out when we are open please press the button below!</MudPaper>
+                            <MudButton Href="/openingtimes" Variant="Variant.Outlined">Press Me!</MudButton>
+                        </MudStack>
+                    </MudPaper>
+                </MudCardContent>
+                <MudCardContent>
+                    <MudText Typo="Typo.body1">
+                        Above you can find our location information and below u can directly access google to help you!
+                    </MudText>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d75385.74374956217!2d-1.6264068109391194!3d53.81076252213387!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48795eaa88dbb08b%3A0xe7d6eabaa00c9705!2sNotre%20Dame%20Catholic%20Sixth%20Form%20College!5e0!3m2!1sen!2suk!4v1732531739757!5m2!1sen!2suk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
 
 @code {
+
+
+
+
+
 
 }
