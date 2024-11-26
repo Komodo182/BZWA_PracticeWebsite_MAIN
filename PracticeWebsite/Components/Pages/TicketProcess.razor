@@ -50,27 +50,26 @@
                     </RowTemplate>
                 </MudTable>
 
-                <MudText Typo="Typo.h6" Class="mt-4">Selected Quantities</MudText>
+                @* <MudText Typo="Typo.h6" Class="mt-4">Selected Quantities</MudText>
                 <ul>
                     @foreach (var ticket in Tickets)
                     {
                         <li>@($"{ticket.Name}: {ticket.Quantity}")</li>
                     }
-                </ul>
+                </ul> *@
 
-                <MudButton Disabled="@_processing2" OnClick="ProcessSomething2" Variant="Variant.Filled" Color="Color.Primary" Class="mt-4">
-                    Confirm Selection
+                <MudButton Disabled="@_processing2" OnClick="ProcessSomething2" Variant="Variant.Outlined" Color="Color.Primary" Class="mt-4">
+                    @if (_processing2)
+                    {
+                        <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                        <MudText Class="ms-2">Processing</MudText>
+                    }
+                    else
+                    {
+                        <MudText>Confirm Selection</MudText>
+                    }
                 </MudButton>
 
-                @if (_processing2)
-                {
-                    <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                    <MudText Class="ms-2">Processing</MudText>
-                }
-                else
-                {
-                    <MudText>Confirm Selection</MudText>
-                }
 
                 <MudText Typo="Typo.h6" Class="mt-4">Selected Tickets</MudText>
                 @if (ConfirmedTickets?.Any() == true)
@@ -89,7 +88,7 @@
             </MudStep>
 
 
-            <MudStep Title="Step 3" SecondaryText="Choose a timeslot" HasError="@(_step3Complete==false)">
+            <MudStep Title="Step 3" SecondaryText="Payment Information" HasError="@(_step3Complete==false)">
                 <MudGrid>
                     <!-- Ticket Summary -->
                     <MudItem xs="12" md="6">
@@ -118,27 +117,91 @@
                     <!-- Input Fields -->
                     <MudItem xs="12" md="6">
                         <MudText Typo="Typo.h6" Class="mb-2">Personal Information</MudText>
-                        <MudTextField Label="First Name" @bind-Value="fName" Required="true" />
-                        <MudTextField Label="Last Name" @bind-Value="lName" Required="true" />
-                        <MudTextField Label="Email" @bind-Value="email" Required="true" />
-                        <MudTextField Label="Telephone" @bind-Value="phone" Required="true" />
-                        <MudTextField Label="Address" @bind-Value="address" Required="true" />
+                        <MudTextField ShrinkLabel HelperText="Max. 15 characters" HelperTextOnFocus="true"
+                        Counter="15" MaxLength="15" Immediate="true" Label="First Name" @bind-Value="fName" Required="true" Variant="Variant.Outlined" />
+                        <MudTextField ShrinkLabel HelperText="Max. 15 characters" HelperTextOnFocus="true"
+                        Counter="20" MaxLength="20" Immediate="true" Label="Last Name" @bind-Value="lName" Required="true" Variant="Variant.Outlined" />
+                        <MudTextField ShrinkLabel HelperText="Max. 15 characters" HelperTextOnFocus="true"
+                        InputType="InputType.Email" Label="Email" @bind-Value="email" Required="true" Variant="Variant.Outlined" />
+                        <MudTextField ShrinkLabel HelperText="Max. 15 characters" HelperTextOnFocus="true"
+                        Counter="11" MaxLength="11" Immediate="true" InputType="InputType.Telephone" Label="Telephone" @bind-Value="phone" Required="true" Variant="Variant.Outlined" />
+                        <MudTextField ShrinkLabel HelperText="Max. 15 characters" HelperTextOnFocus="true"
+                        Counter="8" MaxLength="8" Immediate="true" Label="Address" @bind-Value="address" Required="true" Variant="Variant.Outlined" />
 
-                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveCheckoutData" Class="mt-4">
-                            Save and Complete
+                        <MudButton Disabled="@_processing3" OnClick="ProcessSomething3" Variant="Variant.Filled" Color="Color.Primary" Class="mt-4">
+                            @if (_processing3)
+                            {
+                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                <MudText Class="ms-2">Processing</MudText>
+                            }
+                            else
+                            {
+                                <MudText>Confirm and Continue</MudText>
+                            }
                         </MudButton>
                     </MudItem>
                 </MudGrid>
             </MudStep>
 
+            <MudStep Title="Step 4" SecondaryText="Finalizing Transaction" HasError="@(_step4Complete==false)">
+                <MudGrid>
+                    <!-- Ticket Summary with Costs -->
+                    <MudItem xs="12" md="6">
+                        <MudText Typo="Typo.h6" Class="mb-2">Ticket Summary</MudText>
+                        @if (ConfirmedTickets?.Any() == true)
+                        {
+                            <MudTable Items="ConfirmedTickets" Dense="true" Bordered="true">
+                                <HeaderContent>
+                                    <MudTh>Ticket Name</MudTh>
+                                    <MudTh>Quantity</MudTh>
+                                    <MudTh>Price</MudTh>
+                                    <MudTh>Date</MudTh>
+                                </HeaderContent>
+                                <RowTemplate>
+                                    <MudTd>@context.Name</MudTd>
+                                    <MudTd>@context.Quantity</MudTd>
+                                    <MudTd>@($"${context.Quantity * Tickets.First(t => t.Name == context.Name).Price:F2}")</MudTd>
+                                    <MudTd>@context.Date?.ToString("d")</MudTd>
+                                </RowTemplate>
+                            </MudTable>
+
+                            <!-- Total Cost -->
+                            <MudText Typo="Typo.h6" Class="mt-2">
+                                Total Cost: @($"${ConfirmedTickets.Sum(ticket => ticket.Quantity * Tickets.First(t => t.Name == ticket.Name).Price):F2}")
+                            </MudText>
+                        }
+                        else
+                        {
+                            <MudText Typo="Typo.body2">No tickets selected.</MudText>
+                        }
+                    </MudItem>
+
+                    <!-- Payment Fields -->
+                    <MudItem xs="12" md="6">
+                        <MudText Typo="Typo.h6" Class="mb-2">Payment Details</MudText>
+                        <MudTextField Label="Credit Card Number" @bind-Value="CreditCardNumber" Placeholder="XXXX-XXXX-XXXX-XXXX" Mask="@(new PatternMask("0000 0000 0000 0000"))" Required="true" />
+                        <MudTextField Label="CVV" @bind-Value="CVV" Placeholder="XXX" Mask="@(new PatternMask("000"))" Required="true" />
+                        <MudTextField Label="Expiration Date" @bind-Value="ExpirationDate" Placeholder="MM/YY" Mask="@(new DateMask("MM/YY", 'Y', 'M'))" Required="true" />
+
+
+
+                        <MudButton Disabled="@_processing4" OnClick="ProcessSomething4" Variant="Variant.Filled" Color="Color.Primary" Class="mt-4">
+                            @if (_processing4)
+                            {
+                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                <MudText Class="ms-2">Processing</MudText>
+                            }
+                            else
+                            {
+                                <MudText>Finalise Purchase</MudText>
+                            }
+                        </MudButton>
+                    </MudItem>
+                </MudGrid>
+            </MudStep>
         </MudStepper>
     </MudCard>
 </MudContainer>
-
-
-
-
-
 
 @code 
 {
@@ -149,6 +212,7 @@
     private bool? _step1Complete;
     private bool? _step2Complete;
     private bool? _step3Complete;
+    private bool? _step4Complete;
     private DateTime? _date;
     private DateTime? _datechosen = DateTime.Today;
     private DateTime _minDate = DateTime.Now.Date;
@@ -174,12 +238,28 @@
     private bool _processing2 = false;
     private async Task ProcessSomething2()
     {
-        Console.WriteLine("pressed");
         _processing2 = true;
         await ConfirmSelectionAsync();
         await Task.Delay(1);
         _processing2 = false;
         _step2Complete = true;
+    }
+    private bool _processing3 = false;
+    private async Task ProcessSomething3()
+    {
+        _processing3 = true;
+        await Task.Delay(1);
+        _processing3 = false;
+        _step3Complete = true;
+    }
+    private bool _processing4 = false;
+    private async Task ProcessSomething4()
+    {
+        _processing4 = true;
+        await Task.Delay(1);
+        _processing4 = false;
+        await CompletePayment();
+        _step4Complete = true;
     }
 
     private async Task OnPreviewInteraction(StepperInteractionEventArgs arg)
@@ -288,18 +368,18 @@
     private string email { get; set; }
     private string phone { get; set; }
     private string address { get; set; }
+    private string CreditCardNumber { get; set; }
+    private string CVV { get; set; }
+    private string ExpirationDate { get; set; }
 
-    private async Task SaveCheckoutData()
+    private async Task CompletePayment()
     {
-        // Simulate saving Name and Email
-        await Task.Delay(500); // Simulate processing delay
-        Snackbar?.Add($"Checkout complete! Name: {fName}, Email: {email}", Severity.Success);
+        await Task.Delay(500);
+        Snackbar?.Add("Payment successful! Thank you for your purchase.", Severity.Success);
     }
 
     [Inject]
     private ISnackbar Snackbar { get; set; }
-
-
 
 
 
