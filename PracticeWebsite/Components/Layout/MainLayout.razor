@@ -110,12 +110,12 @@
                         <ValidationSummary/>
                         <MudGrid>
                             <MudItem>
-                                <MudCard Elevation="0">
+                                <MudCard Elevation="1">
                                     <MudCardContent>
-                                        <MudTextField T="string" ShrinkLabel Label="Username" Required="true" 
-                                            @bind-Value="LogInCustomer.Username" RequiredError=" Username or an Email is required!" />
+                                        <MudTextField T="string" ShrinkLabel Label="Username" Required="true"
+                                                      @bind-Value="LogInCustomer.Username" RequiredError=" Username or an Email is required!" Variant="Variant.Outlined" />
                                         <MudTextField T="string" ShrinkLabel Label="Password" Required="true"
-                                            @bind-Value="password" @ref="pwField1" InputType="InputType.Password" RequiredError="Password is required!"/>
+                                                      @bind-Value="password" @ref="pwField1" InputType="InputType.Password" RequiredError="Password is required!" Variant="Variant.Outlined" />
                                         <MudCardActions>
                                             <div class="d-flex align-center justify-space-between">
                                                 <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success)" Class="ml-auto">Log in</MudButton>

@@ -14,9 +14,10 @@
 <p>Welcome to the zoo how may we help you?</p>
 
 <a href="register">register link</a> *@
-<MudContainer Fixed="true">
+<MudContainer Fixed="true" MaxWidth="MaxWidth.ExtraLarge" Class="mt-4">
     <MudCard>
         <MudCarousel Class="mud-width-full" Style="height:600px;" ShowArrows="false" ShowBullets="false" EnableSwipeGesture="false" AutoCycle="true" TData="object">
+            
             <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Primary">
                 <div class="d-flex" style="height:100%">
                     <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center" 
@@ -35,10 +36,185 @@
                     Height="1280" Width="1920" Src="images/Wolf(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
                 </div>
             </MudCarouselItem>
+            <!-- Static Overlay Bar -->
+            <div class="overlay-bar" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; z-index: 2;">
+                <!-- Static Overlay Bar -->
+                <MudPaper Class="overlay-bar d-flex justify-center align-center" Elevation="3">
+                    <MudGrid AlignItems="Center" Spacing="2">
+                        <!-- Section 1 -->
+                        <MudItem xs="12" sm="6" md="3">
+                            <a href="/attractions" style="text-decoration: none; color: inherit;">
+                                <div class="icon-text-group">
+                                    <MudIcon Icon="@Icons.Material.Filled.Pets" Size="Size.Large" Color="Color.Primary" />
+                                    <MudText Typo="Typo.h6">Animals</MudText>
+                                </div>
+                            </a>
+                        </MudItem>
+                        <!-- Section 2 -->
+                        <MudItem xs="12" sm="6" md="3">
+                            <a href="/tickets" style="text-decoration: none; color: inherit;">
+                                <div class="icon-text-group">
+                                    <MudIcon Icon="@Icons.Material.Filled.ConfirmationNumber" Size="Size.Large" Color="Color.Primary" />
+                                    <MudText Typo="Typo.h6">Tickets</MudText>
+                                </div>
+                            </a>
+                        </MudItem>
+                        <!-- Section 3 -->
+                        <MudItem xs="12" sm="6" md="3">
+                            <a href="/plan-your-visit" style="text-decoration: none; color: inherit;">
+                                <div class="icon-text-group">
+                                    <MudIcon Icon="@Icons.Material.Filled.CalendarToday" Size="Size.Large" Color="Color.Primary" />
+                                    <MudText Typo="Typo.h6">Visit</MudText>
+                                </div>
+                            </a>
+                        </MudItem>
+                        <!-- Section 4 -->
+                        <MudItem xs="12" sm="6" md="3">
+                            <a href="/contact-us" style="text-decoration: none; color: inherit;">
+                                <div class="icon-text-group">
+                                    <MudIcon Icon="@Icons.Material.Filled.LocationOn" Size="Size.Large" Color="Color.Primary" />
+                                    <MudText Typo="Typo.h6">Find Us</MudText>
+                                </div>
+                            </a>
+                        </MudItem>
+                    </MudGrid>
+                </MudPaper>
+            </div>
         </MudCarousel> 
     </MudCard>
+    <!-- Intro Section -->
+    <MudPaper Class="p-4 mt-4" Elevation="1">
+        <MudText Typo="Typo.h4" Align="Align.Center" Class="mb-3">Welcome to Our Zoo</MudText>
+        <MudText Typo="Typo.body1" Align="Align.Justify">
+            Discover a world of wonder at our zoo! Home to exotic animals, thrilling attractions, and family-friendly experiences, we invite you to explore
+            the beauty of wildlife and nature. Plan your visit today to make unforgettable memories!
+        </MudText>
+    </MudPaper>
+
+    <!-- Featured Attractions Section -->
+    <MudGrid Class="mt-4" Spacing="3">
+        <MudItem xs="12">
+            <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-2">Our Featured Attractions</MudText>
+        </MudItem>
+
+        <!-- Attraction 1 -->
+        <MudItem xs="12" sm="6" md="4">
+            <MudCard>
+                <MudCardMedia Image="https://via.placeholder.com/400x300?text=Safari+Adventure" Height="200" />
+                <MudCardContent>
+                    <MudText Typo="Typo.h6">Safari Adventure</MudText>
+                    <MudText Typo="Typo.body2">
+                        Embark on an unforgettable journey through our African safari, where you'll encounter lions, giraffes, and rhinos up close.
+                    </MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+
+        <!-- Attraction 2 -->
+        <MudItem xs="12" sm="6" md="4">
+            <MudCard>
+                <MudCardMedia Image="https://via.placeholder.com/400x300?text=Penguin+Paradise" Height="200" />
+                <MudCardContent>
+                    <MudText Typo="Typo.h6">Penguin Paradise</MudText>
+                    <MudText Typo="Typo.body2">
+                        Visit our playful penguins in their icy habitat. Watch them dive, swim, and waddle around with joy.
+                    </MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+
+        <!-- Attraction 3 -->
+        <MudItem xs="12" sm="6" md="4">
+            <MudCard>
+                <MudCardMedia Image="https://via.placeholder.com/400x300?text=Rainforest+Realm" Height="200" />
+                <MudCardContent>
+                    <MudText Typo="Typo.h6">Rainforest Realm</MudText>
+                    <MudText Typo="Typo.body2">
+                        Immerse yourself in a lush rainforest, home to vibrant birds, curious monkeys, and hidden treasures.
+                    </MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+
+    <!-- Visitor Information Section -->
+    <MudPaper Class="p-4 mt-4" Elevation="1">
+        <MudGrid>
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.h5" Class="mb-2">Plan Your Visit</MudText>
+                <MudText Typo="Typo.body2">
+                    We're open year-round! Check out our opening times, ticket prices, and special offers. Don't forget to book your tickets in advance!
+                </MudText>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-2">Plan Your Visit</MudButton>
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudImage Src="https://via.placeholder.com/600x400?text=Zoo+Map" Alt="Zoo Map" Class="rounded" />
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+
+    <!-- Footer Section -->
+    <MudPaper Class="p-4 mt-4" Style="background-color: #f5f5f5;">
+        <MudGrid>
+            <MudItem xs="12" md="4">
+                <MudText Typo="Typo.h6">Contact Us</MudText>
+                <MudText Typo="Typo.body2">
+                    Address: 123 Zoo Lane, City, Country<br />
+                    Phone: +44 123 456 7890<br />
+                    Email: info@zooexample.com
+                </MudText>
+            </MudItem>
+            <MudItem xs="12" md="4">
+                <MudText Typo="Typo.h6">Opening Hours</MudText>
+                <MudText Typo="Typo.body2">
+                    Monday - Friday: 9:00 AM - 5:00 PM<br />
+                    Saturday - Sunday: 10:00 AM - 6:00 PM
+                </MudText>
+            </MudItem>
+            <MudItem xs="12" md="4">
+                <MudText Typo="Typo.h6">Follow Us</MudText>
+                <MudText Typo="Typo.body2">
+                    Stay updated with the latest news and events.<br />
+                    <MudButton Variant="Variant.Text" Color="Color.Primary">Facebook</MudButton>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary">Instagram</MudButton>
+                </MudText>
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+
+
+
 </MudContainer>
 
 
 @code {
+    // .overlay-bar {
+    //     position: absolute;
+    //     bottom: 10%; /* Adjust to your preference */
+    //     left: 50%;
+    //     transform: translateX(-50%);
+    //     width: 90%; /* Adjust width */
+    //     padding: 1rem;
+    //     background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    //     border-radius: 10px;
+    //     z-index: 2;
+    // }
+
+    // .icon-text-group {
+    //     display: flex;
+    //     flex-direction: column; /* Stack icon and text vertically */
+    //     align-items: center;    /* Center both icon and text */
+    //     gap: 0.5rem;            /* Space between icon and text */
+    // }
+
+
 }
