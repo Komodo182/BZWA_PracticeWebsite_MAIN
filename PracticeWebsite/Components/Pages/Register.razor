@@ -122,22 +122,7 @@
             PasswordInput2 = InputType.Text;
         }
     }
-    // private void OnValidSubmit(EditContext context)
-    // {
-    //     success = true;
-    //     StateHasChanged();
-    //     Console.WriteLine("Register button has been clicked");
-    //     Console.WriteLine(model.Username);
-    //     Console.WriteLine(model.Password);
-    //     Console.WriteLine(model.FirstName);
-    //     Console.WriteLine(model.LastName);
-    //     Console.WriteLine(model.Email);
-    //     Console.WriteLine(model.PostCode);
-    //     Console.WriteLine(model.PhoneNumber);
-    //     Console.WriteLine(model.DoB);
-    //     Console.WriteLine(model.employeeStatus);
-    //     Console.WriteLine(model.EmployeeID);
-    // }
+
     private async Task OnValidSubmit()
     {
         bool usernameTaken = await CustomerService.CheckUsernameExistsAsync(model.Username);

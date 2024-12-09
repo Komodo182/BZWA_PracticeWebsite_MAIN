@@ -1,11 +1,43 @@
-﻿<MudNavMenu>
-    <MudText Typo="Typo.h6" Class="px-4">Employee ToolBox</MudText>
+﻿<MudNavMenu Rounded="true" Margin="Margin.Dense">
+    <MudText Typo="Typo.h4" Class="px-4">Navigation Menu</MudText>
     <MudDivider Class="my-2" />
-    <MudNavLink Href="/servers" Icon="@Icons.Material.Filled.Storage" >Server Connections</MudNavLink>
-    <MudNavGroup Title="Settings" Icon="@Icons.Material.Filled.Settings" Expanded="true">
-        <MudNavLink Href="/userman" Icon="@Icons.Material.Filled.People" >User Management</MudNavLink>
-        <MudNavLink Href="/securityman" Icon="@Icons.Material.Filled.AdminPanelSettings" >Security Management</MudNavLink>
+    <MudSpacer/>
+    <MudButton Class="justify-center" Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White} ;background:{Colors.Green.Darken3};")" Href="/tickets">Book Tickets!</MudButton>
+    <MudSpacer/>
+    <MudNavGroup Title="Book/Buy" Icon="@Icons.Material.Filled.CreditCard" Expanded="true">
+        <MudNavLink Disabled="false" Href="/tickets">Park Admission Tickets</MudNavLink>
+        <MudNavLink Disabled="false" Href="/membership">Memberships</MudNavLink>
+        <MudNavLink Disabled="true" Href="/membership/requirements">Members Admission</MudNavLink>
+        <MudNavLink Disabled="true" Href="/animals/rangerexperience">The Real Ranger Experience</MudNavLink>
+        <MudNavLink Disabled="true" Href="/gifts">Gift Shop</MudNavLink>
+        <MudNavLink Disabled="true" Href="/gifts/adoptananimal">Adobt an Animal</MudNavLink>
     </MudNavGroup>
-    <MudNavLink Href="/dataman" Icon="@Icons.Material.Filled.Equalizer">Data Records</MudNavLink>
-    <MudNavLink Href="/about" Icon="@Icons.Material.Filled.Build" >About</MudNavLink>
+    <MudDivider/>
+    <MudNavGroup Title="Explore" Icon="@Icons.Material.Filled.Explore" Expanded="true">
+        <MudNavLink Disabled="false" Href="/animals">Animals</MudNavLink>
+        <MudNavLink Disabled="true" Href="/animals/experience">Animal Experiences</MudNavLink>
+        <MudNavLink Disabled="true" Href="/events">Shows & Ranger Talks</MudNavLink>
+        <MudNavLink Disabled="true" Href="/events/special">Special Events</MudNavLink>
+        <MudNavLink Disabled="false" Href="/map">Park Map</MudNavLink>
+        <MudNavLink Disabled="true" Href="/hotel/experience">Stay at the Hotel</MudNavLink>
+    </MudNavGroup>
+    <MudDivider />
+    <MudNavGroup Title="Venue Hire" Icon="@Icons.Material.Filled.Book" Expanded="true">
+        <MudNavLink Disabled="true" Href="/venue/wedding">Weddings</MudNavLink>
+        <MudNavLink Disabled="true" Href="/venue/hospitality">Corporate Hospitality</MudNavLink>
+        <MudNavLink Disabled="true" Href="/">Team Building</MudNavLink>
+        <MudNavLink Disabled="true" Href="/venue/business">Meetings & Conferences</MudNavLink>
+        <MudNavLink Disabled="true" Href="/venue">Private Parties</MudNavLink>
+        <MudNavLink Disabled="true" Href="/educationalvisit">Educational Visits</MudNavLink>
+    </MudNavGroup>
+    <MudDivider />
+    <MudNavGroup Title="More" Icon="@Icons.Material.Filled.More" Expanded="true">
+        <MudNavLink Disabled="false" Href="/openingtimes">Opening Times</MudNavLink>
+        <MudNavLink Disabled="false" Href="/howtogethere">How to get here</MudNavLink>
+        <MudNavLink Disabled="true" Href="/policies/accessibility">Accessibility</MudNavLink>
+        <MudNavLink Disabled="true" Href="/policies">Policies</MudNavLink>
+        <MudNavLink Disabled="false" Href="/contact">Contact</MudNavLink>
+        <MudNavLink Disabled="false" Href="/contact">Contact</MudNavLink>
+    </MudNavGroup>
+    <MudDivider />
 </MudNavMenu>

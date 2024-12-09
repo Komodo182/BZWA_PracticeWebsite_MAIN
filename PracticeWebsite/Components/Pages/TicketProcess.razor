@@ -16,7 +16,7 @@
                         <MudText Typo="Typo.h4">Please select what day you would like to book...</MudText>
                     </MudCardHeader>
                     <MudCardContent>
-                        <MudDatePicker @bind-Date="_datechosen" MinDate="_minDate" PickerVariant="PickerVariant.Static"/>
+                        <MudDatePicker @bind-Date="_datechosen" Orientation="Orientation.Landscape" MinDate="_minDate" PickerVariant="PickerVariant.Static"/>
                         <MudHidden Breakpoint="@Breakpoint.Xs">
                         </MudHidden>
                         <MudButton Disabled="@_processing1" OnClick="ProcessSomething1" @bind-Completed="_step1Complete" Variant="Variant.Outlined" Color="Color.Primary">
@@ -231,32 +231,39 @@
     private bool _processing1 = false;
     private async Task ProcessSomething1()
     {
+        _step1Complete = false;
         _processing1 = true;
         _date = _datechosen;
-        await Task.Delay(1);
+        await Task.Delay(2000);
         _processing1 = false;
         _step1Complete = true;
     }
+
     private bool _processing2 = false;
     private async Task ProcessSomething2()
     {
+        _step2Complete = false;
         _processing2 = true;
         await ConfirmSelectionAsync();
         await Task.Delay(1);
         _processing2 = false;
         _step2Complete = true;
     }
+
     private bool _processing3 = false;
     private async Task ProcessSomething3()
     {
+        _step3Complete = false;
         _processing3 = true;
         await Task.Delay(1);
         _processing3 = false;
         _step3Complete = true;
     }
+
     private bool _processing4 = false;
     private async Task ProcessSomething4()
     {
+        _step4Complete = false;
         _processing4 = true;
         await Task.Delay(1);
         _processing4 = false;

@@ -7,6 +7,7 @@
 @using PracticeWebsite.Models
 @using System.Text.RegularExpressions
 @using System.ComponentModel.DataAnnotations
+@using MudBlazor
 
 <MudThemeProvider />
 <MudPopoverProvider />
@@ -14,128 +15,135 @@
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar Elevation = "10" Style="@($"background:{Colors.LightGreen.Darken2};")">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <MudLink Class="pa-4 mud-dark-text" Typo="Typo.h6" href="/">The Zoo!</MudLink>
-        <MudSpacer />
+    <MudAppBar WrapContent="true" Elevation = "10" Style="@($"background:{Colors.LightGreen.Darken2};")">
+        <ChildContent>
+            <MudHidden Breakpoint="Breakpoint.MdAndUp">
+                <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => ToggleDrawer())" />
+            </MudHidden>
+            <MudLink Class="pa-4 mud-dark-text" Typo="Typo.h6" href="/">The Zoo!</MudLink>
+            <MudSpacer />
+            <MudHidden Breakpoint="Breakpoint.MdAndDown">
+                <MudMenu Label="Book/Buy" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+                    <ActivatorContent>
+                        <MudButton T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">Book/Buy</MudButton>
+                    </ActivatorContent>
+                    <ChildContent>
+                        <MudMenuItem Disabled="false" Href="/tickets">Park Admission Tickets</MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="false" Href="/membership">Memberships</MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="true" Href="/membership/requirements">Members Admission</MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="true" Href="/animals/rangerexperience">The Real Ranger Experience</MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="true" Href="/gifts">Gift Shop</MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="true" Href="/gifts/adoptananimal">Adobt an Animal</MudMenuItem>
+                    </ChildContent>
+                </MudMenu>
+                <MudSpacer />
 
-        <MudMenu Label="Book/Buy" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
-            <ActivatorContent>
-                <MudButton T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">Book/Buy</MudButton>
-            </ActivatorContent>
-            <ChildContent>
-                <MudMenuItem Disabled="false" Href="/tickets">Park Admission Tickets</MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="false" Href="/membership">Memberships</MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="true" Href="/membership/requirements">Members Admission</MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="true" Href="/animals/rangerexperience">The Real Ranger Experience</MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="true" Href="/gifts">Gift Shop</MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="true" Href="/gifts/adoptananimal">Adobt an Animal</MudMenuItem>
-            </ChildContent>
-        </MudMenu>
-        <MudSpacer />
+                <MudMenu Label="Explore" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+                    <ActivatorContent>
+                        <MudButton T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">Explore</MudButton>
+                    </ActivatorContent>
+                    <ChildContent>
+                        <MudMenuItem Disabled="false" Href="/animals"> Animals </MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="true" Href="/animals/experience"> Animal Experiences </MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="true" Href="/events"> Shows & Ranger Talks </MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="true" Href="/events/special"> Special Events </MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="false" Href="/map"> Park Map </MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="true" Href="/hotel/experience"> Stay at the Hotel </MudMenuItem>
+                    </ChildContent>
+                </MudMenu>
+                <MudSpacer />
 
-        <MudMenu Label="Explore" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
-            <ActivatorContent>
-                <MudButton T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">Explore</MudButton>
-            </ActivatorContent>
-            <ChildContent>
-                <MudMenuItem Disabled="false" Href="/animals"> Animals </MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="true" Href="/animals/experience"> Animal Experiences </MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="true" Href="/events"> Shows & Ranger Talks </MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="true" Href="/events/special"> Special Events </MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="false" Href="/map"> Park Map </MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="true" Href="/hotel/experience"> Stay at the Hotel </MudMenuItem>
-            </ChildContent>
-        </MudMenu>
-        <MudSpacer />
+                <MudMenu Label="Venue Hire" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+                    <ActivatorContent>
+                        <MudButton T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">Venue Hire</MudButton>
+                    </ActivatorContent>
+                    <ChildContent>
+                        <MudMenuItem Disabled="true" Href="/venue/wedding">Weddings</MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="true" Href="/venue/hospitality">Corporate Hospitality</MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="true" Href="/">Team Building</MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="true" Href="/venue/business">Meetings & Conferences</MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="true" Href="/venue">Private Parties</MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="true" Href="/educationalvisit">Educational Visits</MudMenuItem>
+                    </ChildContent>
+                </MudMenu>
+                <MudSpacer />
 
-        <MudMenu Label="Venue Hire" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
-            <ActivatorContent>
-                <MudButton T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">Venue Hire</MudButton>
-            </ActivatorContent>
-            <ChildContent>
-                <MudMenuItem Disabled="true" Href="/venue/wedding">Weddings</MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="true" Href="/venue/hospitality">Corporate Hospitality</MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="true" Href="/">Team Building</MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="true" Href="/venue/business">Meetings & Conferences</MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="true" Href="/venue">Private Parties</MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="true" Href="/educationalvisit">Educational Visits</MudMenuItem>
-            </ChildContent>
-        </MudMenu>
-        <MudSpacer />
+                <MudMenu Label="More" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+                    <ActivatorContent>
+                        <MudButton T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">More</MudButton>
+                    </ActivatorContent>
+                    <ChildContent>
+                        <MudMenuItem Disabled="false" Href="/openingtimes">Opening Times</MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="false" Href="/howtogethere">How to get here</MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="true" Href="/policies/accessibility">Accessibility</MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="true" Href="/policies">Policies</MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="false" Href="/contact">Contact</MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Disabled="true" Href="/faqs">FAQs</MudMenuItem>
+                    </ChildContent>
+                </MudMenu>
+                <MudSpacer />
 
-        <MudMenu Label="More" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
-            <ActivatorContent>
-                <MudButton T="string" Size="Size.Large" Variant="Variant.Outlined" Color="Color.Dark">More</MudButton>
-            </ActivatorContent>
-            <ChildContent>
-                <MudMenuItem Disabled="false" Href="/openingtimes">Opening Times</MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="false" Href="/howtogethere">How to get here</MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="true" Href="/policies/accessibility">Accessibility</MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="true" Href="/policies">Policies</MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="false" Href="/contact">Contact</MudMenuItem>
-                <MudDivider />
-                <MudMenuItem Disabled="true" Href="/faqs">FAQs</MudMenuItem>
-            </ChildContent>
-        </MudMenu>
-        <MudSpacer />
-
-        <MudButton Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White} ;background:{Colors.Green.Darken3};")" Href="/tickets">Book Tickets!</MudButton>
-
-        <MudIconButton Icon="@Icons.Material.Filled.Login" Color="Color.Inherit" OnClick="@((e) => LoginToggle())" />
-        <MudPopover Open="@_login" Fixed="true" Class="px-4 pt-4" AnchorOrigin = "Origin.TopRight" TransformOrigin = "Origin.TopRight">
-            <MudCard Elevation="0">
-                <div class="d-flex flex-column">
-                    <EditForm Model="@LogInCustomer" OnValidSubmit="HandleValidSubmit" FormName="LogInTicket">
-                        <DataAnnotationsValidator/>
-                        <ValidationSummary/>
-                        <MudGrid>
-                            <MudItem>
-                                <MudCard Elevation="1">
-                                    <MudCardContent>
-                                        <MudTextField T="string" ShrinkLabel Label="Username" Required="true"
-                                                      @bind-Value="LogInCustomer.Username" RequiredError=" Username or an Email is required!" Variant="Variant.Outlined" />
-                                        <MudTextField T="string" ShrinkLabel Label="Password" Required="true"
-                                                      @bind-Value="password" @ref="pwField1" InputType="InputType.Password" RequiredError="Password is required!" Variant="Variant.Outlined" />
-                                        <MudCardActions>
-                                            <div class="d-flex align-center justify-space-between">
-                                                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success)" Class="ml-auto">Log in</MudButton>
-                                            </div>
-                                        </MudCardActions>
-                                    </MudCardContent>
-                                </MudCard>
-                            </MudItem>
-                        </MudGrid>
-                    </EditForm>
-                    Dont have an account? 
-                    <a href="/register"> Sign up!</a>
-                </div>
-            </MudCard>
-        </MudPopover> 
-        
+                <MudButton Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White} ;background:{Colors.Green.Darken3};")" Href="/tickets">Book Tickets!</MudButton>
+            </MudHidden>
+            <MudIconButton Icon="@Icons.Material.Filled.Login" Color="Color.Inherit" OnClick="@((e) => LoginToggle())" />
+            <MudPopover Open="@_login" Fixed="true" Class="px-4 pt-4" AnchorOrigin = "Origin.TopRight" TransformOrigin = "Origin.TopRight">
+                <MudCard Elevation="0">
+                    <div class="d-flex flex-column">
+                        <EditForm Model="@LogInCustomer" OnValidSubmit="HandleValidSubmit" FormName="LogInTicket">
+                            <DataAnnotationsValidator/>
+                            <ValidationSummary/>
+                            <MudGrid>
+                                <MudItem>
+                                    <MudCard Elevation="1">
+                                        <MudCardContent>
+                                            <MudTextField T="string" ShrinkLabel Label="Username" Required="true"
+                                            @bind-Value="LogInCustomer.Username" RequiredError=" Username or an Email is required!" Variant="Variant.Outlined" />
+                                            <MudTextField T="string" ShrinkLabel Label="Password" Required="true"
+                                            @bind-Value="password" @ref="pwField1" InputType="InputType.Password" RequiredError="Password is required!" Variant="Variant.Outlined" />
+                                            <MudCardActions>
+                                                <div class="d-flex align-center justify-space-between">
+                                                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success)" Class="ml-auto">Log in</MudButton>
+                                                </div>
+                                            </MudCardActions>
+                                        </MudCardContent>
+                                    </MudCard>
+                                </MudItem>
+                            </MudGrid>
+                        </EditForm>
+                        Dont have an account? 
+                        <a href="/register"> Sign up!</a>
+                    </div>
+                </MudCard>
+            </MudPopover> 
+        </ChildContent>    
     </MudAppBar>
-    <MudDrawer @bind-Open="@_drawerOpen">
+    <MudDrawer @bind-Open="@_drawerOpen" OnClose="CloseDrawer" ClipMode="DrawerClipMode.Never" Anchor="Anchor.Left">
         <NavMenu/>
     </MudDrawer>
+    @if (_drawerOpen)
+    {
+        <MudOverlay OnClick="CloseDrawer" />
+    }
     <MudMainContent>
         @Body
     </MudMainContent>
@@ -146,22 +154,19 @@
     private string password;
     bool _drawerOpen = false;
     private bool _login;
-    bool employee = true;
     bool success;
     string[] errors = { };
     MudTextField<string> pwField1;
     MudForm LoginTicket;
 
-    void DrawerToggle()
+    private void ToggleDrawer()
     {
-        if (employee == false)
-        {
-            return;
-        }
-        else
-        {
-            _drawerOpen = !_drawerOpen;
-        }
+        _drawerOpen = !_drawerOpen;
+    }
+
+    private void CloseDrawer()
+    {
+        _drawerOpen = false;
     }
 
     private void LoginToggle() => _login = !_login;
