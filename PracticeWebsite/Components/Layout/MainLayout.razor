@@ -2,14 +2,14 @@
 @rendermode InteractiveServer
 @inject PracticeWebsite.Services.CustomerServices CustomerService
 @inject NavigationManager NavigationManager
-
+@inject UserSession UserSession
 @inject ISnackbar Snackbar
 @using PracticeWebsite.Utilities
 @using PracticeWebsite.Models
 @using System.Text.RegularExpressions
 @using System.ComponentModel.DataAnnotations
 @using MudBlazor
-@inject UserSession UserSession
+
 <MudThemeProvider />
 <MudPopoverProvider />
 <MudDialogProvider />
@@ -127,9 +127,9 @@
                                         <MudCard Elevation="1">
                                             <MudCardContent>
                                                 <MudTextField T="string" ShrinkLabel Label="Username" Required="true"
-                                                              @bind-Value="LogInCustomer.Username" RequiredError=" Username or an Email is required!" Variant="Variant.Outlined" />
+                                                @bind-Value="LogInCustomer.Username" RequiredError=" Username or an Email is required!" Variant="Variant.Outlined" />
                                                 <MudTextField T="string" ShrinkLabel Label="Password" Required="true"
-                                                              @bind-Value="password" @ref="pwField1" InputType="InputType.Password" RequiredError="Password is required!" Variant="Variant.Outlined" />
+                                                @bind-Value="password" @ref="pwField1" InputType="InputType.Password" RequiredError="Password is required!" Variant="Variant.Outlined" />
                                                 <MudCardActions>
                                                     <div class="d-flex align-center justify-space-between">
                                                         <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Log in</MudButton>
@@ -152,7 +152,7 @@
                     </MudCard>
                 }
             </MudPopover>
-                
+
             @* <MudPopover Open="@_login" Fixed="true" Class="px-4 pt-4" AnchorOrigin = "Origin.TopRight" TransformOrigin = "Origin.TopRight">
                 <MudCard Elevation="0">
                     <div class="d-flex flex-column">
@@ -218,7 +218,8 @@
     }
 
     private bool ShowPopover { get; set; } = false;
-    UserSession.IsLoggedIn // Replace with actual login state management.
+    private bool IsLoggedIn = false;
+    //private bool UserSession.IsLoggedIn = false; // Replace with actual login state management.
     private string Icon => IsLoggedIn ? Icons.Material.Filled.Settings : Icons.Material.Filled.Person;
     private void LoginToggle() => _login = !_login;
 
@@ -228,8 +229,10 @@
         LogInCustomer = await CustomerService.LogIn(LogInCustomer);
         if (LogInCustomer == null)
         {
+            await Task.Delay(1000);
             Snackbar?.Add("Unsuccessful Log In. Try again.", Severity.Error);
             Console.WriteLine("User didnt log in");
+            NavigationManager.NavigateTo("/");
         }
         else
         {
