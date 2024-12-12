@@ -1,14 +1,15 @@
 ﻿@inherits LayoutComponentBase
+@rendermode InteractiveServer
 @inject PracticeWebsite.Services.CustomerServices CustomerService
 @inject NavigationManager NavigationManager
+
+@inject ISnackbar Snackbar
 @using PracticeWebsite.Utilities
-@inject UserSession UserSession
-@rendermode InteractiveServer
 @using PracticeWebsite.Models
 @using System.Text.RegularExpressions
 @using System.ComponentModel.DataAnnotations
 @using MudBlazor
-
+@inject UserSession UserSession
 <MudThemeProvider />
 <MudPopoverProvider />
 <MudDialogProvider />
@@ -105,8 +106,54 @@
 
                 <MudButton Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White} ;background:{Colors.Green.Darken3};")" Href="/tickets">Book Tickets!</MudButton>
             </MudHidden>
-            <MudIconButton Icon="@Icons.Material.Filled.Login" Color="Color.Inherit" OnClick="@((e) => LoginToggle())" />
-            <MudPopover Open="@_login" Fixed="true" Class="px-4 pt-4" AnchorOrigin = "Origin.TopRight" TransformOrigin = "Origin.TopRight">
+
+
+
+
+
+
+
+            <MudIconButton Icon="@Icon" Color="Color.Inherit" OnClick="@((e) => LoginToggle())" />
+            <MudPopover Open="@_login" Fixed="true" Class="px-4 pt-4" AnchorOrigin="Origin.TopRight" TransformOrigin="Origin.TopRight">
+                @if (IsLoggedIn == false)
+                {
+                    <MudCard Elevation="0">
+                        <div class="d-flex flex-column">
+                            <EditForm Model="@LogInCustomer" OnValidSubmit="HandleValidSubmit" FormName="LogInTicket">
+                                <DataAnnotationsValidator />
+                                <ValidationSummary />
+                                <MudGrid>
+                                    <MudItem>
+                                        <MudCard Elevation="1">
+                                            <MudCardContent>
+                                                <MudTextField T="string" ShrinkLabel Label="Username" Required="true"
+                                                              @bind-Value="LogInCustomer.Username" RequiredError=" Username or an Email is required!" Variant="Variant.Outlined" />
+                                                <MudTextField T="string" ShrinkLabel Label="Password" Required="true"
+                                                              @bind-Value="password" @ref="pwField1" InputType="InputType.Password" RequiredError="Password is required!" Variant="Variant.Outlined" />
+                                                <MudCardActions>
+                                                    <div class="d-flex align-center justify-space-between">
+                                                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Log in</MudButton>
+                                                    </div>
+                                                </MudCardActions>
+                                            </MudCardContent>
+                                        </MudCard>
+                                    </MudItem>
+                                </MudGrid>
+                            </EditForm>
+                            Dont have an account?
+                            <a href="/register"> Sign up!</a>
+                        </div>
+                    </MudCard>
+                }
+                else
+                {
+                    <MudCard Elevation="0">
+                        <a href="/settings">Account Settings</a>
+                    </MudCard>
+                }
+            </MudPopover>
+                
+            @* <MudPopover Open="@_login" Fixed="true" Class="px-4 pt-4" AnchorOrigin = "Origin.TopRight" TransformOrigin = "Origin.TopRight">
                 <MudCard Elevation="0">
                     <div class="d-flex flex-column">
                         <EditForm Model="@LogInCustomer" OnValidSubmit="HandleValidSubmit" FormName="LogInTicket">
@@ -122,7 +169,7 @@
                                             @bind-Value="password" @ref="pwField1" InputType="InputType.Password" RequiredError="Password is required!" Variant="Variant.Outlined" />
                                             <MudCardActions>
                                                 <div class="d-flex align-center justify-space-between">
-                                                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success)" Class="ml-auto">Log in</MudButton>
+                                                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Log in</MudButton>
                                                 </div>
                                             </MudCardActions>
                                         </MudCardContent>
@@ -134,7 +181,8 @@
                         <a href="/register"> Sign up!</a>
                     </div>
                 </MudCard>
-            </MudPopover> 
+            </MudPopover> *@
+            @* <MudIconButton Icon="@Icon" OnClick="@OnButtonClick"></MudIconButton> *@
         </ChildContent>    
     </MudAppBar>
     <MudDrawer @bind-Open="@_drawerOpen" OnClose="CloseDrawer" ClipMode="DrawerClipMode.Never" Anchor="Anchor.Left">
@@ -169,19 +217,49 @@
         _drawerOpen = false;
     }
 
+    private bool ShowPopover { get; set; } = false;
+    UserSession.IsLoggedIn // Replace with actual login state management.
+    private string Icon => IsLoggedIn ? Icons.Material.Filled.Settings : Icons.Material.Filled.Person;
     private void LoginToggle() => _login = !_login;
+
     private async Task HandleValidSubmit()
     {
         LogInCustomer.Password = password; //await PasswordUtils.HashPassword(password);
         LogInCustomer = await CustomerService.LogIn(LogInCustomer);
         if (LogInCustomer == null)
         {
-            Console.WriteLine("Could not log in");
+            Snackbar?.Add("Unsuccessful Log In. Try again.", Severity.Error);
+            Console.WriteLine("User didnt log in");
         }
         else
         {
+            IsLoggedIn = true;
             UserSession.UserId = LogInCustomer.CustomerId;
+            Console.WriteLine("User Logged In");
+            Snackbar?.Add("Successful Log In.", Severity.Success);
             NavigationManager.NavigateTo("/");
         }
     }
+
+    // private async Task LoginButton()
+    // {
+    //     if (IsLoggedIn)
+    //     {
+    //         // Navigate to settings page
+    //         await HandleValidSubmit();
+    //         NavigationManager.NavigateTo("/error");
+    //     }
+    //     else
+    //     {
+    //         // Open popover for login
+    //         Hanr();
+    //     }
+    // }
+
+    // private void ShowLoginPopover()
+    // {
+    //     ShowPopover = !ShowPopover;
+    //     Console.WriteLine("Could not log in");
+    // }
+
 }

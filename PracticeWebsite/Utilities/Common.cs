@@ -51,6 +51,7 @@ namespace PracticeWebsite.Utilities
     {
         public int UserId { get; set; }
 
+        public bool IsLoggedIn;
         //private void OnValidSubmit(EditContext context)
         //{
         //    success = true;
