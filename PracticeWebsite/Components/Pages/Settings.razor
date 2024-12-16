@@ -1,53 +1,228 @@
-﻿@page "/settings"
+﻿@page "/account-settings"
+@using PracticeWebsite.Services
+@using PracticeWebsite.Models
 
-<MudContainer Class="mx-auto pa-6">
-    <MudCardHeader>
-        <MudGrid Justify="Justify.Center">
-            <MudItem xs="12">
-                <MudCard Class="pa-md-6 mx-lg-auto d-flex align-center flex-grow-1 gap-4">
-                    <MudCardHeader>
-                        <CardHeaderContent>
-                            <MudText Align="Align.Center" Typo="Typo.h2">Account Settings</MudText>
-                        </CardHeaderContent>
-                    </MudCardHeader>
-                    <MudDivider f/>
-                    <MudCardContent>
-                        <MudText Typo="Typo.body2">Here you can modify and personalise your account and view any information we store about you to be fully clear with you.</MudText>
-                    </MudCardContent>
-                </MudCard>
-            </MudItem>
-        </MudGrid>
-        <MudDivider/>
-        <MudGrid>
-            <MudItem xs="6">
-                <MudCard>
-                    <MudCardHeader>
-                        <CardHeaderContent>
-                            <MudText Typo="Typo.h4">Personal Data</MudText>
-                        </CardHeaderContent>
-                    </MudCardHeader>
-                </MudCard>
-            </MudItem>
-            <MudItem xs="6">
-                <MudCard>
-                    <MudCardHeader>
-                        <CardHeaderContent>
-                            <MudText Typo="Typo.h4">Acessibility Settings</MudText>
-                        </CardHeaderContent>
-                    </MudCardHeader>
-                </MudCard>
-            </MudItem>
-        </MudGrid>
-    </MudCardHeader>
-</MudContainer>
+<MudCard>
+    <MudCardMedia Height="300" Image="images/PolarBear(1).jpg"/>
+</MudCard>
+<MudCard>
+    <MudContainer Class="mx-auto pa-6">
+        <MudCardHeader>
+            <MudGrid Justify="Justify.Center">
+                <MudItem xs="12" sm="6" md="12">
+                    <MudCard Elevation="25" Class="rounded-lg pb-4">
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Align="Align.Center" Typo="Typo.h2">
+                                    Account Settings
+                                </MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudDivider />
+                        <MudCardContent>
+                            <MudText Align="Align.Center" Typo="Typo.body2">
+                                Here you can modify and personalise your account and view any information we store about you to be fully clear with you.
+                            </MudText>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            </MudGrid>
+        </MudCardHeader>
+        @if (customer == null)
+        {
+            <MudGrid Justify="Justify.Center">
+                <MudItem xs="12" sm="6" md="10">
+                    <MudCard Elevation="25" Class="rounded-lg pb-4">
+                        <MudText Typo="Typo.body1" Align="Align.Center">Please log in to see your account details.</MudText>
 
+                        <MudGrid Justify="Justify.Center" Class="mt-4">
+                            <MudItem>
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="NavigateToLogin" Class="mt-4" Style="font-size: 1.5rem; padding: 0.75rem 1.5rem; width: 200px;">
+                                    Log In
+                                </MudButton>
+                            </MudItem>
+                        </MudGrid>
+                    </MudCard>
+                </MudItem>
+            </MudGrid>
+        }
+        else
+        {
+            <MudContainer>
+                <MudItem>
+                    <MudCard Elevation="0">
+                        <MudGrid>
+                            <MudItem xs="12" sm="6" md="6">
+                                <MudCard Elevation="5" Class="rounded-lg pb-4">
+                                    <MudCardHeader>
+                                        <CardHeaderContent>
+                                            <MudIcon Color="Color.Dark" Class="mx-auto my-auto d-flex align-center" Icon="@Icons.Material.Filled.CardMembership" Style="font-size: 4rem;" />
+                                        </CardHeaderContent>
+                                    </MudCardHeader>
+                                    <MudCardContent>
+                                        <MudText Align="Align.Center" Typo="Typo.h6">
+                                            Personal User Data
+                                        </MudText>
+                                        <MudDivider/>
+                                        <MudCard Class="mb-4">
+                                            <MudCardContent>
+                                                <MudGrid>
+                                                    <MudItem xs="12" sm="6">
+                                                        <MudText Typo="Typo.body1"><strong>Username:</strong> @customer.Username</MudText>
+                                                    </MudItem>
+                                                    <MudItem xs="12" sm="6">
+                                                        <MudText Typo="Typo.body1"><strong>Email:</strong> @customer.Email</MudText>
+                                                    </MudItem>
+                                                    <MudItem xs="12" sm="6">
+                                                        <MudText Typo="Typo.body1"><strong>Post Code:</strong> @customer.Postcode</MudText>
+                                                    </MudItem>
+                                                    <MudItem xs="12" sm="6">
+                                                        <MudText Typo="Typo.body1"><strong>Phone Number:</strong> @customer.PhoneNumber</MudText>
+                                                    </MudItem>
+                                                </MudGrid>
+                                            </MudCardContent>
+                                        </MudCard>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudItem>
 
+                            <MudItem xs="12" sm="6" md="6">
+                                <MudCard Elevation="5" Class="rounded-lg pb-4">
+                                    <MudCardHeader>
+                                        <CardHeaderContent>
+                                            <MudIcon Color="Color.Dark" Class="mx-auto my-auto d-flex align-center" Icon="@Icons.Material.Outlined.ShoppingBag" Style="font-size: 4rem;" />
+                                        </CardHeaderContent>
+                                    </MudCardHeader>
+                                    <MudCardContent>
+                                        <MudText Align="Align.Center" Typo="Typo.h6">
+                                            Account Security Settings
+                                        </MudText>
+                                        <MudDivider/>
+                                        <MudCard Class="mb-4">
+                                            <MudCardContent>
+                                                <MudText Typo="Typo.body1">Change your password and manage security settings below.</MudText>
+                                                <br />
+                                                <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="NavigateToChangePassword">Change Password</MudButton>
+                                            </MudCardContent>
+                                        </MudCard>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudItem>
 
+                            <MudItem xs="12" sm="6" md="8">
+                                <MudCard Elevation="5" Class="rounded-lg pb-4">
+                                    <MudCardHeader>
+                                        <CardHeaderContent>
+                                            <MudIcon Color="Color.Dark" Class="mx-auto my-auto d-flex align-center" Icon="@Icons.Material.Outlined.ShoppingBag" Style="font-size: 4rem;" />
+                                        </CardHeaderContent>
+                                    </MudCardHeader>
+                                    <MudCardContent>
+                                        <MudText Align="Align.Center" Typo="Typo.h6">
+                                            Account Action
+                                        </MudText>
+                                        <MudDivider />
+                                        <MudCard Class="mb-4">
+                                            <MudCardContent>
+                                                <MudText Typo="Typo.h5">Account Actions</MudText>
+                                                <MudDivider Class="my-2" />
+                                                <MudButton Variant="Variant.Outlined" Color="Color.Error" OnClick="ShowDeleteConfirmation">Delete Account</MudButton>
 
+                                                @if (showDeleteConfirmation)
+                                                {
+                                                    <MudText Typo="Typo.body2" Color="Color.Error" Class="mt-2">Are you sure you want to delete your account? This action cannot be undone.</MudText>
+                                                    <MudGrid Justify="Justify.Center" Class="mt-2">
+                                                        <MudItem>
+                                                            <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="DeleteAccount">Yes, Delete</MudButton>
+                                                            <MudButton Variant="Variant.Outlined" Color="Color.Default" OnClick="CancelDelete">Cancel</MudButton>
+                                                        </MudItem>
+                                                    </MudGrid>
+                                                }
+                                            </MudCardContent>
+                                        </MudCard>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudItem>
 
-
+                        </MudGrid>
+                        <MudGrid Justify="Justify.Center">
+                            <MudItem>
+                                <br />
+                                <br />
+                                <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="Logout">Logout</MudButton>
+                            </MudItem>
+                        </MudGrid>
+                    </MudCard>
+                </MudItem>
+            </MudContainer>
+        }
+    </MudContainer>
+</MudCard>    
 
 
 @code {
+    private Customer? customer;
+    private bool showDeleteConfirmation = false;
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(200);
 
+        if (AuthService.isLoggedIn)
+        {
+            // Fetch customer details if logged in
+            customer = await UserService.GetCustomerByUsernameAsync(AuthService.CurrentUsername);
+        }
+    }
+
+    private void ShowDeleteConfirmation()
+    {
+        showDeleteConfirmation = true;
+    }
+
+    private void CancelDelete()
+    {
+        showDeleteConfirmation = false;
+    }
+
+    private async Task DeleteAccount()
+    {
+        if (customer != null)
+        {
+            // Call the delete method from UserService
+            await UserService.DeleteCustomerAsync(customer.Username); // Assuming you have this method implemented
+            AuthService.Logout();
+            NavigationManager.NavigateTo("/login"); // Redirect to login page after deletion
+            Console.WriteLine("Account Deleted");
+        }
+    }
+
+    private void NavigateToChangePassword()
+    {
+        NavigationManager.NavigateTo("/changePassword");
+    }
+
+    private void NavigateToLogin()
+    {
+        NavigationManager.NavigateTo("/login");
+    }
+
+    private void Logout()
+    {
+        AuthService.Logout();
+        NavigationManager.NavigateTo("/login"); // Redirect to login page
+    }
+
+    private bool first = true;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Get the current page URL (this can be adjusted depending on how you're tracking page URL)
+            var currentPageUrl = NavigationManager.Uri.Substring(22);
+
+            // Call the method to track the page view
+            await PageService.TrackPageViewAsync(currentPageUrl);
+            first = false;
+        }
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.ComponentModel.DataAnnotations;
 
 namespace PracticeWebsite.Utilities
@@ -50,23 +51,24 @@ namespace PracticeWebsite.Utilities
     public class UserSession
     {
         public int UserId { get; set; }
-
+        private int? ActiveUserID;
         public bool IsLoggedIn { get; set; }
-        //private void OnValidSubmit(EditContext context)
-        //{
-        //    success = true;
-        //    StateHasChanged();
-        //    Console.WriteLine("Register button has been clicked");
-        //    Console.WriteLine(model.Username);
-        //    Console.WriteLine(model.Password);
-        //    Console.WriteLine(model.FirstName);
-        //    Console.WriteLine(model.LastName);
-        //    Console.WriteLine(model.Email);
-        //    Console.WriteLine(model.PostCode);
-        //    Console.WriteLine(model.PhoneNumber);
-        //    Console.WriteLine(model.DoB);
-        //    Console.WriteLine(model.employeeStatus);
-        //    Console.WriteLine(model.EmployeeID);
-        //}
+
+        public static string CurrentUsername { get; private set; } = string.Empty;
+
+        // Logic for login, logout, and registration...
+        public void Login(string username)
+        {
+            IsLoggedIn = true;
+            CurrentUsername = username;
+            ActiveUserID = UserId;
+        }
+
+        public void Logout()
+        {
+            IsLoggedIn = false;
+            CurrentUsername = string.Empty;
+            ActiveUserID = null;
+        }
     }
 }

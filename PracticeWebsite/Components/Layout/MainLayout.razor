@@ -152,37 +152,6 @@
                     </MudCard>
                 }
             </MudPopover>
-
-            @* <MudPopover Open="@_login" Fixed="true" Class="px-4 pt-4" AnchorOrigin = "Origin.TopRight" TransformOrigin = "Origin.TopRight">
-                <MudCard Elevation="0">
-                    <div class="d-flex flex-column">
-                        <EditForm Model="@LogInCustomer" OnValidSubmit="HandleValidSubmit" FormName="LogInTicket">
-                            <DataAnnotationsValidator/>
-                            <ValidationSummary/>
-                            <MudGrid>
-                                <MudItem>
-                                    <MudCard Elevation="1">
-                                        <MudCardContent>
-                                            <MudTextField T="string" ShrinkLabel Label="Username" Required="true"
-                                            @bind-Value="LogInCustomer.Username" RequiredError=" Username or an Email is required!" Variant="Variant.Outlined" />
-                                            <MudTextField T="string" ShrinkLabel Label="Password" Required="true"
-                                            @bind-Value="password" @ref="pwField1" InputType="InputType.Password" RequiredError="Password is required!" Variant="Variant.Outlined" />
-                                            <MudCardActions>
-                                                <div class="d-flex align-center justify-space-between">
-                                                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Log in</MudButton>
-                                                </div>
-                                            </MudCardActions>
-                                        </MudCardContent>
-                                    </MudCard>
-                                </MudItem>
-                            </MudGrid>
-                        </EditForm>
-                        Dont have an account? 
-                        <a href="/register"> Sign up!</a>
-                    </div>
-                </MudCard>
-            </MudPopover> *@
-            @* <MudIconButton Icon="@Icon" OnClick="@OnButtonClick"></MudIconButton> *@
         </ChildContent>    
     </MudAppBar>
     <MudDrawer @bind-Open="@_drawerOpen" OnClose="CloseDrawer" ClipMode="DrawerClipMode.Never" Anchor="Anchor.Left">
@@ -202,10 +171,8 @@
     private string password;
     bool _drawerOpen = false;
     private bool _login;
-    bool success;
     string[] errors = { };
     MudTextField<string> pwField1;
-    MudForm LoginTicket;
 
     private void ToggleDrawer()
     {
@@ -219,7 +186,6 @@
 
     private bool ShowPopover { get; set; } = false;
     private bool IsLoggedIn = false;
-    //private bool UserSession.IsLoggedIn = false; // Replace with actual login state management.
     private string Icon => IsLoggedIn ? Icons.Material.Filled.Settings : Icons.Material.Filled.Person;
     private void LoginToggle() => _login = !_login;
 
@@ -227,42 +193,21 @@
     {
         LogInCustomer.Password = password; //await PasswordUtils.HashPassword(password);
         LogInCustomer = await CustomerService.LogIn(LogInCustomer);
-        if (LogInCustomer == null)
+        if (LogInCustomer != null)
         {
-            await Task.Delay(1000);
-            Snackbar?.Add("Unsuccessful Log In. Try again.", Severity.Error);
-            Console.WriteLine("User didnt log in");
-            NavigationManager.NavigateTo("/");
-        }
-        else
-        {
+            Snackbar.Clear();
             IsLoggedIn = true;
             UserSession.UserId = LogInCustomer.CustomerId;
             Console.WriteLine("User Logged In");
-            Snackbar?.Add("Successful Log In.", Severity.Success);
-            NavigationManager.NavigateTo("/");
+            Snackbar.Add("Successful Log In.", Severity.Success);
+        }
+        else
+        {
+            Snackbar.Clear();
+            Snackbar.Add("Unsuccessful Log In. Please Wait to Try Again.", Severity.Error, config => { config.ShowCloseIcon = false;});
+            Console.WriteLine("User didnt log in");
+            await Task.Delay(5000);
+            NavigationManager.NavigateTo(NavigationManager.Uri, true);
         }
     }
-
-    // private async Task LoginButton()
-    // {
-    //     if (IsLoggedIn)
-    //     {
-    //         // Navigate to settings page
-    //         await HandleValidSubmit();
-    //         NavigationManager.NavigateTo("/error");
-    //     }
-    //     else
-    //     {
-    //         // Open popover for login
-    //         Hanr();
-    //     }
-    // }
-
-    // private void ShowLoginPopover()
-    // {
-    //     ShowPopover = !ShowPopover;
-    //     Console.WriteLine("Could not log in");
-    // }
-
 }
