@@ -148,7 +148,7 @@
                 else
                 {
                     <MudCard Elevation="0">
-                        <a href="/settings">Account Settings</a>
+                        <a href="/account-settings">Account Settings</a>
                     </MudCard>
                 }
             </MudPopover>
@@ -197,7 +197,9 @@
         {
             Snackbar.Clear();
             IsLoggedIn = true;
+            UserSession.IsLoggedIn = true;
             UserSession.UserId = LogInCustomer.CustomerId;
+            UserSession.CurrentUsername = LogInCustomer.Username;
             Console.WriteLine("User Logged In");
             Snackbar.Add("Successful Log In.", Severity.Success);
         }

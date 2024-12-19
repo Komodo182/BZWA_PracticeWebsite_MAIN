@@ -1,6 +1,9 @@
 ﻿@page "/account-settings"
 @using PracticeWebsite.Services
 @using PracticeWebsite.Models
+@using PracticeWebsite.Utilities
+@inject UserSession UserSession
+@inject NavigationManager NavigationManager
 
 <MudCard>
     <MudCardMedia Height="300" Image="images/PolarBear(1).jpg"/>
@@ -166,10 +169,10 @@
     {
         await Task.Delay(200);
 
-        if (AuthService.isLoggedIn)
+        if (UserSession.IsLoggedIn == true)
         {
             // Fetch customer details if logged in
-            customer = await UserService.GetCustomerByUsernameAsync(AuthService.CurrentUsername);
+            //customer = await UserService.GetCustomerByUsernameAsync(UserSession.CurrentUsername);
         }
     }
 
@@ -188,8 +191,8 @@
         if (customer != null)
         {
             // Call the delete method from UserService
-            await UserService.DeleteCustomerAsync(customer.Username); // Assuming you have this method implemented
-            AuthService.Logout();
+            //await UserService.DeleteCustomerAsync(customer.Username); // Assuming you have this method implemented
+            UserSession.Logout();
             NavigationManager.NavigateTo("/login"); // Redirect to login page after deletion
             Console.WriteLine("Account Deleted");
         }
@@ -207,7 +210,7 @@
 
     private void Logout()
     {
-        AuthService.Logout();
+        UserSession.Logout();
         NavigationManager.NavigateTo("/login"); // Redirect to login page
     }
 
@@ -221,7 +224,7 @@
             var currentPageUrl = NavigationManager.Uri.Substring(22);
 
             // Call the method to track the page view
-            await PageService.TrackPageViewAsync(currentPageUrl);
+            //await PageService.TrackPageViewAsync(currentPageUrl);
             first = false;
         }
     }

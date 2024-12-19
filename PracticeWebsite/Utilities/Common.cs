@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using PracticeWebsite.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace PracticeWebsite.Utilities
@@ -51,24 +52,73 @@ namespace PracticeWebsite.Utilities
     public class UserSession
     {
         public int UserId { get; set; }
+        public string ActiveUsername { get; set; }
         private int? ActiveUserID;
         public bool IsLoggedIn { get; set; }
 
-        public static string CurrentUsername { get; private set; } = string.Empty;
+        public string CurrentUsername { get; set; }
 
         // Logic for login, logout, and registration...
-        public void Login(string username)
-        {
-            IsLoggedIn = true;
-            CurrentUsername = username;
-            ActiveUserID = UserId;
-        }
-
         public void Logout()
         {
             IsLoggedIn = false;
             CurrentUsername = string.Empty;
             ActiveUserID = null;
         }
+    }
+    public class PageService
+    {
+        private readonly TlS2301171RzaContext _context;
+
+        public PageService(TlS2301171RzaContext context)
+        {
+            _context = context;
+        }
+
+        // Method to track page views
+        //public async Task TrackPageViewAsync(string pageUrl)
+        //{
+        //    Console.WriteLine(pageUrl);
+        //    var pageStats = await _context.Stats
+        //        .SingleOrDefaultAsync(ps => ps.PageUrl == pageUrl);
+
+        //    if (pageStats == null)
+        //    {
+        //        Console.WriteLine("New Page Entry");
+        //    }
+        //    else
+        //    {
+        //        // If the page exists, increment the Page_views by 1
+        //        pageStats.PageViews++;
+        //    }
+
+        //    await _context.SaveChangesAsync();
+        //}
+
+        //// Get the total active user count from the database
+        //public async Task<int> GetActiveUserCountAsync()
+        //{
+        //    // Query to get the total number of customers (active users)
+        //    return await _context.Customers.CountAsync();
+        //}
+
+        //// Get the total page views from the 'Stats' table
+        //public async Task<int> GetPageViewsCountAsync()
+        //{
+        //    // Sum up all PageViews in the Stats table
+        //    return await _context.Stats.SumAsync(s => s.PageViews);
+        //}
+
+        //// Randomly generate new users count (kept as is)
+        //public Task<int> GetNewUserCountAsync()
+        //{
+        //    return Task.FromResult(new Random().Next(5, 100)); // Generates a number between 5 and 100
+        //}
+
+        //public async Task Dispose()
+        //{
+        //    await _context.SaveChangesAsync();
+        //}
+
     }
 }
