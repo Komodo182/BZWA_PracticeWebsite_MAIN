@@ -30,7 +30,7 @@
                 </MudPaper>
 
                 <MudStack Row="true" Justify="Justify.SpaceAround" AlignItems="AlignItems.Center" StretchItems="StretchItems.None">
-                    <MudLink Class="pa-4 mud-dark-text" Typo="Typo.h6" Underline="Underline.None" href="/">The Zoo!</MudLink>
+                    <MudLink Class="pa-4 mud-dark-text" Typo="Typo.h6" Underline="Underline.None" href="/">GibJohn Tutoring!</MudLink>
                     <MudSpacer />
                     <MudHidden Breakpoint="Breakpoint.MdAndDown">
                         <MudMenu Label="Book/Buy" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
@@ -113,7 +113,7 @@
                         </MudMenu>
                         <MudSpacer />
 
-                        <MudButton Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White} ;background:{Colors.Green.Darken3};")" Href="/tickets">Book Tickets!</MudButton>
+                        <MudButton Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White} ;background:{Colors.Green.Darken3};")" Href="/tickets">Find a Subject!</MudButton>
                     </MudHidden>
 
                     <MudIconButton Icon="@Icon" Color="Color.Inherit" OnClick="@((e) => LoginToggle())" />
@@ -227,50 +227,68 @@
             {
                 Primary = "FFE0B5",
                 PrimaryContrastText = "1B1725",
-                PrimaryDarken = Colors.Green.Accent4,
-                PrimaryLighten = Colors.Green.Accent4,
+                //PrimaryDarken = "",
+                //PrimaryLighten = "",
 
                 Secondary = "D0BCD5",
                 SecondaryContrastText = "1B1725",
-                SecondaryDarken = Colors.Green.Accent4,
-                SecondaryLighten = Colors.Green.Accent4,
+                //SecondaryDarken = "",
+                //SecondaryLighten = "",
 
                 Tertiary = "A499B3",
                 TertiaryContrastText = "1B1725",
-                TertiaryDarken = Colors.Green.Accent4,
-                TertiaryLighten = Colors.Green.Accent4,
+                //TertiaryDarken = "",
+                //TertiaryLighten = "",
 
                 TextPrimary = "1B1725",
                 TextSecondary = "534B62",
-                AppbarText = "1B1725",
+                //TextDisabled = "",
+
                 Dark = "1B1725",
 
+                //Background = "",
+                //BackgroundGray = "",
+
+                //DrawerBackground = "",
+                //DrawerText = "",
+                //DrawerIcon = "",
+
                 AppbarBackground = "FFE0B5",
+                AppbarText = "1B1725",
             },
+
             PaletteDark = new PaletteDark()
             {
                 Primary = "1B1725",
                 PrimaryContrastText = "FFE0B5",
-                PrimaryDarken = Colors.Green.Accent4,
-                PrimaryLighten = Colors.Green.Accent4,
+                //PrimaryDarken = "",
+                //PrimaryLighten = "",
 
                 Secondary = "534B62",
                 SecondaryContrastText = "FFE0B5",
-                SecondaryDarken = Colors.Green.Accent4,
-                SecondaryLighten = Colors.Green.Accent4,
+                //SecondaryDarken = "",
+                //SecondaryLighten = "",
 
                 Tertiary = "A499B3",
                 TertiaryContrastText = "FFE0B5",
-                TertiaryDarken = Colors.Green.Accent4,
-                TertiaryLighten = Colors.Green.Accent4,
+                //TertiaryDarken = "",
+                //TertiaryLighten = "",
 
                 TextPrimary = "FFE0B5",
                 TextSecondary = "D0BCD5",
-                AppbarText = "FFE0B5",
+                //TextDisabled = "",
+
                 Dark = "FFE0B5",
 
-                AppbarBackground = "1B1725",
+                //Background = "", 
+                //BackgroundGray = "",
 
+                //DrawerBackground = "",
+                //DrawerText = "",
+                //DrawerIcon = "",
+
+                AppbarBackground = "1B1725",
+                AppbarText = "FFE0B5",
             },
 
             LayoutProperties = new LayoutProperties()
