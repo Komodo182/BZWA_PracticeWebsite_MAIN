@@ -1,7 +1,281 @@
 ﻿@page "/membership/admission"
+@rendermode InteractiveServer
+@using PracticeWebsite.Services
+@using PracticeWebsite.Utilities
+@inject CustomerServices CustomerService
+@using Microsoft.AspNetCore.Components
+@using System.ComponentModel.DataAnnotations
+@using MudBlazor.Interfaces
 
-<h3>MembershipRequirements</h3>
+<PageTitle>Quiz</PageTitle>
 
-@code {
+<MudContainer Fixed="true" MaxWidth="MaxWidth.ExtraLarge" Class="mt-4">
+    <MudCard Class="flex-auto d-flex py-8 mud-theme-white" Elevation="6">
+        <MudStepper NonLinear ShowResetButton OnPreviewInteraction="OnPreviewInteraction">
 
+            <MudStep Title="Question 1" HasError="@(_step1Complete==false)">
+                <MudCard>
+
+                    <MudCardHeader>
+                        <MudText Typo="Typo.h4">Question No.1</MudText>
+                        <MudText></MudText>
+                    </MudCardHeader>
+
+                    <MudCardContent>
+                        <MudGrid Justify="Justify.SpaceEvenly">
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary">Default</MudButton>
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary">Primary</MudButton>
+                            <MudFlexBreak />
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary">Secondary</MudButton>
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary">Disabled</MudButton>
+                        </MudGrid>
+
+                        <MudHidden Breakpoint="@Breakpoint.Xs">
+                        </MudHidden>
+
+                        <MudButton Disabled="@_processing1" OnClick="ProcessSomething1" @bind-Completed="_step1Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                            @if (_processing1)
+                            {
+                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                <MudText Class="ms-2">Processing</MudText>
+                            }
+                            else
+                            {
+                                <MudText>Confirm Date</MudText>
+                            }
+                        </MudButton>
+                    </MudCardContent>
+                </MudCard>
+            </MudStep>
+
+            <MudStep Title="Step 2" HasError="@(_step2Complete==false)">
+                <MudCard>
+
+                    <MudCardHeader>
+                        <MudText Typo="Typo.h4">Question No.2</MudText>
+                        <MudText></MudText>
+                    </MudCardHeader>
+
+                    <MudCardContent>
+                        <MudGrid Justify="Justify.SpaceEvenly">
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary">Default</MudButton>
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary">Primary</MudButton>
+                            <MudFlexBreak />
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary">Secondary</MudButton>
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary">Disabled</MudButton>
+                        </MudGrid>
+
+                        <MudHidden Breakpoint="@Breakpoint.Xs">
+                        </MudHidden>
+
+                        <MudButton Disabled="@_processing2" OnClick="ProcessSomething2" Variant="Variant.Outlined" Color="Color.Primary" Class="mt-4">
+                            @if (_processing2)
+                            {
+                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                <MudText Class="ms-2">Processing</MudText>
+                            }
+                            else
+                            {
+                                <MudText>Confirm Selection</MudText>
+                            }
+                        </MudButton>
+                    </MudCardContent>
+                </MudCard>
+            </MudStep>
+
+        </MudStepper>
+    </MudCard>
+</MudContainer>
+
+@code
+{
+    [Inject]
+    IDialogService DialogService { get; set; }
+    private ISnackbar Snackbar { get; set; }
+
+    private bool? _step1Complete;
+    private bool? _step2Complete;
+    private bool? _step3Complete;
+    private bool? _step4Complete;
+    private DateTime? _date;
+    private DateTime? _datechosen = DateTime.Today;
+    private DateTime _minDate = DateTime.Now.Date;
+    private string fName { get; set; }
+    private string lName { get; set; }
+    private string email { get; set; }
+    private string phone { get; set; }
+    private string address { get; set; }
+    private string CreditCardNumber { get; set; }
+    private string CVV { get; set; }
+    private string ExpirationDate { get; set; }
+
+    private bool _processing1 = false;
+    private async Task ProcessSomething1()
+    {
+        _step1Complete = false;
+        _processing1 = true;
+        _date = _datechosen;
+        await Task.Delay(2000);
+        _processing1 = false;
+        _step1Complete = true;
+    }
+
+    private bool _processing2 = false;
+    private async Task ProcessSomething2()
+    {
+        _step2Complete = false;
+        _processing2 = true;
+        await ConfirmSelectionAsync();
+        await Task.Delay(1);
+        _processing2 = false;
+        _step2Complete = true;
+    }
+
+    private bool _processing3 = false;
+    private async Task ProcessSomething3()
+    {
+        _step3Complete = false;
+        _processing3 = true;
+        await Task.Delay(1);
+        _processing3 = false;
+        _step3Complete = true;
+    }
+
+    private bool _processing4 = false;
+    private async Task ProcessSomething4()
+    {
+        _step4Complete = false;
+        _processing4 = true;
+        await Task.Delay(1);
+        _processing4 = false;
+        await CompletePayment();
+        _step4Complete = true;
+    }
+
+    private async Task OnPreviewInteraction(StepperInteractionEventArgs arg)
+    {
+        if (arg.Action == StepAction.Complete)
+        {
+            // occurrs when clicking next
+            await ControlStepCompletion(arg);
+        }
+        else if (arg.Action == StepAction.Activate)
+        {
+            // occurrs when clicking a step header with the mouse
+            await ControlStepNavigation(arg);
+        }
+    }
+
+    private async Task ControlStepCompletion(StepperInteractionEventArgs arg)
+    {
+        switch (arg.StepIndex)
+        {
+            case 0:
+                if ((_step1Complete != true) || (_date < _minDate) || (_date == null))
+                {
+                    await DialogService.ShowMessageBox("Error", "You have not selected a date in the step 1.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 1:
+                if ((_step2Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "You have not submitted any tickets.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 2:
+                if ((_step3Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "You have not put in the required billing information.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 3:
+                if ((_step4Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "You have not submitted any valid card information.");
+                    arg.Cancel = true;
+                }
+                break;
+        }
+    }
+
+    private async Task ControlStepNavigation(StepperInteractionEventArgs arg)
+    {
+        switch (arg.StepIndex)
+        {
+            case 1:
+                if (_step1Complete != true)
+                {
+                    await DialogService.ShowMessageBox("Error", "Finish step 'Date' first.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 2:
+                if ((_step1Complete != true) || (_step2Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "Finish step 1 and 2 first.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 3:
+                if ((_step1Complete != true) || (_step2Complete != true) || (_step3Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "Finish step 1,2 and 3 first.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 4:
+                if ((_step1Complete != true) || (_step2Complete != true) || (_step3Complete != true) || (_step4Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "Finish step 1,2,3 and 4 first.");
+                    arg.Cancel = true;
+                }
+                break;
+        }
+    }
+
+    public class Ticket
+    {
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public int Quantity { get; set; }
+        public DateTime? Date { get; set; }
+    }
+
+    private List<Ticket> ConfirmedTickets = new();
+    private List<Ticket> Tickets = new List<Ticket>
+    {
+        new Ticket { Name = "Admission - Adult (16+)", Price = 19.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Child (6-15)", Price = 14.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Senior (65+)", Price = 17.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Student", Price = 17.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Under 6s", Price = 0.00M, Quantity = 0 },
+        new Ticket { Name = "Admission - Disabled Adult (16+)", Price = 14.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Disabled Child (6-15)", Price = 9.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Disabled Senior (65+)", Price = 11.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Disabled Student", Price = 11.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Disabled Carer", Price = 8.00M, Quantity = 0 }
+    };
+
+    private async Task ConfirmSelectionAsync()
+    {
+        // Save only tickets with quantity > 0
+        ConfirmedTickets = Tickets
+            .Where(ticket => ticket.Quantity > 0)
+            .Select(ticket => new Ticket
+                {
+                    Name = ticket.Name,
+                    Quantity = ticket.Quantity,
+                    Date = _datechosen
+                })
+            .ToList();
+    }
+
+    private async Task CompletePayment()
+    {
+        await Task.Delay(500);
+        Snackbar?.Add("Payment successful! Thank you for your purchase.", Severity.Success);
+    }
 }

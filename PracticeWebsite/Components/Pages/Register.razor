@@ -12,72 +12,74 @@
 <h3>Register</h3>
 
 <EditForm Model="@model" OnValidSubmit="OnValidSubmit"><DataAnnotationsValidator/>
-    <MudGrid>
-        <MudItem xs="12" sm="7">
-            <MudCard>
-                <MudCardContent>
-                    <MudTextField ShrinkLabel Label="First name" HelperText="Max. 15 characters" HelperTextOnFocus="true"
-                                  Counter="15" MaxLength="15" Immediate="true" @bind-Value="model.FirstName" For="@(() => model.FirstName)" Variant="Variant.Outlined" />
+    <MudPaper Style="d-flex justify-center align-center">
+        <MudGrid Justify="Justify.Center">
+            <MudItem xs="12" sm="4">
+                <MudCard>
+                    <MudCardContent>
+                        <MudTextField ShrinkLabel Label="First name" HelperText="Max. 15 characters" HelperTextOnFocus="true"
+                                      Counter="15" MaxLength="15" Immediate="true" @bind-Value="model.FirstName" For="@(() => model.FirstName)" Variant="Variant.Outlined" />
 
-                    <MudTextField ShrinkLabel Label="Last name" HelperText="Max. 20 characters" HelperTextOnFocus="true"
-                                  Counter="20" MaxLength="20" Immediate="true" @bind-Value="model.LastName" For="@(() => model.LastName)" Variant="Variant.Outlined" />
+                        <MudTextField ShrinkLabel Label="Last name" HelperText="Max. 20 characters" HelperTextOnFocus="true"
+                                      Counter="20" MaxLength="20" Immediate="true" @bind-Value="model.LastName" For="@(() => model.LastName)" Variant="Variant.Outlined" />
 
-                    <MudTextField ShrinkLabel Label="Email" Class="mt-3" HelperText="Input your email." HelperTextOnFocus="true"
-                                  @bind-Value="model.Email" For="@(() => model.Email)" InputType="InputType.Email" Variant="Variant.Outlined" />
+                        <MudTextField ShrinkLabel Label="Email" Class="mt-3" HelperText="Input your email." HelperTextOnFocus="true"
+                                      @bind-Value="model.Email" For="@(() => model.Email)" InputType="InputType.Email" Variant="Variant.Outlined" />
 
-                    <MudTextField ShrinkLabel Label="Username" HelperText="Max. 10 characters" HelperTextOnFocus="true"
-                                  Counter="10" MaxLength="10" Immediate="true" @bind-Value="model.Username" For="@(() => model.Username)" Variant="Variant.Outlined" />
+                        <MudTextField ShrinkLabel Label="Username" HelperText="Max. 10 characters" HelperTextOnFocus="true"
+                                      Counter="10" MaxLength="10" Immediate="true" @bind-Value="model.Username" For="@(() => model.Username)" Variant="Variant.Outlined" />
 
-                    <MudTextField ShrinkLabel Label="Password" Class="mt-3" HelperText="Choose a strong password" HelperTextOnFocus="true"
-                                  Counter="30" MaxLength="30" Immediate="true" @bind-Value="model.Password" For="@(() => model.Password)" Variant="Variant.Outlined" 
-                                  InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ShowPasswordToggle" AdornmentAriaLabel="Show Password" />
+                        <MudTextField ShrinkLabel Label="Password" Class="mt-3" HelperText="Choose a strong password" HelperTextOnFocus="true"
+                                      Counter="30" MaxLength="30" Immediate="true" @bind-Value="model.Password" For="@(() => model.Password)" Variant="Variant.Outlined" 
+                                      InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ShowPasswordToggle" AdornmentAriaLabel="Show Password" />
 
-                    <MudTextField ShrinkLabel Label="Repeat Password" Class="mt-3" HelperText="Repeat the password" HelperTextOnFocus="true"
-                                  Counter="30" MaxLength="30" Immediate="true" @bind-Value="model.Password2" For="@(() => model.Password2)" Variant="Variant.Outlined" 
-                                  InputType="@PasswordInput2" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon2" OnAdornmentClick="ShowPasswordToggle2" AdornmentAriaLabel="Show Repeated Password" />
+                        <MudTextField ShrinkLabel Label="Repeat Password" Class="mt-3" HelperText="Repeat the password" HelperTextOnFocus="true"
+                                      Counter="30" MaxLength="30" Immediate="true" @bind-Value="model.Password2" For="@(() => model.Password2)" Variant="Variant.Outlined" 
+                                      InputType="@PasswordInput2" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon2" OnAdornmentClick="ShowPasswordToggle2" AdornmentAriaLabel="Show Repeated Password" />
 
-                    <MudTextField ShrinkLabel Label="Post Code" Class="mt-3" HelperText="Please provide your postcode. Max. 8 characters" HelperTextOnFocus="true"
-                                  Counter="8" MaxLength="8" Immediate="true" @bind-Value="model.PostCode" For="@(() => model.PostCode)" Variant="Variant.Outlined" />
+                        <MudTextField ShrinkLabel Label="Post Code" Class="mt-3" HelperText="Please provide your postcode. Max. 8 characters" HelperTextOnFocus="true"
+                                      Counter="8" MaxLength="8" Immediate="true" @bind-Value="model.PostCode" For="@(() => model.PostCode)" Variant="Variant.Outlined" />
 
-                    <MudTextField ShrinkLabel Label="Phone Number" Class="mt-3" HelperText="Please provide your phone number. Max. 11 characters" HelperTextOnFocus="true"
-                                  Counter="11" MaxLength="11" Immediate="true" @bind-Value="model.PhoneNumber" For="@(() => model.PhoneNumber)" InputType="InputType.Telephone" Variant="Variant.Outlined" />
+                        <MudTextField ShrinkLabel Label="Phone Number" Class="mt-3" HelperText="Please provide your phone number. Max. 11 characters" HelperTextOnFocus="true"
+                                      Counter="11" MaxLength="11" Immediate="true" @bind-Value="model.PhoneNumber" For="@(() => model.PhoneNumber)" InputType="InputType.Telephone" Variant="Variant.Outlined" />
 
-                    <MudTextField ShrinkLabel Label="Date Of Birth" HelperText="Please provide your date of birth." HelperTextOnFocus="true"
-                                  @bind-Value="model.DoB" For="@(() => model.DoB)" InputType="InputType.Date" Variant="Variant.Outlined" />
+                        <MudTextField ShrinkLabel Label="Date Of Birth" HelperText="Please provide your date of birth." HelperTextOnFocus="true"
+                                      @bind-Value="model.DoB" For="@(() => model.DoB)" InputType="InputType.Date" Variant="Variant.Outlined" />
 
-                    <MudCheckBox T="bool" Label="Are you an employee?" @bind-Value="model.employeeStatus" For="@(() => model.employeeStatus)" />
-                    @if (model.employeeStatus)
+                        <MudCheckBox T="bool" Label="Are you an employee?" @bind-Value="model.employeeStatus" For="@(() => model.employeeStatus)" />
+                        @if (model.employeeStatus)
+                        {
+                            <MudTextField ShrinkLabel Label="Employee ID" HelperText="Please input your employee identification code."
+                                          @bind-Value="model.EmployeeID" For="@(() => model.EmployeeID)" Variant="Variant.Outlined"/>
+                        } 
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton ButtonType ="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+            <MudItem xs="12" sm="4">
+                <MudPaper Class="pa-4 mud-height-full">
+                    <MudText Typo="Typo.subtitle2">Validation Summary: </MudText>
+                    @if (success)
                     {
-                        <MudTextField ShrinkLabel Label="Employee ID" HelperText="Please input your employee identification code."
-                                      @bind-Value="model.EmployeeID" For="@(() => model.EmployeeID)" Variant="Variant.Outlined"/>
-                    } 
-                </MudCardContent>
-                <MudCardActions>
-                    <MudButton ButtonType ="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-        <MudItem xs="12" sm="5">
-            <MudPaper Class="pa-4 mud-height-full">
-                <MudText Typo="Typo.subtitle2">Validation Summary: </MudText>
-                @if (success)
-                {
-                    <MudText Color="Color.Success">Success</MudText>
-                }
-                else
-                {
-                    <MudText Color="@Color.Error">
-                        <ValidationSummary />
-                    </MudText>
-                }
-            </MudPaper>
-        </MudItem>
-        <MudItem xs="12">
-            <MudText Typo="Typo.body2" Align="Align.Center">
-                Fill out the form correctly to see the success message.<br>
-            </MudText>
-        </MudItem>
-    </MudGrid>
+                        <MudText Color="Color.Success">Success</MudText>
+                    }
+                    else
+                    {
+                        <MudText Color="@Color.Error">
+                            <ValidationSummary />
+                        </MudText>
+                    }
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12">
+                <MudText Typo="Typo.body2" Align="Align.Center">
+                    Fill out the form correctly to see the success message.<br>
+                </MudText>
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
 </EditForm>
 
 @code {

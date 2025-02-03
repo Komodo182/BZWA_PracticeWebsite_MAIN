@@ -2,15 +2,310 @@
 
 <PageTitle>Membership</PageTitle>
 
-<MudCard>
+<MudContainer Fixed="true" MaxWidth="MaxWidth.ExtraLarge" Class="mt-4">
+    <MudCard>
+        <MudCarousel Class="mud-width-full" Style="height:600px;" ShowArrows="false" ShowBullets="false" EnableSwipeGesture="false" AutoCycle="true" TData="object">
+            <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Primary">
+                <div class="d-flex" style="height:100%">
+                    <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center"
+                              Height="1280" Width="1920" Src="images/BrownBear(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
+                </div>
+            </MudCarouselItem>
+            <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Secondary">
+                <div class="d-flex" style="height:100%">
+                    <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center"
+                              Height="1280" Width="1920" Src="images/Meerkats(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
+                </div>
+            </MudCarouselItem>
+            <MudCarouselItem Transition="@Transition.Slide">
+                <div class="d-flex" style="height:100%">
+                    <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center"
+                              Height="1280" Width="1920" Src="images/Wolf(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
+                </div>
+            </MudCarouselItem>
+        </MudCarousel>
+    </MudCard>
+</MudContainer>
+
+<MudContainer Fixed="true" MaxWidth="MaxWidth.ExtraLarge" Class="mt-4">
+    <!-- Intro Section -->
+        <MudCard>
+            <MudCardContent>
+                <MudGrid Justify="Justify.Center">
+                    <MudItem xs="8">
+                        <MudCard Style="@($"Background:{Colors.Brown.Lighten1};")" Class="d-flex justify-center align-center">
+                            <MudCardHeader>
+                                <CardHeaderContent>
+                                    <MudText Align="Align.Center" Typo="Typo.h2">Memberships</MudText>
+                                </CardHeaderContent>
+                            </MudCardHeader>
+                            <MudDivider />
+                            <MudCardContent>
+                                <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+        </MudCard>
+
+
+
+
+
+
+
+
+
+    <MudContainer>
+        <MudText Typo="Typo.h4" Align="Align.Center">Search for what you need!</MudText>
+        <MudGrid Class="mt-8">
+            <MudItem xs="12" sm="6" md="6">
+                <MudCard Elevation="25" Class="rounded-lg pb-4">
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h5" Align="Align.Center">Key Stages:</MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <div class="d-flex justify-center">
+                            <MudText Typo="Typo.h6" Class="ml-1 mt-5">Search for what level you need!</MudText>
+                        </div>
+                        <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
+                            <MudListItem Icon="@Icons.Material.Filled.Check">
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary">KS1</MudButton>
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Check">
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary">KS2</MudButton>
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Check">
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary">KS3</MudButton>
+                            </MudListItem>
+                        </MudList>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+
+            <MudItem xs="12" sm="6" md="6">
+                <MudCard Elevation="25" Class="rounded-lg pb-4">
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h5" Align="Align.Center">Subjects:</MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <div class="d-flex justify-center">
+                            <MudText Typo="Typo.h6" Class="ml-1 mt-5">Search for what subject you need!</MudText>
+                        </div>
+                        <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
+                            <MudListItem Icon="@Icons.Material.Filled.Check">
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary">Mathematics</MudButton>
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Check">
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary">Science</MudButton>
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Check">
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary">English</MudButton>
+                            </MudListItem>
+                        </MudList>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+        </MudGrid>
+    </MudContainer>
+
+
+
+
+
+
+
+
+
+
+
+    <MudPaper Class="footer-background" Elevation="1">
+        <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="py-6">
+            <MudGrid Spacing="3">
+                <!-- Column 1: Social Media Links -->
+                <MudItem xs="12" sm="3">
+                    <MudText Typo="Typo.h6" Class="mb-2">Follow Us</MudText>
+                    <MudGrid Class="d-flex">
+                        <MudItem xs="2">
+                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.Facebook" Href="https://www.facebook.com" Target="_blank" Color="Color.Primary" />
+                        </MudItem>
+                        <MudItem xs="2">
+                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.Twitter" Href="https://www.twitter.com" Target="_blank" Color="Color.Primary" />
+                        </MudItem>
+                        <MudItem xs="2">
+                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.Instagram" Href="https://www.instagram.com" Target="_blank" Color="Color.Primary" />
+                        </MudItem>
+                        <MudItem xs="2">
+                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.YouTube" Href="https://www.youtube.com" Target="_blank" Color="Color.Primary" />
+                        </MudItem>
+                        <MudItem xs="2">
+                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.TikTok" Href="https://www.tiktok.com" Target="_blank" Color="Color.Primary" />
+                        </MudItem>
+                    </MudGrid>
+                </MudItem>
+
+                <!-- Column 2: Contact Us -->
+                <MudItem xs="12" sm="3">
+                    <MudText Typo="Typo.h6" Class="mb-2">Contact Us</MudText>
+                    <MudList Dense="true" T="string">
+                        <MudListItem>
+                            <MudIcon Icon="@Icons.Material.Filled.Phone" Class="me-2" />
+                            <span>+44 1234 567890</span>
+                        </MudListItem>
+                        <MudListItem>
+                            <MudIcon Icon="@Icons.Material.Filled.Email" Class="me-2" />
+                            <span>info@zooexample.com</span>
+                        </MudListItem>
+                        <MudListItem>
+                            <MudIcon Icon="@Icons.Material.Filled.LocationOn" Class="me-2" />
+                            <span>123 Zoo Street, City, UK</span>
+                        </MudListItem>
+                    </MudList>
+                </MudItem>
+
+                <!-- Column 3: Opening Hours -->
+                <MudItem xs="12" sm="3">
+                    <MudText Typo="Typo.h6" Class="mb-2">Opening Hours</MudText>
+                    <MudList Dense="true" T="string">
+                        <MudListItem>Monday - Friday: 9:00 AM - 5:00 PM</MudListItem>
+                        <MudListItem>Saturday - Sunday: 10:00 AM - 6:00 PM</MudListItem>
+                        <MudListItem>Bank Holidays: 10:00 AM - 4:00 PM</MudListItem>
+                    </MudList>
+                </MudItem>
+
+                <!-- Column 4: Policies and Links -->
+                <MudItem xs="12" sm="3">
+                    <MudText Typo="Typo.h6" Class="mb-2">Links</MudText>
+                    <MudList Dense="true" T="string">
+                        <MudListItem>
+                            <MudLink Disabled="true" Href="/privacy-policy" Color="Color.Primary">Privacy Policy</MudLink>
+                        </MudListItem>
+                        <MudListItem>
+                            <MudLink Disabled="true" Href="/terms-of-service" Color="Color.Primary">Terms of Service</MudLink>
+                        </MudListItem>
+                        <MudListItem>
+                            <MudLink Disabled="true" Href="/cookies-policy" Color="Color.Primary">Cookies Policy</MudLink>
+                        </MudListItem>
+                        <MudListItem>
+                            <MudLink Disabled="true" Href="/careers" Color="Color.Primary">Careers</MudLink>
+                        </MudListItem>
+                    </MudList>
+                </MudItem>
+            </MudGrid>
+
+            <MudDivider Class="my-4" />
+
+            <!-- Copyright Section -->
+            <MudText Typo="Typo.caption" Align="Align.Center">
+                &copy; 2024 Zoo Example. All rights reserved. |
+                <MudLink Disabled="true" Href="/privacy-policy" Color="Color.Primary">Privacy Policy</MudLink> |
+                <MudLink Disabled="true" Href="/terms-of-service" Color="Color.Primary">Terms of Service</MudLink>
+            </MudText>
+        </MudContainer>
+    </MudPaper>
+
+</MudContainer>
+
+
+@code {
+
+    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "/"),
+        new BreadcrumbItem("Memberships", href: "/membership"),
+    };
+    // Special Event Model
+    private class SpecialEventModel
+    {
+        public string Time { get; set; }
+        public string EventName { get; set; }
+        public string Link { get; set; }
+    }
+
+    // Normal Event Model
+    private class NormalEventModel
+    {
+        public string Time { get; set; }
+        public string EventName { get; set; }
+        public string Location { get; set; }
+    }
+
+    // Sample Data for Special Events
+    private List<SpecialEventModel> SpecialEventList = new()
+    {
+        new SpecialEventModel { Time = "11:00 AM", EventName = "VIP Lion Feeding", Link = "https://example.com/lion-feeding" },
+        new SpecialEventModel { Time = "01:30 PM", EventName = "Behind-the-Scenes Tour", Link = "https://example.com/behind-scenes" },
+        new SpecialEventModel { Time = "04:00 PM", EventName = "Meet the Zookeepers", Link = "https://example.com/zookeepers" }
+    };
+
+    // Sample Data for Normal Events
+    private List<NormalEventModel> NormalEventList = new()
+    {
+        new NormalEventModel { Time = "10:00 AM", EventName = "Penguin Feeding", Location = "Penguin Habitat" },
+        new NormalEventModel { Time = "12:30 PM", EventName = "Lion Talk", Location = "Big Cat Zone" },
+        new NormalEventModel { Time = "02:00 PM", EventName = "Reptile Encounter", Location = "Reptile House" },
+        new NormalEventModel { Time = "03:15 PM", EventName = "Giraffe Feeding", Location = "Safari Plains" }
+    };
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <MudCard>
     <MudCardMedia Height="600" Image="images/PolarBear(1).jpg"/>
 </MudCard>
-<MudCard Style="@($"Background:{Colors.LightGreen.Darken3};")">
+<MudPaper Style="d-flex justify-center align-center">
     <MudContainer Class="mx-auto pa-6">
         <MudCardHeader>
             <MudGrid Justify="Justify.Center">
                 <MudItem xs="8">
-                    <MudCard Style="@($"Background:{Colors.Brown.Lighten1};")" Class="pa-md-6 mx-lg-auto d-flex align-center flex-grow-1 gap-4">
+                    <MudCard Style="@($"Background:{Colors.Brown.Lighten1};")" Class="d-flex justify-center align-center">
                         <MudCardHeader>
                             <CardHeaderContent>
                                 <MudText Align="Align.Center" Typo="Typo.h2">Memberships</MudText>
@@ -234,13 +529,7 @@
             </MudGrid>
         </MudCard>
     </MudContainer>
-</MudCard>
-
-
-
-
-
-
+</MudPaper>
 
 @code {
     private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
@@ -248,5 +537,5 @@
         new BreadcrumbItem("Home", href: "/"),
         new BreadcrumbItem("Memberships", href: "/membership"),
     };
-}
+} *@
 
