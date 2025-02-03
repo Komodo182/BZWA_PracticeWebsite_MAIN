@@ -8,19 +8,19 @@
             <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Primary">
                 <div class="d-flex" style="height:100%">
                     <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center"
-                              Height="1280" Width="1920" Src="images/BrownBear(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
+                    Height="1280" Width="1920" Src="images/BrownBear(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
                 </div>
             </MudCarouselItem>
             <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Secondary">
                 <div class="d-flex" style="height:100%">
                     <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center"
-                              Height="1280" Width="1920" Src="images/Meerkats(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
+                    Height="1280" Width="1920" Src="images/Meerkats(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
                 </div>
             </MudCarouselItem>
             <MudCarouselItem Transition="@Transition.Slide">
                 <div class="d-flex" style="height:100%">
                     <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center"
-                              Height="1280" Width="1920" Src="images/Wolf(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
+                    Height="1280" Width="1920" Src="images/Wolf(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
                 </div>
             </MudCarouselItem>
         </MudCarousel>
@@ -29,25 +29,25 @@
 
 <MudContainer Fixed="true" MaxWidth="MaxWidth.ExtraLarge" Class="mt-4">
     <!-- Intro Section -->
-        <MudCard>
-            <MudCardContent>
-                <MudGrid Justify="Justify.Center">
-                    <MudItem xs="8">
-                        <MudCard Style="@($"Background:{Colors.Brown.Lighten1};")" Class="d-flex justify-center align-center">
-                            <MudCardHeader>
-                                <CardHeaderContent>
-                                    <MudText Align="Align.Center" Typo="Typo.h2">Memberships</MudText>
-                                </CardHeaderContent>
-                            </MudCardHeader>
-                            <MudDivider />
-                            <MudCardContent>
-                                <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
-                            </MudCardContent>
-                        </MudCard>
-                    </MudItem>
-                </MudGrid>
-            </MudCardContent>
-        </MudCard>
+    <MudCard>
+        <MudCardContent>
+            <MudGrid Justify="Justify.Center">
+                <MudItem xs="8">
+                    <MudCard Style="@($"Background:{Colors.Brown.Lighten1};")" Class="d-flex justify-center align-center">
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Align="Align.Center" Typo="Typo.h2">Memberships</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudDivider />
+                        <MudCardContent>
+                            <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+    </MudCard>
 
 
 
@@ -59,9 +59,9 @@
 
     <MudContainer>
         <MudText Typo="Typo.h4" Align="Align.Center">Search for what you need!</MudText>
-        <MudGrid Class="mt-8">
+        <MudGrid Class="mt-8" Justify="Justify.SpaceEvenly">
             <MudItem xs="12" sm="6" md="6">
-                <MudCard Elevation="25" Class="rounded-lg pb-4">
+                <MudCard Elevation="3" Class="rounded-lg pb-4">
                     <MudCardHeader>
                         <CardHeaderContent>
                             <MudText Typo="Typo.h5" Align="Align.Center">Key Stages:</MudText>
@@ -73,13 +73,13 @@
                         </div>
                         <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
                             <MudListItem Icon="@Icons.Material.Filled.Check">
-                                <MudButton Variant="Variant.Filled" Color="Color.Primary">KS1</MudButton>
+                                <MudButton OnClick="@(() => chooseKs(0))" Variant="Variant.Filled" Color="Color.Primary">KS1</MudButton>
                             </MudListItem>
                             <MudListItem Icon="@Icons.Material.Filled.Check">
-                                <MudButton Variant="Variant.Filled" Color="Color.Primary">KS2</MudButton>
+                                <MudButton OnClick="@(() => chooseKs(1))" Variant="Variant.Filled" Color="Color.Primary">KS2</MudButton>
                             </MudListItem>
                             <MudListItem Icon="@Icons.Material.Filled.Check">
-                                <MudButton Variant="Variant.Filled" Color="Color.Primary">KS3</MudButton>
+                                <MudButton OnClick="@(() => chooseKs(2))" Variant="Variant.Filled" Color="Color.Primary">KS3</MudButton>
                             </MudListItem>
                         </MudList>
                     </MudCardContent>
@@ -87,7 +87,7 @@
             </MudItem>
 
             <MudItem xs="12" sm="6" md="6">
-                <MudCard Elevation="25" Class="rounded-lg pb-4">
+                <MudCard Elevation="3" Class="rounded-lg pb-4">
                     <MudCardHeader>
                         <CardHeaderContent>
                             <MudText Typo="Typo.h5" Align="Align.Center">Subjects:</MudText>
@@ -99,16 +99,46 @@
                         </div>
                         <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
                             <MudListItem Icon="@Icons.Material.Filled.Check">
-                                <MudButton Variant="Variant.Filled" Color="Color.Primary">Mathematics</MudButton>
+                                <MudButton OnClick="@(() => chooseSub(0))" Variant="Variant.Filled" Color="Color.Primary">Mathematics</MudButton>
                             </MudListItem>
                             <MudListItem Icon="@Icons.Material.Filled.Check">
-                                <MudButton Variant="Variant.Filled" Color="Color.Primary">Science</MudButton>
+                                <MudButton OnClick="@(() => chooseSub(1))" Variant="Variant.Filled" Color="Color.Primary">Science</MudButton>
                             </MudListItem>
                             <MudListItem Icon="@Icons.Material.Filled.Check">
-                                <MudButton Variant="Variant.Filled" Color="Color.Primary">English</MudButton>
+                                <MudButton OnClick="@(() => chooseSub(2))" Variant="Variant.Filled" Color="Color.Primary">English</MudButton>
                             </MudListItem>
                         </MudList>
                     </MudCardContent>
+                </MudCard>
+            </MudItem>
+
+            <MudItem xs="12" sm="6" md="12">
+                <MudCard Elevation="3" Class="rounded-lg pb-4">
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h3" Align="Align.Center">Submit Selection</MudText>
+                            <MudText Typo="Typo.h6" Align="Align.Center"> Please press the button below to submit your selected options and search for corresponding quizes.</MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent Class="d-flex justify-center align-center">
+                        <MudButton Disabled="@_processingSubmit" OnClick="ProcessSubmit" @bind-Completed="_searchComplete" Variant="Variant.Filled" Color="Color.Primary">
+                            @if (_processingSubmit)
+                            {
+                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                <MudText Class="ms-2">Processing</MudText>
+                            }
+                            else
+                            {
+                                <MudText>Submit Search!</MudText>
+                            }
+                        </MudButton>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+
+            <MudItem>
+                <MudCard>
+
                 </MudCard>
             </MudItem>
         </MudGrid>
@@ -213,46 +243,61 @@
 
 
 @code {
+    private bool? _searchComplete;
+    private string? submitKS;
+    private string? submitSUB;
+    private string? chosenKs;
+    private string? chosenSub;
+
 
     private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
     {
         new BreadcrumbItem("Home", href: "/"),
         new BreadcrumbItem("Memberships", href: "/membership"),
     };
-    // Special Event Model
-    private class SpecialEventModel
+
+    private bool _processingSubmit = false;
+    private async Task ProcessSubmit()
     {
-        public string Time { get; set; }
-        public string EventName { get; set; }
-        public string Link { get; set; }
+        _searchComplete = false;
+        _processingSubmit = true;
+        chosenKs = submitKS;
+        chosenSub = submitSUB;
+        await Task.Delay(1000);
+        _processingSubmit = false;
+        _searchComplete = true;
     }
 
-    // Normal Event Model
-    private class NormalEventModel
+    private void chooseSub(int id)
     {
-        public string Time { get; set; }
-        public string EventName { get; set; }
-        public string Location { get; set; }
+        switch (id)
+        {
+            case 0:
+                chosenSub = "Mathematics";
+                break;
+            case 1:
+                chosenSub = "Science";
+                break;
+            case 2:
+                chosenSub = "Englsih";
+                break;
+        }
     }
-
-    // Sample Data for Special Events
-    private List<SpecialEventModel> SpecialEventList = new()
+    private void chooseKs(int id)
     {
-        new SpecialEventModel { Time = "11:00 AM", EventName = "VIP Lion Feeding", Link = "https://example.com/lion-feeding" },
-        new SpecialEventModel { Time = "01:30 PM", EventName = "Behind-the-Scenes Tour", Link = "https://example.com/behind-scenes" },
-        new SpecialEventModel { Time = "04:00 PM", EventName = "Meet the Zookeepers", Link = "https://example.com/zookeepers" }
-    };
-
-    // Sample Data for Normal Events
-    private List<NormalEventModel> NormalEventList = new()
-    {
-        new NormalEventModel { Time = "10:00 AM", EventName = "Penguin Feeding", Location = "Penguin Habitat" },
-        new NormalEventModel { Time = "12:30 PM", EventName = "Lion Talk", Location = "Big Cat Zone" },
-        new NormalEventModel { Time = "02:00 PM", EventName = "Reptile Encounter", Location = "Reptile House" },
-        new NormalEventModel { Time = "03:15 PM", EventName = "Giraffe Feeding", Location = "Safari Plains" }
-    };
-
-
+        switch (id)
+        {
+            case 0:
+                chosenKs = "1";
+                break;
+            case 1:
+                chosenKs = "2";
+                break;
+            case 2:
+                chosenKs = "3";
+                break;
+        }
+    }
 }
 
 
