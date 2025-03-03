@@ -22,9 +22,19 @@ public partial class TlS2301171RzaContext : DbContext
 
     public virtual DbSet<Eduvisit> Eduvisits { get; set; }
 
+    public virtual DbSet<Keystage> Keystages { get; set; }
+
+    public virtual DbSet<Progress> Progresses { get; set; }
+
+    public virtual DbSet<Question> Questions { get; set; }
+
+    public virtual DbSet<Quiz> Quizzes { get; set; }
+
     public virtual DbSet<Room> Rooms { get; set; }
 
     public virtual DbSet<Roombooking> Roombookings { get; set; }
+
+    public virtual DbSet<Subject> Subjects { get; set; }
 
     public virtual DbSet<Ticket> Tickets { get; set; }
 
@@ -113,6 +123,102 @@ public partial class TlS2301171RzaContext : DbContext
                 .HasColumnName("stageOfEdu");
         });
 
+        modelBuilder.Entity<Keystage>(entity =>
+        {
+            entity.HasKey(e => e.KeystageId).HasName("PRIMARY");
+
+            entity.ToTable("keystage");
+
+            entity.Property(e => e.KeystageId)
+                .ValueGeneratedNever()
+                .HasColumnName("keystageID");
+            entity.Property(e => e.KeystageName)
+                .HasMaxLength(45)
+                .HasColumnName("keystageName");
+        });
+
+        modelBuilder.Entity<Progress>(entity =>
+        {
+            entity.HasKey(e => new { e.QuizId, e.CustomerId })
+                .HasName("PRIMARY")
+                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
+            entity.ToTable("progress");
+
+            entity.HasIndex(e => e.CustomerId, "proressfk1_idx");
+
+            entity.Property(e => e.QuizId).HasColumnName("quizID");
+            entity.Property(e => e.CustomerId).HasColumnName("customerID");
+            entity.Property(e => e.Ks1Maths).HasColumnName("ks1_maths");
+
+            entity.HasOne(d => d.Customer).WithMany(p => p.Progresses)
+                .HasForeignKey(d => d.CustomerId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("proressfk1");
+
+            entity.HasOne(d => d.Quiz).WithMany(p => p.Progresses)
+                .HasForeignKey(d => d.QuizId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("progressfk2");
+        });
+
+        modelBuilder.Entity<Question>(entity =>
+        {
+            entity.HasKey(e => e.QuestionsId).HasName("PRIMARY");
+
+            entity.ToTable("questions");
+
+            entity.HasIndex(e => e.QuizId, "questionfk1_idx");
+
+            entity.Property(e => e.QuestionsId)
+                .ValueGeneratedNever()
+                .HasColumnName("questionsID");
+            entity.Property(e => e.Answer1)
+                .HasMaxLength(45)
+                .HasColumnName("answer1");
+            entity.Property(e => e.Answer2)
+                .HasMaxLength(45)
+                .HasColumnName("answer2");
+            entity.Property(e => e.Answer3)
+                .HasMaxLength(45)
+                .HasColumnName("answer3");
+            entity.Property(e => e.Answer4)
+                .HasMaxLength(45)
+                .HasColumnName("answer4");
+            entity.Property(e => e.Finalanswer)
+                .HasMaxLength(45)
+                .HasColumnName("finalanswer");
+            entity.Property(e => e.Question1)
+                .HasMaxLength(100)
+                .HasColumnName("question");
+            entity.Property(e => e.QuizId).HasColumnName("quizID");
+
+            entity.HasOne(d => d.Quiz).WithMany(p => p.Questions)
+                .HasForeignKey(d => d.QuizId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("questionfk1");
+        });
+
+        modelBuilder.Entity<Quiz>(entity =>
+        {
+            entity.HasKey(e => e.QuizId).HasName("PRIMARY");
+
+            entity.ToTable("quiz");
+
+            entity.HasIndex(e => e.SubjectId, "quizfk1_idx");
+
+            entity.Property(e => e.QuizId)
+                .ValueGeneratedNever()
+                .HasColumnName("quizID");
+            entity.Property(e => e.KeystageId).HasColumnName("keystageID");
+            entity.Property(e => e.SubjectId).HasColumnName("subjectID");
+
+            entity.HasOne(d => d.Subject).WithMany(p => p.Quizzes)
+                .HasForeignKey(d => d.SubjectId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("quizfk1");
+        });
+
         modelBuilder.Entity<Room>(entity =>
         {
             entity.HasKey(e => e.RoomNumber).HasName("PRIMARY");
@@ -154,6 +260,20 @@ public partial class TlS2301171RzaContext : DbContext
                 .HasForeignKey(d => d.RoomNumber)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("roombookings_ibfk_2");
+        });
+
+        modelBuilder.Entity<Subject>(entity =>
+        {
+            entity.HasKey(e => e.SubjectId).HasName("PRIMARY");
+
+            entity.ToTable("subject");
+
+            entity.Property(e => e.SubjectId)
+                .ValueGeneratedNever()
+                .HasColumnName("subjectID");
+            entity.Property(e => e.SubjectName)
+                .HasMaxLength(45)
+                .HasColumnName("subjectName");
         });
 
         modelBuilder.Entity<Ticket>(entity =>

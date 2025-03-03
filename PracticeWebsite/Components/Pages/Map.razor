@@ -1,7 +1,1582 @@
 ﻿@page "/map"
-<PageTitle>Park Map</PageTitle>
-<h3>Imagine theres a interactive map here</h3>
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.370084566239!2d-1.0331622251050163!3d53.49862093733981!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48790f6d7e9a463b%3A0xb0cbffdc6cac3af3!2sYorkshire%20Wildlife%20Park!5e0!3m2!1sen!2suk!4v1731070247375!5m2!1sen!2suk" width="600" height="800" style="border:0;" allowfullscreen="true" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+﻿@using PracticeWebsite.Services
+@using PracticeWebsite.Models
+@inject CustomerServices CustomerService
+
+<PageTitle>Membership</PageTitle>
+
+<MudContainer Fixed="true" MaxWidth="MaxWidth.ExtraExtraLarge" Class="mt-4">
+    <MudCard>
+        <MudCarousel Class="mud-width-full" Style="height:600px;" ShowArrows="false" ShowBullets="false" EnableSwipeGesture="false" AutoCycle="true" TData="object">
+            <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Primary">
+                <div class="d-flex" style="height:100%">
+                    <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center"
+                    Height="1280" Width="1920" Src="images/BrownBear(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
+                </div>
+            </MudCarouselItem>
+            <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Secondary">
+                <div class="d-flex" style="height:100%">
+                    <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center"
+                    Height="1280" Width="1920" Src="images/Meerkats(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
+                </div>
+            </MudCarouselItem>
+            <MudCarouselItem Transition="@Transition.Slide">
+                <div class="d-flex" style="height:100%">
+                    <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center"
+                    Height="1280" Width="1920" Src="images/Wolf(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
+                </div>
+            </MudCarouselItem>
+        </MudCarousel>
+    </MudCard>
+</MudContainer>
+<MudContainer Fixed="true" MaxWidth="MaxWidth.ExtraExtraLarge" Class="mt-4">
+    <!-- Intro Section -->
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="10">
+            <MudCard Style="@($"Background:{Colors.Brown.Lighten1};")" Class="d-flex justify-center align-center">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Align="Align.Center" Typo="Typo.h2">Memberships</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudDivider />
+                <MudCardContent>
+                    <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+    <MudContainer>
+        <MudText Typo="Typo.h4" Align="Align.Center">Search for what you need!</MudText>
+        <MudGrid Class="ma-4 ps-4" Justify="Justify.Center">
+            <MudItem xs="12" sm="10" md="6">
+                <MudCard Elevation="3" Class="rounded-lg pb-4">
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h5" Align="Align.Center">Key Stages:</MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <div class="d-flex justify-center">
+                            <MudText Typo="Typo.h6" Class="ml-1 mt-5">Search for what level you need!</MudText>
+                        </div>
+                        <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
+                            <MudListItem Icon="@Icons.Material.Filled.Check">
+                                <MudButton OnClick="@(() => chooseKs(0))" Variant="Variant.Filled" Color="Color.Primary">KS1</MudButton>
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Check">
+                                <MudButton OnClick="@(() => chooseKs(1))" Variant="Variant.Filled" Color="Color.Primary">KS2</MudButton>
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Check">
+                                <MudButton OnClick="@(() => chooseKs(2))" Variant="Variant.Filled" Color="Color.Primary">KS3</MudButton>
+                            </MudListItem>
+                        </MudList>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+            <MudItem xs="12" sm="10" md="6">
+                <MudCard Elevation="3" Class="rounded-lg pb-4">
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h5" Align="Align.Center">Subjects:</MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <div class="d-flex justify-center">
+                            <MudText Typo="Typo.h6" Class="ml-1 mt-5">Search for what subject you need!</MudText>
+                        </div>
+                        <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
+                            <MudListItem Icon="@Icons.Material.Filled.Check">
+                                <MudButton OnClick="@(() => chooseSub(0))" Variant="Variant.Filled" Color="Color.Primary">Mathematics</MudButton>
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Check">
+                                <MudButton OnClick="@(() => chooseSub(1))" Variant="Variant.Filled" Color="Color.Primary">Science</MudButton>
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Check">
+                                <MudButton OnClick="@(() => chooseSub(2))" Variant="Variant.Filled" Color="Color.Primary">English</MudButton>
+                            </MudListItem>
+                        </MudList>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+            <MudItem xs="12" sm="12" md="12">
+                <MudCard Elevation="3" Class="rounded-lg pb-4">
+                    <MudCardContent>
+                        <MudText Typo="Typo.h3" Align="Align.Center">Submit Selection</MudText>
+                        <MudText Typo="Typo.h6" Align="Align.Center"> Please press the button below to submit your selected options and search for corresponding quizes.</MudText>
+                    </MudCardContent>
+                    <MudCardContent Class="d-flex justify-center align-center">
+                        <MudStack>
+                            <MudButton Disabled="@_processingSubmit" OnClick="ProcessSubmit" @bind-Completed="_searchComplete" Variant="Variant.Filled" Color="Color.Primary">
+                                @if (_processingSubmit == true)
+                                {
+                                    <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                    <MudText Class="ms-2">Processing</MudText>
+                                }
+                                else
+                                {
+                                    <MudText>Submit Search!</MudText>
+                                }
+                            </MudButton>
+                            @if (mainSearchError == true)
+                            {
+                                <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Center">Error! Ensure you have selected both a keystage & Subject.</MudAlert>
+                            }
+                            else
+                            {
+                                <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Center">Please first select a keystage and a subject before you submit to not encounter an error!</MudAlert>
+                            }
+
+                            @if (validSearch == true)
+                            {
+                                <MudCard>
+                                    <MudCardContent>
+                                        <MudText Typo="Typo.body2" Align="Align.Center">Please select which quiz you would like to load in.</MudText>
+                                        <MudSelect Label="Select Level" @bind-Value="SelectedQuizLevel">
+                                            @for (int i = 1; i <= 3; i++)
+                                            {
+                                                int num = i;
+                                                <MudSelectItem Value="@num">@num</MudSelectItem>
+                                            }
+                                        </MudSelect>
+                                        <MudButton Disabled="@_processingFullSubmit" OnClick="ProcessFullSubmit" @bind-Completed="_searchFullComplete" Variant="Variant.Filled" Color="Color.Primary">
+                                            @if (_processingFullSubmit == true && validFullSearch == true)
+                                            {
+                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                                <MudText Class="ms-2">Processing</MudText>
+                                            }
+                                            else
+                                            {
+                                                <MudText>Load Question!</MudText>
+                                            }
+                                        </MudButton>
+                                    </MudCardContent>
+                                </MudCard>
+
+                            }
+                        </MudStack>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+            @if (validFullSearch == true && validSearch == true)
+            {
+                <MudItem xs="12" sm="12" md="12">
+                    <MudCard Class="flex-auto d-flex py-8 mud-theme-white" Elevation="6">
+                        <MudStepper ShowResetButton CenterLabels="true" OnPreviewInteraction="OnPreviewInteraction">
+                            <MudStep Title="Question 1" HasError="@(_step1Complete==false)">
+                                <MudCard>
+                                    <MudCardHeader>
+                                        <MudText Typo="Typo.h4">Question No.1</MudText>
+                                        <MudText>@quiz.Quiz1Question</MudText>
+                                    </MudCardHeader>
+                                    <MudCardContent>
+                                        <MudGrid Justify="Justify.SpaceEvenly">
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(0))"> @Question.Answer1 </MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(1))"> @quiz.Quiz1Ans2 </MudButton>
+                                            <MudFlexBreak />
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(2))"> @quiz.Quiz1Ans3 </MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(3))"> @quiz.Quiz1Ans4 </MudButton>
+                                        </MudGrid>
+                                        <MudHidden Breakpoint="@Breakpoint.Xs">
+                                        </MudHidden>
+                                        <MudButton Disabled="@_processing1" OnClick="ProcessSomething1" @bind-Completed="_step1Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                                            @if (_processing1)
+                                            {
+                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                                <MudText Class="ms-2">Processing</MudText>
+                                            }
+                                            else
+                                            {
+                                                <MudText>Submit Answer</MudText>
+                                            }
+                                        </MudButton>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudStep>
+                            <MudStep Title="Question 2" HasError="@(_step2Complete==false)">
+                                <MudCard>
+
+                                    <MudCardHeader>
+                                        <MudText Typo="Typo.h4">Question No.2</MudText>
+                                        <MudText></MudText>
+                                    </MudCardHeader>
+
+                                    <MudCardContent>
+                                        <MudGrid Justify="Justify.SpaceEvenly">
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(0))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(1))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudFlexBreak />
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(2))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(3))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                        </MudGrid>
+
+                                        <MudHidden Breakpoint="@Breakpoint.Xs">
+                                        </MudHidden>
+
+                                        <MudButton Disabled="@_processing2" OnClick="ProcessSomething2" Variant="Variant.Outlined" Color="Color.Primary" Class="mt-4">
+                                            @if (_processing2)
+                                            {
+                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                                <MudText Class="ms-2">Processing</MudText>
+                                            }
+                                            else
+                                            {
+                                                <MudText>Confirm Selection</MudText>
+                                            }
+                                        </MudButton>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudStep>
+                            <MudStep Title="Question 3" HasError="@(_step3Complete==false)">
+                                <MudCard>
+                                    <MudCardHeader>
+                                        <MudText Typo="Typo.h4">Question No.3</MudText>
+                                        <MudText></MudText>
+                                    </MudCardHeader>
+                                    <MudCardContent>
+                                        <MudGrid Justify="Justify.SpaceEvenly">
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(0))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(1))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudFlexBreak />
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(2))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(3))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                        </MudGrid>
+                                        <MudHidden Breakpoint="@Breakpoint.Xs">
+                                        </MudHidden>
+                                        <MudButton Disabled="@_processing3" OnClick="ProcessSomething3" @bind-Completed="_step3Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                                            @if (_processing3)
+                                            {
+                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                                <MudText Class="ms-2">Processing</MudText>
+                                            }
+                                            else
+                                            {
+                                                <MudText>Submit Answer</MudText>
+                                            }
+                                        </MudButton>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudStep>
+                            <MudStep Title="Question 4" HasError="@(_step4Complete==false)">
+                                <MudCard>
+                                    <MudCardHeader>
+                                        <MudText Typo="Typo.h4">Question No.4</MudText>
+                                        <MudText></MudText>
+                                    </MudCardHeader>
+                                    <MudCardContent>
+                                        <MudGrid Justify="Justify.SpaceEvenly">
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(0))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(1))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudFlexBreak />
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(2))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(3))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                        </MudGrid>
+                                        <MudHidden Breakpoint="@Breakpoint.Xs">
+                                        </MudHidden>
+                                        <MudButton Disabled="@_processing4" OnClick="ProcessSomething4" @bind-Completed="_step4Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                                            @if (_processing4)
+                                            {
+                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                                <MudText Class="ms-2">Processing</MudText>
+                                            }
+                                            else
+                                            {
+                                                <MudText>Submit Answer</MudText>
+                                            }
+                                        </MudButton>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudStep>
+                            <MudStep Title="Question 5" HasError="@(_step5Complete==false)">
+                                <MudCard>
+                                    <MudCardHeader>
+                                        <MudText Typo="Typo.h4">Question No.5</MudText>
+                                        <MudText></MudText>
+                                    </MudCardHeader>
+                                    <MudCardContent>
+                                        <MudGrid Justify="Justify.SpaceEvenly">
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(0))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(1))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudFlexBreak />
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(2))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(3))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                        </MudGrid>
+                                        <MudHidden Breakpoint="@Breakpoint.Xs">
+                                        </MudHidden>
+                                        <MudButton Disabled="@_processing5" OnClick="ProcessSomething5" @bind-Completed="_step5Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                                            @if (_processing5)
+                                            {
+                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                                <MudText Class="ms-2">Processing</MudText>
+                                            }
+                                            else
+                                            {
+                                                <MudText>Submit Answer</MudText>
+                                            }
+                                        </MudButton>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudStep>
+                            <MudStep Title="Question 6" HasError="@(_step6Complete==false)">
+                                <MudCard>
+                                    <MudCardHeader>
+                                        <MudText Typo="Typo.h4">Question No.6</MudText>
+                                        <MudText></MudText>
+                                    </MudCardHeader>
+                                    <MudCardContent>
+                                        <MudGrid Justify="Justify.SpaceEvenly">
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(0))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(1))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudFlexBreak />
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(2))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(3))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                        </MudGrid>
+                                        <MudHidden Breakpoint="@Breakpoint.Xs">
+                                        </MudHidden>
+                                        <MudButton Disabled="@_processing6" OnClick="ProcessSomething6" @bind-Completed="_step6Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                                            @if (_processing6)
+                                            {
+                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                                <MudText Class="ms-2">Processing</MudText>
+                                            }
+                                            else
+                                            {
+                                                <MudText>Submit Answer</MudText>
+                                            }
+                                        </MudButton>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudStep>
+                            <MudStep Title="Question 7" HasError="@(_step7Complete==false)">
+                                <MudCard>
+                                    <MudCardHeader>
+                                        <MudText Typo="Typo.h4">Question No.7</MudText>
+                                        <MudText></MudText>
+                                    </MudCardHeader>
+                                    <MudCardContent>
+                                        <MudGrid Justify="Justify.SpaceEvenly">
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(0))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(1))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudFlexBreak />
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(2))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(3))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                        </MudGrid>
+                                        <MudHidden Breakpoint="@Breakpoint.Xs">
+                                        </MudHidden>
+                                        <MudButton Disabled="@_processing7" OnClick="ProcessSomething7" @bind-Completed="_step7Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                                            @if (_processing7)
+                                            {
+                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                                <MudText Class="ms-2">Processing</MudText>
+                                            }
+                                            else
+                                            {
+                                                <MudText>Submit Answer</MudText>
+                                            }
+                                        </MudButton>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudStep>
+                            <MudStep Title="Question 8" HasError="@(_step8Complete==false)">
+                                <MudCard>
+                                    <MudCardHeader>
+                                        <MudText Typo="Typo.h4">Question No.8</MudText>
+                                        <MudText></MudText>
+                                    </MudCardHeader>
+                                    <MudCardContent>
+                                        <MudGrid Justify="Justify.SpaceEvenly">
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(0))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(1))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudFlexBreak />
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(2))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(3))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                        </MudGrid>
+                                        <MudHidden Breakpoint="@Breakpoint.Xs">
+                                        </MudHidden>
+                                        <MudButton Disabled="@_processing8" OnClick="ProcessSomething8" @bind-Completed="_step8Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                                            @if (_processing8)
+                                            {
+                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                                <MudText Class="ms-2">Processing</MudText>
+                                            }
+                                            else
+                                            {
+                                                <MudText>Submit Answer</MudText>
+                                            }
+                                        </MudButton>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudStep>
+                            <MudStep Title="Question 9" HasError="@(_step9Complete==false)">
+                                <MudCard>
+                                    <MudCardHeader>
+                                        <MudText Typo="Typo.h4">Question No.9</MudText>
+                                        <MudText></MudText>
+                                    </MudCardHeader>
+                                    <MudCardContent>
+                                        <MudGrid Justify="Justify.SpaceEvenly">
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(0))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(1))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudFlexBreak />
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(2))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(3))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                        </MudGrid>
+                                        <MudHidden Breakpoint="@Breakpoint.Xs">
+                                        </MudHidden>
+                                        <MudButton Disabled="@_processing9" OnClick="ProcessSomething9" @bind-Completed="_step9Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                                            @if (_processing9)
+                                            {
+                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                                <MudText Class="ms-2">Processing</MudText>
+                                            }
+                                            else
+                                            {
+                                                <MudText>Submit Answer</MudText>
+                                            }
+                                        </MudButton>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudStep>
+                            <MudStep Title="Question 10" HasError="@(_step10Complete==false)">
+                                <MudCard>
+                                    <MudCardHeader>
+                                        <MudText Typo="Typo.h4">Question No.10</MudText>
+                                        <MudText></MudText>
+                                    </MudCardHeader>
+                                    <MudCardContent>
+                                        <MudGrid Justify="Justify.SpaceEvenly">
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(0))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(1))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudFlexBreak />
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(2))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(3))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                        </MudGrid>
+                                        <MudHidden Breakpoint="@Breakpoint.Xs">
+                                        </MudHidden>
+                                        <MudButton Disabled="@_processing10" OnClick="ProcessSomething10" @bind-Completed="_step10Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                                            @if (_processing10)
+                                            {
+                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                                <MudText Class="ms-2">Processing</MudText>
+                                            }
+                                            else
+                                            {
+                                                <MudText>Submit Answer</MudText>
+                                            }
+                                        </MudButton>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudStep>
+                        </MudStepper>
+                    </MudCard>
+                </MudItem>
+            }
+            else if (validSearch == true && (validFullSearch == false || validFullSearch == null))
+            {
+                <MudItem xs="12" sm="12" md="12">
+                    <MudAlert Severity="Severity.Info">To start a quiz select a quiz level and submit the search!</MudAlert>
+                </MudItem>
+            }
+
+            @* <MudCard Class="pa-4 mt-3">
+                    <MudCardHeader>
+                        <MudCardContent>
+                            <MudText Typo="Typo.h6">@Questions[SelectedQuestionIndex].Question1</MudText>
+                        </MudCardContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudTextField Label="Your Answer:" @bind-Value="@UserAnswers[Questions[SelectedQuestionIndex].QuizId]" />
+                    </MudCardContent>           
+                    <MudCardActions>
+                        <MudButton OnClick="PreviousQuestion" Disabled="@(SelectedQuestionIndex == 0)">Previous</MudButton>
+                        <MudButton OnClick="NextQuestion" Disabled="@(SelectedQuestionIndex == Questions.Count - 1)">Next</MudButton>
+                        <MudButton OnClick="CheckAnswer" Color="Color.Secondary">Check Answer</MudButton>
+                    </MudCardActions>            
+                </MudCard> *@
+
+
+        </MudGrid>
+    </MudContainer>
+    <MudPaper Class="footer-background" Elevation="1">
+        <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="py-6">
+            <MudGrid Spacing="3">
+                <!-- Column 1: Social Media Links -->
+                <MudItem xs="12" sm="3">
+                    <MudText Typo="Typo.h6" Class="mb-2">Follow Us</MudText>
+                    <MudGrid Class="d-flex">
+                        <MudItem xs="2">
+                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.Facebook" Href="https://www.facebook.com" Target="_blank" Color="Color.Primary" />
+                        </MudItem>
+                        <MudItem xs="2">
+                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.Twitter" Href="https://www.twitter.com" Target="_blank" Color="Color.Primary" />
+                        </MudItem>
+                        <MudItem xs="2">
+                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.Instagram" Href="https://www.instagram.com" Target="_blank" Color="Color.Primary" />
+                        </MudItem>
+                        <MudItem xs="2">
+                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.YouTube" Href="https://www.youtube.com" Target="_blank" Color="Color.Primary" />
+                        </MudItem>
+                        <MudItem xs="2">
+                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.TikTok" Href="https://www.tiktok.com" Target="_blank" Color="Color.Primary" />
+                        </MudItem>
+                    </MudGrid>
+                </MudItem>
+
+                <!-- Column 2: Contact Us -->
+                <MudItem xs="12" sm="3">
+                    <MudText Typo="Typo.h6" Class="mb-2">Contact Us</MudText>
+                    <MudList Dense="true" T="string">
+                        <MudListItem>
+                            <MudIcon Icon="@Icons.Material.Filled.Phone" Class="me-2" />
+                            <span>+44 1234 567890</span>
+                        </MudListItem>
+                        <MudListItem>
+                            <MudIcon Icon="@Icons.Material.Filled.Email" Class="me-2" />
+                            <span>info@zooexample.com</span>
+                        </MudListItem>
+                        <MudListItem>
+                            <MudIcon Icon="@Icons.Material.Filled.LocationOn" Class="me-2" />
+                            <span>123 Zoo Street, City, UK</span>
+                        </MudListItem>
+                    </MudList>
+                </MudItem>
+
+                <!-- Column 3: Opening Hours -->
+                <MudItem xs="12" sm="3">
+                    <MudText Typo="Typo.h6" Class="mb-2">Opening Hours</MudText>
+                    <MudList Dense="true" T="string">
+                        <MudListItem>Monday - Friday: 9:00 AM - 5:00 PM</MudListItem>
+                        <MudListItem>Saturday - Sunday: 10:00 AM - 6:00 PM</MudListItem>
+                        <MudListItem>Bank Holidays: 10:00 AM - 4:00 PM</MudListItem>
+                    </MudList>
+                </MudItem>
+
+                <!-- Column 4: Policies and Links -->
+                <MudItem xs="12" sm="3">
+                    <MudText Typo="Typo.h6" Class="mb-2">Links</MudText>
+                    <MudList Dense="true" T="string">
+                        <MudListItem>
+                            <MudLink Disabled="true" Href="/privacy-policy" Color="Color.Primary">Privacy Policy</MudLink>
+                        </MudListItem>
+                        <MudListItem>
+                            <MudLink Disabled="true" Href="/terms-of-service" Color="Color.Primary">Terms of Service</MudLink>
+                        </MudListItem>
+                        <MudListItem>
+                            <MudLink Disabled="true" Href="/cookies-policy" Color="Color.Primary">Cookies Policy</MudLink>
+                        </MudListItem>
+                        <MudListItem>
+                            <MudLink Disabled="true" Href="/careers" Color="Color.Primary">Careers</MudLink>
+                        </MudListItem>
+                    </MudList>
+                </MudItem>
+            </MudGrid>
+
+            <MudDivider Class="my-4" />
+
+            <!-- Copyright Section -->
+            <MudText Typo="Typo.caption" Align="Align.Center">
+                &copy; 2024 Zoo Example. All rights reserved. |
+                <MudLink Disabled="true" Href="/privacy-policy" Color="Color.Primary">Privacy Policy</MudLink> |
+                <MudLink Disabled="true" Href="/terms-of-service" Color="Color.Primary">Terms of Service</MudLink>
+            </MudText>
+        </MudContainer>
+    </MudPaper>
+</MudContainer>
+
+
 @code {
+    [Inject]
+    IDialogService DialogService { get; set; }
+    private ISnackbar Snackbwear { get; set; }
+
+    private int SelectedQuizLevel;
+    private List<Question> Questions = new();
+    private Dictionary<int, string> UserAnswers = new();
+    private int SelectedQuestionIndex = -1;
+    private string AnswerResponse = "";
+    private int CorrectAnswers = 0;
+    private bool? validSearch;
+    private bool? validFullSearch;
+
+
+    private bool? _searchComplete;
+    public int submitKS;
+    public int submitSUB;
+    private int? chosenKs;
+    private int? chosenSub;
+    private bool _processingSubmit = false;
+    private bool mainSearchError = false;
+    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "/"),
+        new BreadcrumbItem("Memberships", href: "/membership"),
+    };
+    private void FirstSearchError()
+    {
+        mainSearchError = true;
+    }
+    private async Task ProcessSubmit()
+    {
+        _searchComplete = false;
+        _processingSubmit = true;
+        validFullSearch = null;
+        validSearch = false;
+        await Task.Delay(3000);
+        //(submitKS != null && Questions.Count > 0 && SelectedQuestionIndex >=0 && submitSUB != null && Questions.Count > 0 && SelectedQuestionIndex >=0)
+        if (chosenSub != null || chosenSub !=0 && chosenKs != null || chosenKs !=0)
+        {
+            validSearch = true;
+            int submitKS = chosenKs ?? 0;
+            int submitSUB = chosenSub ?? 0;
+        }
+        else
+        {
+            FirstSearchError();
+            validSearch = false;
+        }
+        //LoadQuestions();
+        _processingSubmit = false;
+        _searchComplete = true;
+    }
+    private async Task LoadQuestions()
+    {
+        List<Quiz> Quizzes = await CustomerService.GetQuizzes(submitKS, submitSUB);
+        if (Quizzes.Count != 0)
+        {
+            Questions = await CustomerService.GetQuestions(Quizzes[0].QuizId);
+            UserAnswers.Clear();
+            foreach (var question in Questions)
+            {
+                UserAnswers[question.QuizId] = "";
+            }
+        }
+    }
+    private bool? _searchFullComplete;
+    private bool _processingFullSubmit = false;
+    private async Task ProcessFullSubmit()
+    {
+        _searchFullComplete = false;
+        _processingFullSubmit = true;
+        validFullSearch = false;
+        await Task.Delay(3000);
+        if (submitKS != null && submitSUB != null && (SelectedQuizLevel > 0 && SelectedQuizLevel < 3))
+        {
+            validFullSearch = true;
+        }
+        else
+        {
+            validFullSearch = false;
+        }
+        _processingFullSubmit = false;
+        _searchFullComplete = true;
+
+    }
+    private void chooseSub(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                chosenSub = 1;
+                break;
+            case 1:
+                chosenSub = 2;
+                break;
+            case 2:
+                chosenSub = 3;
+                break;
+        }
+    }
+    private void chooseKs(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                chosenKs = 1;
+                break;
+            case 1:
+                chosenKs = 2;
+                break;
+            case 2:
+                chosenKs = 3;
+                break;
+        }
+    }
+
+    // private void _1ButtonText(int id)
+    // {
+    //     switch (id)
+    //     {
+    //         case 0:
+    //             _1ButtonText = "Reply";
+    //             break;
+    //         case 1:
+    //             _buttonText = "Reply All";
+    //             break;
+    //         case 2:
+    //             _buttonText = "Forward";
+    //             break;
+    //         case 3:
+    //             _buttonText = "Reply & Delete";
+    //             break;
+    //     }
+    // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // private async Task LoadQuestions()
+    // {
+    //     List<Quiz> Quizzes = await CustomerService.GetQuizzes(submitSUB);
+    //     if (Quizzes.Count != 0)
+    //     {
+    //         Questions = await CustomerService.GetQuestions(Quizzes[0].QuizId);
+    //         UserAnswers.Clear();
+    //         foreach (var question in Questions)
+    //         {
+    //             UserAnswers[question.QuizId] = "";
+    //         }
+    //         SelectedQuestionIndex = 0; // Start with the first question
+    //     }
+    // }
+    // private void NextQuestion()
+    // {
+    //     if (SelectedQuestionIndex < Questions.Count - 1)
+    //     {
+    //         SelectedQuestionIndex++;
+    //     }
+    // }
+    // private void PreviousQuestion()
+    // {
+    //     if (SelectedQuestionIndex > 0)
+    //     {
+    //         SelectedQuestionIndex--;
+    //     }
+    // }
+    // private async Task CheckAnswer()
+    // {
+    //     try
+    //     {
+    //         string userAnswer = UserAnswers[Questions[SelectedQuestionIndex].QuizId];
+    //         AnswerResponse = "Thinking...";
+
+    //         // Generate response from Chatbot
+    //         AnswerResponse = await OpenAiService.GetOpenAIResponseAsync($"You are being used in a educational quiz about {TopicService.SelectedTopic}. The question is: {Questions[SelectedQuestionIndex].Question1} Users answer is: {userAnswer}. Judge harshly whether the userAnswer is 'Correct' or 'Incorrect'? If no userAnswer or any fault, say 'Please Answer Again'");
+
+    //         // Check if the response contains "Correct" (case-insensitive)
+    //         if (AnswerResponse.Contains("Correct", StringComparison.OrdinalIgnoreCase))
+    //         {
+    //             CorrectAnswers++;
+    //             AnswerResponse = "Correct!";
+    //         }
+    //         else
+    //         {
+    //             AnswerResponse = "Incorrect!";
+    //         }
+
+    //         // Update pie chart data
+    //         data[0] = CorrectAnswers;
+    //         data[1] = (Questions.Count - CorrectAnswers);
+
+    //         StateHasChanged(); // Re-render the page to update UI
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         AnswerResponse = ex.Message;
+    //     }
+    // }
+    // protected override void OnInitialized()
+    // {
+    //     TopicService.OnTopicChanged += StateHasChanged;
+    // }
+
+    // public void Dispose()
+    // {
+    //     TopicService.OnTopicChanged -= StateHasChanged;
+    // }
+
+
+
+    private bool? _step1Complete;
+    private bool? _step2Complete;
+    private bool? _step3Complete;
+    private bool? _step4Complete;
+    private bool? _step5Complete;
+    private bool? _step6Complete;
+    private bool? _step7Complete;
+    private bool? _step8Complete;
+    private bool? _step9Complete;
+    private bool? _step10Complete;
+
+    private string? Quiz1UserAns;
+    private string? Quiz2UserAns;
+    private string? Quiz3UserAns;
+    private string? Quiz4UserAns;
+    private string? Quiz5UserAns;
+    private string? Quiz6UserAns;
+    private string? Quiz7UserAns;
+    private string? Quiz8UserAns;
+    private string? Quiz9UserAns;
+    private string? Quiz10UserAns;
+
+    private DateTime? _date;
+    private DateTime? _datechosen = DateTime.Today;
+    private DateTime _minDate = DateTime.Now.Date;
+    private string fName { get; set; }
+    private string lName { get; set; }
+    private string email { get; set; }
+    private string phone { get; set; }
+    private string address { get; set; }
+    private string CreditCardNumber { get; set; }
+    private string CVV { get; set; }
+    private string ExpirationDate { get; set; }
+
+    private bool _processing1 = false;
+    private async Task ProcessSomething1()
+    {
+        _step1Complete = false;
+        _processing1 = true;
+
+        await Task.Delay(2000);
+        _processing1 = false;
+        _step1Complete = true;
+    }
+    private void _1ButtonQuiz(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                Quiz1UserAns = "1";
+                break;
+            case 1:
+                Quiz1UserAns = "2";
+                break;
+            case 2:
+                Quiz1UserAns = "3";
+                break;
+            case 3:
+                Quiz1UserAns = "4";
+                break;
+        }
+    }
+
+    private bool _processing2 = false;
+    private async Task ProcessSomething2()
+    {
+        _step2Complete = false;
+        _processing2 = true;
+
+        await Task.Delay(1);
+        _processing2 = false;
+        _step2Complete = true;
+    }
+    private void _2ButtonQuiz(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                Quiz2UserAns = "1";
+                break;
+            case 1:
+                Quiz2UserAns = "2";
+                break;
+            case 2:
+                Quiz2UserAns = "3";
+                break;
+            case 3:
+                Quiz2UserAns = "4";
+                break;
+        }
+    }
+
+    private bool _processing3 = false;
+    private async Task ProcessSomething3()
+    {
+        _step3Complete = false;
+        _processing3 = true;
+
+        await Task.Delay(1);
+        _processing3 = false;
+        _step3Complete = true;
+    }
+    private void _3ButtonQuiz(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                Quiz3UserAns = "1";
+                break;
+            case 1:
+                Quiz3UserAns = "2";
+                break;
+            case 2:
+                Quiz3UserAns = "3";
+                break;
+            case 3:
+                Quiz3UserAns = "4";
+                break;
+        }
+    }
+
+    private bool _processing4 = false;
+    private async Task ProcessSomething4()
+    {
+        _step4Complete = false;
+        _processing4 = true;
+
+        await Task.Delay(1);
+        _processing4 = false;
+        _step4Complete = true;
+    }
+    private void _4ButtonQuiz(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                Quiz4UserAns = "1";
+                break;
+            case 1:
+                Quiz4UserAns = "2";
+                break;
+            case 2:
+                Quiz4UserAns = "3";
+                break;
+            case 3:
+                Quiz4UserAns = "4";
+                break;
+        }
+    }
+
+    private bool _processing5 = false;
+    private async Task ProcessSomething5()
+    {
+        _step5Complete = false;
+        _processing5 = true;
+
+        await Task.Delay(2000);
+        _processing5 = false;
+        _step5Complete = true;
+    }
+    private void _5ButtonQuiz(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                Quiz5UserAns = "1";
+                break;
+            case 1:
+                Quiz5UserAns = "2";
+                break;
+            case 2:
+                Quiz5UserAns = "3";
+                break;
+            case 3:
+                Quiz5UserAns = "4";
+                break;
+        }
+    }
+
+    private bool _processing6 = false;
+    private async Task ProcessSomething6()
+    {
+        _step6Complete = false;
+        _processing6 = true;
+
+        await Task.Delay(1);
+        _processing6 = false;
+        _step6Complete = true;
+    }
+    private void _6ButtonQuiz(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                Quiz6UserAns = "1";
+                break;
+            case 1:
+                Quiz6UserAns = "2";
+                break;
+            case 2:
+                Quiz6UserAns = "3";
+                break;
+            case 3:
+                Quiz6UserAns = "4";
+                break;
+        }
+    }
+
+    private bool _processing7 = false;
+    private async Task ProcessSomething7()
+    {
+        _step7Complete = false;
+        _processing7 = true;
+
+        await Task.Delay(1);
+        _processing3 = false;
+        _step3Complete = true;
+    }
+    private void _7ButtonQuiz(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                Quiz7UserAns = "1";
+                break;
+            case 1:
+                Quiz7UserAns = "2";
+                break;
+            case 2:
+                Quiz7UserAns = "3";
+                break;
+            case 3:
+                Quiz7UserAns = "4";
+                break;
+        }
+    }
+
+    private bool _processing8 = false;
+    private async Task ProcessSomething8()
+    {
+        _step8Complete = false;
+        _processing8 = true;
+
+        await Task.Delay(1);
+        _processing8 = false;
+        _step4Complete = true;
+    }
+    private void _8ButtonQuiz(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                Quiz8UserAns = "1";
+                break;
+            case 1:
+                Quiz8UserAns = "2";
+                break;
+            case 2:
+                Quiz8UserAns = "3";
+                break;
+            case 3:
+                Quiz8UserAns = "4";
+                break;
+        }
+    }
+
+    private bool _processing9 = false;
+    private async Task ProcessSomething9()
+    {
+        _step9Complete = false;
+        _processing9 = true;
+
+        await Task.Delay(1);
+        _processing9 = false;
+        _step9Complete = true;
+    }
+    private void _9ButtonQuiz(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                Quiz9UserAns = "1";
+                break;
+            case 1:
+                Quiz9UserAns = "2";
+                break;
+            case 2:
+                Quiz9UserAns = "3";
+                break;
+            case 3:
+                Quiz9UserAns = "4";
+                break;
+        }
+    }
+
+    private bool _processing10 = false;
+    private async Task ProcessSomething10()
+    {
+        _step10Complete = false;
+        _processing10 = true;
+
+        await Task.Delay(1);
+        _processing10 = false;
+        _step10Complete = true;
+    }
+    private void _10ButtonQuiz(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                Quiz10UserAns = "1";
+                break;
+            case 1:
+                Quiz10UserAns = "2";
+                break;
+            case 2:
+                Quiz10UserAns = "3";
+                break;
+            case 3:
+                Quiz10UserAns = "4";
+                break;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private quiz SQLquizdata = new quiz();
+
+    protected override async Task OnInitializedAsync()
+    {
+        SQLquizdata = await CustomerService.GetQuizData(SelectedQuizLevel); // Fetch data from service
+        if (SQLquizdata == null) SQLquizdata = new quiz(); // Avoid null reference errors
+    }
+
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     var data = await CustomerService.GetQuizData(); // Fetch from service
+
+    //     if (data != null)
+    //     {
+    //         SQLquizdata = new quiz
+    //             {
+    //                 Quiz1Question = data.Quiz1Question,
+    //                 Quiz1Ans1 = data.Quiz1Ans1,
+    //                 Quiz1Ans2 = data.Quiz1Ans2,
+    //                 Quiz1Ans3 = data.Quiz1Ans3,
+    //                 Quiz1Ans4 = data.Quiz1Ans4,
+
+    //                 Quiz2Question = data.Quiz2Question,
+    //                 Quiz2Ans1 = data.Quiz2Ans1,
+    //                 Quiz2Ans2 = data.Quiz2Ans2,
+    //                 Quiz2Ans3 = data.Quiz2Ans3,
+    //                 Quiz2Ans4 = data.Quiz2Ans4,
+
+    //                 Quiz3Question = data.Quiz3Question,
+    //                 Quiz3Ans1 = data.Quiz3Ans1,
+    //                 Quiz3Ans2 = data.Quiz3Ans2,
+    //                 Quiz3Ans3 = data.Quiz3Ans3,
+    //                 Quiz3Ans4 = data.Quiz3Ans4
+    //             };
+    //     }
+    //     else
+    //     {
+    //         SQLquizdata = new quiz(); // ✅ Prevent null reference errors
+    //     }
+    // }
+
+    //return protocol to show selected quiz level
+    // public class QuizData
+    // {
+    //     //here need to get the sql data i load in
+    //     public string Quiz1Question { get; set; } 
+    //     public string Quiz1Ans1 { get; set; }
+    //     public string Quiz1Ans2 { get; set; }
+    //     public string Quiz1Ans3 { get; set; }
+    //     public string Quiz1Ans4 { get; set; }
+
+
+
+    //     public string Quiz2Question { get; set; }
+    //     public string Quiz2Ans1 { get; set; }
+    //     public string Quiz2Ans2 { get; set; }
+    //     public string Quiz2Ans3 { get; set; }
+    //     public string Quiz2Ans4 { get; set; }
+
+    //     public string Quiz3Question { get; set; }
+    //     public string Quiz3Ans1 { get; set; }
+    //     public string Quiz3Ans2 { get; set; }
+    //     public string Quiz3Ans3 { get; set; }
+    //     public string Quiz3Ans4 { get; set; }
+
+    //     public string Quiz1TrueAns { get; set; }
+    //     public string Quiz2TrueAns { get; set; }
+    //     public string Quiz3TrueAns { get; set; }
+    // }
+    // public class quiz
+    // {
+    //     //here i need to declar the ones for the questions and match them up to show up from the sql loaded so QuizData
+    //     public string Quiz1Question { get; set; }
+    //     public string Quiz1Ans1 { get; set; }
+    //     public string Quiz1Ans2 { get; set; }
+    //     public string Quiz1Ans3 { get; set; }
+    //     public string Quiz1Ans4 { get; set; }
+
+    //     public string Quiz2Question { get; set; }
+    //     public string Quiz2Ans1 { get; set; }
+    //     public string Quiz2Ans2 { get; set; }
+    //     public string Quiz2Ans3 { get; set; }
+    //     public string Quiz2Ans4 { get; set; }
+
+    //     public string Quiz3Question { get; set; }
+    //     public string Quiz3Ans1 { get; set; }
+    //     public string Quiz3Ans2 { get; set; }
+    //     public string Quiz3Ans3 { get; set; }
+    //     public string Quiz3Ans4 { get; set; }
+    // }
+
+        // public string Quiz4Question { get; set; }
+        // public string Quiz4Ans1 { get; set; }
+        // public string Quiz4Ans2 { get; set; }
+        // public string Quiz4Ans3 { get; set; }
+        // public string Quiz4Ans4 { get; set; }
+
+        // public string Quiz5Question { get; set; }
+        // public string Quiz5Ans1 { get; set; }
+        // public string Quiz5Ans2 { get; set; }
+        // public string Quiz5Ans3 { get; set; }
+        // public string Quiz5Ans4 { get; set; }
+
+        // public string Quiz6Question { get; set; }
+        // public string Quiz6Ans1 { get; set; }
+        // public string Quiz6Ans2 { get; set; }
+        // public string Quiz6Ans3 { get; set; }
+        // public string Quiz6Ans4 { get; set; }
+
+        // public string Quiz7Question { get; set; }
+        // public string Quiz7Ans1 { get; set; }
+        // public string Quiz7Ans2 { get; set; }
+        // public string Quiz7Ans3 { get; set; }
+        // public string Quiz7Ans4 { get; set; }
+
+        // public string Quiz8Question { get; set; }
+        // public string Quiz8Ans1 { get; set; }
+        // public string Quiz8Ans2 { get; set; }
+        // public string Quiz8Ans3 { get; set; }
+        // public string Quiz8Ans4 { get; set; }
+
+        // public string Quiz9Question { get; set; }
+        // public string Quiz9Ans1 { get; set; }
+        // public string Quiz9Ans2 { get; set; }
+        // public string Quiz9Ans3 { get; set; }
+        // public string Quiz9Ans4 { get; set; }
+
+        // public string Quiz10Question { get; set; }
+        // public string Quiz10Ans1 { get; set; }
+        // public string Quiz10Ans2 { get; set; }
+        // public string Quiz10Ans3 { get; set; }
+        // public string Quiz10Ans4 { get; set; }
+
+        // public string Quiz1UserAns { get; set; }
+        // public string Quiz2UserAns { get; set; }
+        // public string Quiz3UserAns { get; set; }
+        // // public string Quiz4UserAns {get; set;}
+        // // public string Quiz5UserAns {get; set;}
+        // // public string Quiz6UserAns {get; set;}
+        // // public string Quiz7UserAns {get; set;}
+        // // public string Quiz8UserAns {get; set;}
+        // // public string Quiz9UserAns {get; set;}
+        // // public string Quiz10UserAns { get; set; }
+
+        // public void LoadFromQuizData(QuizData data)
+        // {
+        //     Quiz1Question = data.Quiz1Question;
+        //     Quiz1Ans1 = data.Quiz1Ans1;
+        //     Quiz1Ans2 = data.Quiz1Ans2;
+        //     Quiz1Ans3 = data.Quiz1Ans3;
+        //     Quiz1Ans4 = data.Quiz1Ans4;
+
+        //     Quiz2Question = data.Quiz2Question;
+        //     Quiz2Ans1 = data.Quiz2Ans1;
+        //     Quiz2Ans2 = data.Quiz2Ans2;
+        //     Quiz2Ans3 = data.Quiz2Ans3;
+        //     Quiz2Ans4 = data.Quiz2Ans4;
+
+        //     Quiz3Question = data.Quiz3Question;
+        //     Quiz3Ans1 = data.Quiz3Ans1;
+        //     Quiz3Ans2 = data.Quiz3Ans2;
+        //     Quiz3Ans3 = data.Quiz3Ans3;
+        //     Quiz3Ans4 = data.Quiz3Ans4;
+
+            // Quiz4Question = data.QuestionText;
+            // Quiz4Ans1 = data.Answer1;
+            // Quiz4Ans2 = data.Answer2;
+            // Quiz4Ans3 = data.Answer3;
+            // Quiz4Ans4 = data.Answer4;
+
+            // Quiz5Question = data.QuestionText;
+            // Quiz5Ans1 = data.Answer1;
+            // Quiz5Ans2 = data.Answer2;
+            // Quiz5Ans3 = data.Answer3;
+            // Quiz5Ans4 = data.Answer4;
+
+            // Quiz6Question = data.QuestionText;
+            // Quiz6Ans1 = data.Answer1;
+            // Quiz6Ans2 = data.Answer2;
+            // Quiz6Ans3 = data.Answer3;
+            // Quiz6Ans4 = data.Answer4;
+
+            // Quiz7Question = data.QuestionText;
+            // Quiz7Ans1 = data.Answer1;
+            // Quiz7Ans2 = data.Answer2;
+            // Quiz7Ans3 = data.Answer3;
+            // Quiz7Ans4 = data.Answer4;
+
+            // Quiz8Question = data.QuestionText;
+            // Quiz8Ans1 = data.Answer1;
+            // Quiz8Ans2 = data.Answer2;
+            // Quiz8Ans3 = data.Answer3;
+            // Quiz8Ans4 = data.Answer4;
+
+            // Quiz9Question = data.QuestionText;
+            // Quiz9Ans1 = data.Answer1;
+            // Quiz9Ans2 = data.Answer2;
+            // Quiz9Ans3 = data.Answer3;
+            // Quiz9Ans4 = data.Answer4;
+
+            // Quiz10Question = data.QuestionText;
+            // Quiz10Ans1 = data.Answer1;
+            // Quiz10Ans2 = data.Answer2;
+            // Quiz10Ans3 = data.Answer3;
+            // Quiz10Ans4 = data.Answer4;
+
+        // }
+
+    //     public void LoadUserAnswers(quiz user)
+    //     {
+    //         Quiz1UserAns = user.Quiz1UserAns;
+    //         Quiz2UserAns = user.Quiz2UserAns;
+    //         Quiz3UserAns = user.Quiz3UserAns;
+    //         // Quiz4UserAns = null { get; set; }
+    //         // Quiz5UserAns = null { get; set; }
+    //         // Quiz6UserAns = null { get; set; }
+    //         // Quiz7UserAns = null { get; set; }
+    //         // Quiz8UserAns = null { get; set; }
+    //         // Quiz9UserAns = null { get; set; }
+    //         // Quiz10UserAns = null { get; set; }
+    //     }
+    // }
+    public class UserQuizAnswers
+    {
+        public Dictionary<int, int> Answers { get; set; } = new Dictionary<int, int>();
+
+        public void StoreAnswer(int questionId, int selectedAnswer)
+        {
+            if (Answers.ContainsKey(questionId))
+            {
+                Answers[questionId] = selectedAnswer;
+            }
+            else
+            {
+                Answers.Add(questionId, selectedAnswer);
+            }
+        }
+
+        public int? GetAnswer(int questionId)
+        {
+            return Answers.ContainsKey(questionId) ? Answers[questionId] : null;
+        }
+
+        public async Task UserAnsCheckFinal(quiz user, QuizData data)
+        {
+            int CorrectAnsTot = 0;
+            int IncorrectAnsTot = 0;
+            if (user.Quiz1UserAns == data.Quiz1TrueAns)
+            {
+                CorrectAnsTot += 1;
+            }
+            else
+            {
+                IncorrectAnsTot += 1;
+            }
+            if (user.Quiz2UserAns == data.Quiz2TrueAns)
+            {
+                CorrectAnsTot += 1;
+            }
+            else
+            {
+                IncorrectAnsTot += 1;
+            }
+            if (user.Quiz3UserAns == data.Quiz3TrueAns)
+            {
+                CorrectAnsTot += 1;
+            }
+            else
+            {
+                IncorrectAnsTot += 1;
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    private async Task OnPreviewInteraction(StepperInteractionEventArgs arg)
+    {
+        if (arg.Action == StepAction.Complete)
+        {
+            // occurrs when clicking next
+            await ControlStepCompletion(arg);
+        }
+        else if (arg.Action == StepAction.Activate)
+        {
+            // occurrs when clicking a step header with the mouse
+            await ControlStepNavigation(arg);
+        }
+    }
+
+    private async Task ControlStepCompletion(StepperInteractionEventArgs arg)
+    {
+        switch (arg.StepIndex)
+        {
+            case 0:
+                if ((_step1Complete != true) || (_date < _minDate) || (_date == null))
+                {
+                    await DialogService.ShowMessageBox("Error", "You have not selected a date in the step 1.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 1:
+                if ((_step2Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "You have not submitted any tickets.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 2:
+                if ((_step3Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "You have not put in the required billing information.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 3:
+                if ((_step4Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "You have not submitted any valid card information.");
+                    arg.Cancel = true;
+                }
+                break;
+        }
+    }
+
+    private async Task ControlStepNavigation(StepperInteractionEventArgs arg)
+    {
+        switch (arg.StepIndex)
+        {
+            case 1:
+                if (_step1Complete != true)
+                {
+                    await DialogService.ShowMessageBox("Error", "Finish step 'Date' first.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 2:
+                if ((_step1Complete != true) || (_step2Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "Finish step 1 and 2 first.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 3:
+                if ((_step1Complete != true) || (_step2Complete != true) || (_step3Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "Finish step 1,2 and 3 first.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 4:
+                if ((_step1Complete != true) || (_step2Complete != true) || (_step3Complete != true) || (_step4Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "Finish step 1,2,3 and 4 first.");
+                    arg.Cancel = true;
+                }
+                break;
+        }
+    }
+
+    public class Ticket
+    {
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public int Quantity { get; set; }
+        public DateTime? Date { get; set; }
+    }
+
+    private List<Ticket> ConfirmedTickets = new();
+    private List<Ticket> Tickets = new List<Ticket>
+    {
+        new Ticket { Name = "Admission - Adult (16+)", Price = 19.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Child (6-15)", Price = 14.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Senior (65+)", Price = 17.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Student", Price = 17.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Under 6s", Price = 0.00M, Quantity = 0 },
+        new Ticket { Name = "Admission - Disabled Adult (16+)", Price = 14.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Disabled Child (6-15)", Price = 9.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Disabled Senior (65+)", Price = 11.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Disabled Student", Price = 11.99M, Quantity = 0 },
+        new Ticket { Name = "Admission - Disabled Carer", Price = 8.00M, Quantity = 0 }
+    };
+
+    private async Task ConfirmSelectionAsync()
+    {
+        // Save only tickets with quantity > 0
+        ConfirmedTickets = Tickets
+            .Where(ticket => ticket.Quantity > 0)
+            .Select(ticket => new Ticket
+                {
+                    Name = ticket.Name,
+                    Quantity = ticket.Quantity,
+                    Date = _datechosen
+                })
+            .ToList();
+    }
+
+    private async Task CompletePayment()
+    {
+        await Task.Delay(500);
+        //Snackbar?.Add("Payment successful! Thank you for your purchase.", Severity.Success);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
