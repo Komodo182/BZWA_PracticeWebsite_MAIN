@@ -1,6 +1,7 @@
 ﻿@page "/map"
 ﻿@using PracticeWebsite.Services
 @using PracticeWebsite.Models
+@using PracticeWebsite.Utilities    
 @inject CustomerServices CustomerService
 
 <PageTitle>Membership</PageTitle>
@@ -167,15 +168,15 @@
                                 <MudCard>
                                     <MudCardHeader>
                                         <MudText Typo="Typo.h4">Question No.1</MudText>
-                                        <MudText>@quiz.Quiz1Question</MudText>
+                                        <MudText>@SQLquizdata.Quiz1Question</MudText>
                                     </MudCardHeader>
                                     <MudCardContent>
                                         <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(0))"> @Question.Answer1 </MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(1))"> @quiz.Quiz1Ans2 </MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(0))"> @SQLquizdata.Quiz1Ans1 </MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(1))"> @SQLquizdata.Quiz1Ans2 </MudButton>
                                             <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(2))"> @quiz.Quiz1Ans3 </MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(3))"> @quiz.Quiz1Ans4 </MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(2))"> @SQLquizdata.Quiz1Ans3 </MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(3))"> @SQLquizdata.Quiz1Ans4 </MudButton>
                                         </MudGrid>
                                         <MudHidden Breakpoint="@Breakpoint.Xs">
                                         </MudHidden>
@@ -198,16 +199,16 @@
 
                                     <MudCardHeader>
                                         <MudText Typo="Typo.h4">Question No.2</MudText>
-                                        <MudText></MudText>
+                                        <MudText>@SQLquizdata.Quiz2Question</MudText>
                                     </MudCardHeader>
 
                                     <MudCardContent>
                                         <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(0))"> @*Varaibale holding from sql to show text *@</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(1))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(0))"> @SQLquizdata.Quiz2Ans1</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(1))"> @SQLquizdata.Quiz2Ans2</MudButton>
                                             <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(2))"> @*Varaibale holding from sql to show text *@</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(3))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(2))"> @SQLquizdata.Quiz2Ans3</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(3))"> @SQLquizdata.Quiz2Ans4</MudButton>
                                         </MudGrid>
 
                                         <MudHidden Breakpoint="@Breakpoint.Xs">
@@ -231,15 +232,15 @@
                                 <MudCard>
                                     <MudCardHeader>
                                         <MudText Typo="Typo.h4">Question No.3</MudText>
-                                        <MudText></MudText>
+                                        <MudText>@SQLquizdata.Quiz3Question</MudText>
                                     </MudCardHeader>
                                     <MudCardContent>
                                         <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(0))"> @*Varaibale holding from sql to show text *@</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(1))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(0))"> @SQLquizdata.Quiz3Ans1</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(1))"> @SQLquizdata.Quiz3Ans2</MudButton>
                                             <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(2))"> @*Varaibale holding from sql to show text *@</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(3))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(2))"> @SQLquizdata.Quiz3Ans3</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(3))"> @SQLquizdata.Quiz3Ans4</MudButton>
                                         </MudGrid>
                                         <MudHidden Breakpoint="@Breakpoint.Xs">
                                         </MudHidden>
@@ -261,15 +262,15 @@
                                 <MudCard>
                                     <MudCardHeader>
                                         <MudText Typo="Typo.h4">Question No.4</MudText>
-                                        <MudText></MudText>
+                                        <MudText>@SQLquizdata.Quiz4Question</MudText>
                                     </MudCardHeader>
                                     <MudCardContent>
                                         <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(0))"> @*Varaibale holding from sql to show text *@</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(1))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(0))"> @SQLquizdata.Quiz4Ans1</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(1))"> @SQLquizdata.Quiz4Ans2</MudButton>
                                             <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(2))"> @*Varaibale holding from sql to show text *@</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(3))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(2))"> @SQLquizdata.Quiz4Ans3</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(3))"> @SQLquizdata.Quiz4Ans4</MudButton>
                                         </MudGrid>
                                         <MudHidden Breakpoint="@Breakpoint.Xs">
                                         </MudHidden>
@@ -291,15 +292,15 @@
                                 <MudCard>
                                     <MudCardHeader>
                                         <MudText Typo="Typo.h4">Question No.5</MudText>
-                                        <MudText></MudText>
+                                        <MudText>@SQLquizdata.Quiz5Question</MudText>
                                     </MudCardHeader>
                                     <MudCardContent>
                                         <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(0))"> @*Varaibale holding from sql to show text *@</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(1))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(0))"> @SQLquizdata.Quiz5Ans1</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(1))"> @SQLquizdata.Quiz5Ans2</MudButton>
                                             <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(2))"> @*Varaibale holding from sql to show text *@</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(3))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(2))"> @SQLquizdata.Quiz5Ans3</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(3))"> @SQLquizdata.Quiz5Ans4</MudButton>
                                         </MudGrid>
                                         <MudHidden Breakpoint="@Breakpoint.Xs">
                                         </MudHidden>
@@ -321,15 +322,15 @@
                                 <MudCard>
                                     <MudCardHeader>
                                         <MudText Typo="Typo.h4">Question No.6</MudText>
-                                        <MudText></MudText>
+                                        <MudText>@SQLquizdata.Quiz6Question</MudText>
                                     </MudCardHeader>
                                     <MudCardContent>
                                         <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(0))"> @*Varaibale holding from sql to show text *@</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(1))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(0))"> @SQLquizdata.Quiz6Ans1</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(1))"> @SQLquizdata.Quiz6Ans2</MudButton>
                                             <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(2))"> @*Varaibale holding from sql to show text *@</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(3))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(2))"> @SQLquizdata.Quiz6Ans3</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(3))"> @SQLquizdata.Quiz6Ans4</MudButton>
                                         </MudGrid>
                                         <MudHidden Breakpoint="@Breakpoint.Xs">
                                         </MudHidden>
@@ -351,15 +352,15 @@
                                 <MudCard>
                                     <MudCardHeader>
                                         <MudText Typo="Typo.h4">Question No.7</MudText>
-                                        <MudText></MudText>
+                                        <MudText>@SQLquizdata.Quiz7Question</MudText>
                                     </MudCardHeader>
                                     <MudCardContent>
                                         <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(0))"> @*Varaibale holding from sql to show text *@</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(1))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(0))"> @SQLquizdata.Quiz7Ans1</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(1))"> @SQLquizdata.Quiz7Ans2</MudButton>
                                             <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(2))"> @*Varaibale holding from sql to show text *@</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(3))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(2))"> @SQLquizdata.Quiz7Ans3</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(3))"> @SQLquizdata.Quiz7Ans4</MudButton>
                                         </MudGrid>
                                         <MudHidden Breakpoint="@Breakpoint.Xs">
                                         </MudHidden>
@@ -381,15 +382,15 @@
                                 <MudCard>
                                     <MudCardHeader>
                                         <MudText Typo="Typo.h4">Question No.8</MudText>
-                                        <MudText></MudText>
+                                        <MudText>@SQLquizdata.Quiz8Question</MudText>
                                     </MudCardHeader>
                                     <MudCardContent>
                                         <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(0))"> @*Varaibale holding from sql to show text *@</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(1))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(0))"> @SQLquizdata.Quiz8Ans1</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(1))"> @SQLquizdata.Quiz8Ans2</MudButton>
                                             <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(2))"> @*Varaibale holding from sql to show text *@</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(3))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(2))"> @SQLquizdata.Quiz8Ans3</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(3))"> @SQLquizdata.Quiz8Ans4</MudButton>
                                         </MudGrid>
                                         <MudHidden Breakpoint="@Breakpoint.Xs">
                                         </MudHidden>
@@ -411,15 +412,15 @@
                                 <MudCard>
                                     <MudCardHeader>
                                         <MudText Typo="Typo.h4">Question No.9</MudText>
-                                        <MudText></MudText>
+                                        <MudText>@SQLquizdata.Quiz9Question</MudText>
                                     </MudCardHeader>
                                     <MudCardContent>
                                         <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(0))"> @*Varaibale holding from sql to show text *@</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(1))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(0))"> @SQLquizdata.Quiz9Ans1</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(1))"> @SQLquizdata.Quiz9Ans2</MudButton>
                                             <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(2))"> @*Varaibale holding from sql to show text *@</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(3))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(2))"> @SQLquizdata.Quiz9Ans3</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(3))"> @SQLquizdata.Quiz9Ans4</MudButton>
                                         </MudGrid>
                                         <MudHidden Breakpoint="@Breakpoint.Xs">
                                         </MudHidden>
@@ -441,15 +442,15 @@
                                 <MudCard>
                                     <MudCardHeader>
                                         <MudText Typo="Typo.h4">Question No.10</MudText>
-                                        <MudText></MudText>
+                                        <MudText>@SQLquizdata.Quiz10Question</MudText>
                                     </MudCardHeader>
                                     <MudCardContent>
                                         <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(0))"> @*Varaibale holding from sql to show text *@</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(1))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(0))"> @SQLquizdata.Quiz10Ans1</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(1))"> @SQLquizdata.Quiz10Ans2</MudButton>
                                             <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(2))"> @*Varaibale holding from sql to show text *@</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(3))"> @*Varaibale holding from sql to show text *@</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(2))"> @SQLquizdata.Quiz10Ans3</MudButton>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(3))"> @SQLquizdata.Quiz10Ans4</MudButton>
                                         </MudGrid>
                                         <MudHidden Breakpoint="@Breakpoint.Xs">
                                         </MudHidden>
@@ -626,8 +627,8 @@
         if (chosenSub != null || chosenSub !=0 && chosenKs != null || chosenKs !=0)
         {
             validSearch = true;
-            int submitKS = chosenKs ?? 0;
-            int submitSUB = chosenSub ?? 0;
+            submitKS = chosenKs ?? 0;
+            submitSUB = chosenSub ?? 0;
         }
         else
         {
@@ -638,6 +639,13 @@
         _processingSubmit = false;
         _searchComplete = true;
     }
+
+
+
+
+
+
+
     private async Task LoadQuestions()
     {
         List<Quiz> Quizzes = await CustomerService.GetQuizzes(submitKS, submitSUB);
@@ -651,6 +659,16 @@
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
     private bool? _searchFullComplete;
     private bool _processingFullSubmit = false;
     private async Task ProcessFullSubmit()
@@ -662,6 +680,7 @@
         if (submitKS != null && submitSUB != null && (SelectedQuizLevel > 0 && SelectedQuizLevel < 3))
         {
             validFullSearch = true;
+            LoadQuestions();
         }
         else
         {
@@ -855,7 +874,7 @@
         _step1Complete = false;
         _processing1 = true;
 
-        await Task.Delay(2000);
+        await Task.Delay(500);
         _processing1 = false;
         _step1Complete = true;
     }
@@ -884,7 +903,7 @@
         _step2Complete = false;
         _processing2 = true;
 
-        await Task.Delay(1);
+        await Task.Delay(500);
         _processing2 = false;
         _step2Complete = true;
     }
@@ -913,7 +932,7 @@
         _step3Complete = false;
         _processing3 = true;
 
-        await Task.Delay(1);
+        await Task.Delay(500);
         _processing3 = false;
         _step3Complete = true;
     }
@@ -942,7 +961,7 @@
         _step4Complete = false;
         _processing4 = true;
 
-        await Task.Delay(1);
+        await Task.Delay(500);
         _processing4 = false;
         _step4Complete = true;
     }
@@ -971,7 +990,7 @@
         _step5Complete = false;
         _processing5 = true;
 
-        await Task.Delay(2000);
+        await Task.Delay(500);
         _processing5 = false;
         _step5Complete = true;
     }
@@ -1000,7 +1019,7 @@
         _step6Complete = false;
         _processing6 = true;
 
-        await Task.Delay(1);
+        await Task.Delay(500);
         _processing6 = false;
         _step6Complete = true;
     }
@@ -1029,7 +1048,7 @@
         _step7Complete = false;
         _processing7 = true;
 
-        await Task.Delay(1);
+        await Task.Delay(500);
         _processing3 = false;
         _step3Complete = true;
     }
@@ -1058,7 +1077,7 @@
         _step8Complete = false;
         _processing8 = true;
 
-        await Task.Delay(1);
+        await Task.Delay(500);
         _processing8 = false;
         _step4Complete = true;
     }
@@ -1087,7 +1106,7 @@
         _step9Complete = false;
         _processing9 = true;
 
-        await Task.Delay(1);
+        await Task.Delay(500);
         _processing9 = false;
         _step9Complete = true;
     }
@@ -1116,7 +1135,7 @@
         _step10Complete = false;
         _processing10 = true;
 
-        await Task.Delay(1);
+        await Task.Delay(500);
         _processing10 = false;
         _step10Complete = true;
     }
@@ -1160,270 +1179,76 @@
         if (SQLquizdata == null) SQLquizdata = new quiz(); // Avoid null reference errors
     }
 
-    // protected override async Task OnInitializedAsync()
+    // public class UserQuizAnswers
     // {
-    //     var data = await CustomerService.GetQuizData(); // Fetch from service
+    //     public Dictionary<int, int> Answers { get; set; } = new Dictionary<int, int>();
 
-    //     if (data != null)
+    //     public void StoreAnswer(int questionId, int selectedAnswer)
     //     {
-    //         SQLquizdata = new quiz
-    //             {
-    //                 Quiz1Question = data.Quiz1Question,
-    //                 Quiz1Ans1 = data.Quiz1Ans1,
-    //                 Quiz1Ans2 = data.Quiz1Ans2,
-    //                 Quiz1Ans3 = data.Quiz1Ans3,
-    //                 Quiz1Ans4 = data.Quiz1Ans4,
-
-    //                 Quiz2Question = data.Quiz2Question,
-    //                 Quiz2Ans1 = data.Quiz2Ans1,
-    //                 Quiz2Ans2 = data.Quiz2Ans2,
-    //                 Quiz2Ans3 = data.Quiz2Ans3,
-    //                 Quiz2Ans4 = data.Quiz2Ans4,
-
-    //                 Quiz3Question = data.Quiz3Question,
-    //                 Quiz3Ans1 = data.Quiz3Ans1,
-    //                 Quiz3Ans2 = data.Quiz3Ans2,
-    //                 Quiz3Ans3 = data.Quiz3Ans3,
-    //                 Quiz3Ans4 = data.Quiz3Ans4
-    //             };
+    //         if (Answers.ContainsKey(questionId))
+    //         {
+    //             Answers[questionId] = selectedAnswer;
+    //         }
+    //         else
+    //         {
+    //             Answers.Add(questionId, selectedAnswer);
+    //         }
     //     }
-    //     else
+
+    //     public int? GetAnswer(int questionId)
     //     {
-    //         SQLquizdata = new quiz(); // ✅ Prevent null reference errors
+    //         return Answers.ContainsKey(questionId) ? Answers[questionId] : null;
     //     }
-    // }
 
-    //return protocol to show selected quiz level
-    // public class QuizData
-    // {
-    //     //here need to get the sql data i load in
-    //     public string Quiz1Question { get; set; } 
-    //     public string Quiz1Ans1 { get; set; }
-    //     public string Quiz1Ans2 { get; set; }
-    //     public string Quiz1Ans3 { get; set; }
-    //     public string Quiz1Ans4 { get; set; }
-
-
-
-    //     public string Quiz2Question { get; set; }
-    //     public string Quiz2Ans1 { get; set; }
-    //     public string Quiz2Ans2 { get; set; }
-    //     public string Quiz2Ans3 { get; set; }
-    //     public string Quiz2Ans4 { get; set; }
-
-    //     public string Quiz3Question { get; set; }
-    //     public string Quiz3Ans1 { get; set; }
-    //     public string Quiz3Ans2 { get; set; }
-    //     public string Quiz3Ans3 { get; set; }
-    //     public string Quiz3Ans4 { get; set; }
-
-    //     public string Quiz1TrueAns { get; set; }
-    //     public string Quiz2TrueAns { get; set; }
-    //     public string Quiz3TrueAns { get; set; }
-    // }
-    // public class quiz
-    // {
-    //     //here i need to declar the ones for the questions and match them up to show up from the sql loaded so QuizData
-    //     public string Quiz1Question { get; set; }
-    //     public string Quiz1Ans1 { get; set; }
-    //     public string Quiz1Ans2 { get; set; }
-    //     public string Quiz1Ans3 { get; set; }
-    //     public string Quiz1Ans4 { get; set; }
-
-    //     public string Quiz2Question { get; set; }
-    //     public string Quiz2Ans1 { get; set; }
-    //     public string Quiz2Ans2 { get; set; }
-    //     public string Quiz2Ans3 { get; set; }
-    //     public string Quiz2Ans4 { get; set; }
-
-    //     public string Quiz3Question { get; set; }
-    //     public string Quiz3Ans1 { get; set; }
-    //     public string Quiz3Ans2 { get; set; }
-    //     public string Quiz3Ans3 { get; set; }
-    //     public string Quiz3Ans4 { get; set; }
-    // }
-
-        // public string Quiz4Question { get; set; }
-        // public string Quiz4Ans1 { get; set; }
-        // public string Quiz4Ans2 { get; set; }
-        // public string Quiz4Ans3 { get; set; }
-        // public string Quiz4Ans4 { get; set; }
-
-        // public string Quiz5Question { get; set; }
-        // public string Quiz5Ans1 { get; set; }
-        // public string Quiz5Ans2 { get; set; }
-        // public string Quiz5Ans3 { get; set; }
-        // public string Quiz5Ans4 { get; set; }
-
-        // public string Quiz6Question { get; set; }
-        // public string Quiz6Ans1 { get; set; }
-        // public string Quiz6Ans2 { get; set; }
-        // public string Quiz6Ans3 { get; set; }
-        // public string Quiz6Ans4 { get; set; }
-
-        // public string Quiz7Question { get; set; }
-        // public string Quiz7Ans1 { get; set; }
-        // public string Quiz7Ans2 { get; set; }
-        // public string Quiz7Ans3 { get; set; }
-        // public string Quiz7Ans4 { get; set; }
-
-        // public string Quiz8Question { get; set; }
-        // public string Quiz8Ans1 { get; set; }
-        // public string Quiz8Ans2 { get; set; }
-        // public string Quiz8Ans3 { get; set; }
-        // public string Quiz8Ans4 { get; set; }
-
-        // public string Quiz9Question { get; set; }
-        // public string Quiz9Ans1 { get; set; }
-        // public string Quiz9Ans2 { get; set; }
-        // public string Quiz9Ans3 { get; set; }
-        // public string Quiz9Ans4 { get; set; }
-
-        // public string Quiz10Question { get; set; }
-        // public string Quiz10Ans1 { get; set; }
-        // public string Quiz10Ans2 { get; set; }
-        // public string Quiz10Ans3 { get; set; }
-        // public string Quiz10Ans4 { get; set; }
-
-        // public string Quiz1UserAns { get; set; }
-        // public string Quiz2UserAns { get; set; }
-        // public string Quiz3UserAns { get; set; }
-        // // public string Quiz4UserAns {get; set;}
-        // // public string Quiz5UserAns {get; set;}
-        // // public string Quiz6UserAns {get; set;}
-        // // public string Quiz7UserAns {get; set;}
-        // // public string Quiz8UserAns {get; set;}
-        // // public string Quiz9UserAns {get; set;}
-        // // public string Quiz10UserAns { get; set; }
-
-        // public void LoadFromQuizData(QuizData data)
-        // {
-        //     Quiz1Question = data.Quiz1Question;
-        //     Quiz1Ans1 = data.Quiz1Ans1;
-        //     Quiz1Ans2 = data.Quiz1Ans2;
-        //     Quiz1Ans3 = data.Quiz1Ans3;
-        //     Quiz1Ans4 = data.Quiz1Ans4;
-
-        //     Quiz2Question = data.Quiz2Question;
-        //     Quiz2Ans1 = data.Quiz2Ans1;
-        //     Quiz2Ans2 = data.Quiz2Ans2;
-        //     Quiz2Ans3 = data.Quiz2Ans3;
-        //     Quiz2Ans4 = data.Quiz2Ans4;
-
-        //     Quiz3Question = data.Quiz3Question;
-        //     Quiz3Ans1 = data.Quiz3Ans1;
-        //     Quiz3Ans2 = data.Quiz3Ans2;
-        //     Quiz3Ans3 = data.Quiz3Ans3;
-        //     Quiz3Ans4 = data.Quiz3Ans4;
-
-            // Quiz4Question = data.QuestionText;
-            // Quiz4Ans1 = data.Answer1;
-            // Quiz4Ans2 = data.Answer2;
-            // Quiz4Ans3 = data.Answer3;
-            // Quiz4Ans4 = data.Answer4;
-
-            // Quiz5Question = data.QuestionText;
-            // Quiz5Ans1 = data.Answer1;
-            // Quiz5Ans2 = data.Answer2;
-            // Quiz5Ans3 = data.Answer3;
-            // Quiz5Ans4 = data.Answer4;
-
-            // Quiz6Question = data.QuestionText;
-            // Quiz6Ans1 = data.Answer1;
-            // Quiz6Ans2 = data.Answer2;
-            // Quiz6Ans3 = data.Answer3;
-            // Quiz6Ans4 = data.Answer4;
-
-            // Quiz7Question = data.QuestionText;
-            // Quiz7Ans1 = data.Answer1;
-            // Quiz7Ans2 = data.Answer2;
-            // Quiz7Ans3 = data.Answer3;
-            // Quiz7Ans4 = data.Answer4;
-
-            // Quiz8Question = data.QuestionText;
-            // Quiz8Ans1 = data.Answer1;
-            // Quiz8Ans2 = data.Answer2;
-            // Quiz8Ans3 = data.Answer3;
-            // Quiz8Ans4 = data.Answer4;
-
-            // Quiz9Question = data.QuestionText;
-            // Quiz9Ans1 = data.Answer1;
-            // Quiz9Ans2 = data.Answer2;
-            // Quiz9Ans3 = data.Answer3;
-            // Quiz9Ans4 = data.Answer4;
-
-            // Quiz10Question = data.QuestionText;
-            // Quiz10Ans1 = data.Answer1;
-            // Quiz10Ans2 = data.Answer2;
-            // Quiz10Ans3 = data.Answer3;
-            // Quiz10Ans4 = data.Answer4;
-
-        // }
-
-    //     public void LoadUserAnswers(quiz user)
+    //     public async Task UserAnsCheckFinal(quiz data)
     //     {
-    //         Quiz1UserAns = user.Quiz1UserAns;
-    //         Quiz2UserAns = user.Quiz2UserAns;
-    //         Quiz3UserAns = user.Quiz3UserAns;
-    //         // Quiz4UserAns = null { get; set; }
-    //         // Quiz5UserAns = null { get; set; }
-    //         // Quiz6UserAns = null { get; set; }
-    //         // Quiz7UserAns = null { get; set; }
-    //         // Quiz8UserAns = null { get; set; }
-    //         // Quiz9UserAns = null { get; set; }
-    //         // Quiz10UserAns = null { get; set; }
+    //         int CorrectAnsTot = 0;
+    //         int IncorrectAnsTot = 0;
+    //         if (Quiz1UserAns == data.Quiz1TrueAns)
+    //         {
+    //             CorrectAnsTot += 1;
+    //         }
+    //         else
+    //         {
+    //             IncorrectAnsTot += 1;
+    //         }
+    //         if (user.Quiz2UserAns == data.Quiz2TrueAns)
+    //         {
+    //             CorrectAnsTot += 1;
+    //         }
+    //         else
+    //         {
+    //             IncorrectAnsTot += 1;
+    //         }
+    //         if (user.Quiz3UserAns == data.Quiz3TrueAns)
+    //         {
+    //             CorrectAnsTot += 1;
+    //         }
+    //         else
+    //         {
+    //             IncorrectAnsTot += 1;
+    //         }
     //     }
     // }
-    public class UserQuizAnswers
+
+    public async Task<(int correctAnsTot, int incorrectAnsTot)> UserAnsCheckFinal(quiz data)
     {
-        public Dictionary<int, int> Answers { get; set; } = new Dictionary<int, int>();
+        int correctAnsTot = 0;
+        int incorrectAnsTot = 0;
 
-        public void StoreAnswer(int questionId, int selectedAnswer)
-        {
-            if (Answers.ContainsKey(questionId))
-            {
-                Answers[questionId] = selectedAnswer;
-            }
-            else
-            {
-                Answers.Add(questionId, selectedAnswer);
-            }
-        }
-
-        public int? GetAnswer(int questionId)
-        {
-            return Answers.ContainsKey(questionId) ? Answers[questionId] : null;
-        }
-
-        public async Task UserAnsCheckFinal(quiz user, QuizData data)
-        {
-            int CorrectAnsTot = 0;
-            int IncorrectAnsTot = 0;
-            if (user.Quiz1UserAns == data.Quiz1TrueAns)
-            {
-                CorrectAnsTot += 1;
-            }
-            else
-            {
-                IncorrectAnsTot += 1;
-            }
-            if (user.Quiz2UserAns == data.Quiz2TrueAns)
-            {
-                CorrectAnsTot += 1;
-            }
-            else
-            {
-                IncorrectAnsTot += 1;
-            }
-            if (user.Quiz3UserAns == data.Quiz3TrueAns)
-            {
-                CorrectAnsTot += 1;
-            }
-            else
-            {
-                IncorrectAnsTot += 1;
-            }
-        }
+        if (Quiz1UserAns == data.Quiz1TrueAns) correctAnsTot++; else incorrectAnsTot++;
+        if (Quiz2UserAns == data.Quiz2TrueAns) correctAnsTot++; else incorrectAnsTot++;
+        if (Quiz3UserAns == data.Quiz3TrueAns) correctAnsTot++; else incorrectAnsTot++;
+        if (Quiz4UserAns == data.Quiz4TrueAns) correctAnsTot++; else incorrectAnsTot++;
+        if (Quiz5UserAns == data.Quiz5TrueAns) correctAnsTot++; else incorrectAnsTot++;
+        if (Quiz6UserAns == data.Quiz6TrueAns) correctAnsTot++; else incorrectAnsTot++;
+        if (Quiz7UserAns == data.Quiz7TrueAns) correctAnsTot++; else incorrectAnsTot++;
+        if (Quiz8UserAns == data.Quiz8TrueAns) correctAnsTot++; else incorrectAnsTot++;
+        if (Quiz9UserAns == data.Quiz9TrueAns) correctAnsTot++; else incorrectAnsTot++;
+        if (Quiz10UserAns == data.Quiz10TrueAns) correctAnsTot++; else incorrectAnsTot++;
+        Console.WriteLine(correctAnsTot);
+        Console.WriteLine(incorrectAnsTot);
+        return (correctAnsTot, incorrectAnsTot);
     }
 
 
