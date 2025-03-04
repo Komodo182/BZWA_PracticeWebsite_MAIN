@@ -168,9 +168,9 @@
                                 <MudCard>
                                     <MudCardHeader>
                                         <MudText Typo="Typo.h4">Question No.1</MudText>
-                                        <MudText>@SQLquizdata.Quiz1Question</MudText>
                                     </MudCardHeader>
                                     <MudCardContent>
+                                        <MudText Typo="Typo.body1" Align="Align.Center">@SQLquizdata.Quiz1Question</MudText>
                                         <MudGrid Justify="Justify.SpaceEvenly">
                                             <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(0))"> @SQLquizdata.Quiz1Ans1 </MudButton>
                                             <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(1))"> @SQLquizdata.Quiz1Ans2 </MudButton>
@@ -178,8 +178,8 @@
                                             <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(2))"> @SQLquizdata.Quiz1Ans3 </MudButton>
                                             <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(3))"> @SQLquizdata.Quiz1Ans4 </MudButton>
                                         </MudGrid>
-                                        <MudHidden Breakpoint="@Breakpoint.Xs">
-                                        </MudHidden>
+                                        @* <MudHidden Breakpoint="@Breakpoint.Xs">
+                                        </MudHidden>*@
                                         <MudButton Disabled="@_processing1" OnClick="ProcessSomething1" @bind-Completed="_step1Complete" Variant="Variant.Outlined" Color="Color.Primary">
                                             @if (_processing1)
                                             {
@@ -646,20 +646,34 @@
 
 
 
+    // private async Task LoadQuestions()
+    // {
+    //     List<Quiz> Quizzes = await CustomerService.GetQuizzes(submitKS, submitSUB);
+    //     if (Quizzes.Count != 0)
+    //     {
+    //         Questions = await CustomerService.GetQuestions(Quizzes[0].QuizId);
+    //         UserAnswers.Clear();
+    //         foreach (var question in Questions)
+    //         {
+    //             UserAnswers[question.QuizId] = "";
+    //         }
+    //     }
+    // }
+    private quiz SQLquizdata = new quiz();
     private async Task LoadQuestions()
     {
         List<Quiz> Quizzes = await CustomerService.GetQuizzes(submitKS, submitSUB);
         if (Quizzes.Count != 0)
         {
-            Questions = await CustomerService.GetQuestions(Quizzes[0].QuizId);
+            SQLquizdata = await CustomerService.GetQuizData(SelectedQuizLevel);
             UserAnswers.Clear();
             foreach (var question in Questions)
             {
                 UserAnswers[question.QuizId] = "";
             }
+            if (SQLquizdata == null) SQLquizdata = new quiz();
         }
     }
-
 
 
 
@@ -1171,13 +1185,13 @@
 
 
 
-    private quiz SQLquizdata = new quiz();
+    //private quiz SQLquizdata = new quiz();
 
-    protected override async Task OnInitializedAsync()
-    {
-        SQLquizdata = await CustomerService.GetQuizData(SelectedQuizLevel); // Fetch data from service
-        if (SQLquizdata == null) SQLquizdata = new quiz(); // Avoid null reference errors
-    }
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     SQLquizdata = await CustomerService.GetQuizData(SelectedQuizLevel); // Fetch data from service
+    //     if (SQLquizdata == null) SQLquizdata = new quiz(); // Avoid null reference errors
+    // }
 
     // public class UserQuizAnswers
     // {

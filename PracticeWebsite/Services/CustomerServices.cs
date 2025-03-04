@@ -59,7 +59,7 @@ namespace PracticeWebsite.Services
                 .Take(10) // Assuming you want only 3 questions max
                 .ToListAsync();
 
-            if (questions.Count < 3) return new quiz(); // Ensure we don't get errors
+            if (questions.Count < 10) return new quiz(); // Ensure we don't get errors
 
             return new quiz
             {
