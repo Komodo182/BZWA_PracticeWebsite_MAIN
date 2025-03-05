@@ -8,13 +8,15 @@
 @using System.ComponentModel.DataAnnotations
 @using MudBlazor.Interfaces
 
-<title>Register</title>
-<h3>Register</h3>
+<PageTitle>Registering</PageTitle>
 
 <EditForm Model="@model" OnValidSubmit="OnValidSubmit"><DataAnnotationsValidator/>
-    <MudPaper Style="d-flex justify-center align-center">
+    <MudContainer>
         <MudGrid Justify="Justify.Center">
-            <MudItem xs="12" sm="4">
+            <MudItem xs="12">
+                <MudText Typo="Typo.h5" Align="Align.Center">Account Creation</MudText>
+            </MudItem>
+            <MudItem xs="12" sm="8" md="6">
                 <MudCard>
                     <MudCardContent>
                         <MudTextField ShrinkLabel Label="First name" HelperText="Max. 15 characters" HelperTextOnFocus="true"
@@ -30,11 +32,11 @@
                                       Counter="10" MaxLength="10" Immediate="true" @bind-Value="model.Username" For="@(() => model.Username)" Variant="Variant.Outlined" />
 
                         <MudTextField ShrinkLabel Label="Password" Class="mt-3" HelperText="Choose a strong password" HelperTextOnFocus="true"
-                                      Counter="30" MaxLength="30" Immediate="true" @bind-Value="model.Password" For="@(() => model.Password)" Variant="Variant.Outlined" 
+                                      Counter="30" MaxLength="30" Immediate="true" @bind-Value="model.Password" For="@(() => model.Password)" Variant="Variant.Outlined"
                                       InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ShowPasswordToggle" AdornmentAriaLabel="Show Password" />
 
                         <MudTextField ShrinkLabel Label="Repeat Password" Class="mt-3" HelperText="Repeat the password" HelperTextOnFocus="true"
-                                      Counter="30" MaxLength="30" Immediate="true" @bind-Value="model.Password2" For="@(() => model.Password2)" Variant="Variant.Outlined" 
+                                      Counter="30" MaxLength="30" Immediate="true" @bind-Value="model.Password2" For="@(() => model.Password2)" Variant="Variant.Outlined"
                                       InputType="@PasswordInput2" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon2" OnAdornmentClick="ShowPasswordToggle2" AdornmentAriaLabel="Show Repeated Password" />
 
                         <MudTextField ShrinkLabel Label="Post Code" Class="mt-3" HelperText="Please provide your postcode. Max. 8 characters" HelperTextOnFocus="true"
@@ -50,15 +52,15 @@
                         @if (model.employeeStatus)
                         {
                             <MudTextField ShrinkLabel Label="Employee ID" HelperText="Please input your employee identification code."
-                                          @bind-Value="model.EmployeeID" For="@(() => model.EmployeeID)" Variant="Variant.Outlined"/>
-                        } 
+                                          @bind-Value="model.EmployeeID" For="@(() => model.EmployeeID)" Variant="Variant.Outlined" />
+                        }
                     </MudCardContent>
                     <MudCardActions>
-                        <MudButton ButtonType ="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
                     </MudCardActions>
                 </MudCard>
             </MudItem>
-            <MudItem xs="12" sm="4">
+            <MudItem xs="12" sm="4" md="6">
                 <MudPaper Class="pa-4 mud-height-full">
                     <MudText Typo="Typo.subtitle2">Validation Summary: </MudText>
                     @if (success)
@@ -79,7 +81,7 @@
                 </MudText>
             </MudItem>
         </MudGrid>
-    </MudPaper>
+    </MudContainer> 
 </EditForm>
 
 @code {

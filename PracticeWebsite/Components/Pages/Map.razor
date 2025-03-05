@@ -4,36 +4,35 @@
 @using PracticeWebsite.Utilities    
 @inject CustomerServices CustomerService
 
-<PageTitle>Membership</PageTitle>
+<PageTitle>Gamified Learning</PageTitle>
 
-<MudContainer Fixed="true" MaxWidth="MaxWidth.ExtraExtraLarge" Class="mt-4">
-    <MudCard>
-        <MudCarousel Class="mud-width-full" Style="height:600px;" ShowArrows="false" ShowBullets="false" EnableSwipeGesture="false" AutoCycle="true" TData="object">
-            <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Primary">
-                <div class="d-flex" style="height:100%">
-                    <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center"
-                    Height="1280" Width="1920" Src="images/BrownBear(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
-                </div>
-            </MudCarouselItem>
-            <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Secondary">
-                <div class="d-flex" style="height:100%">
-                    <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center"
-                    Height="1280" Width="1920" Src="images/Meerkats(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
-                </div>
-            </MudCarouselItem>
-            <MudCarouselItem Transition="@Transition.Slide">
-                <div class="d-flex" style="height:100%">
-                    <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center"
-                    Height="1280" Width="1920" Src="images/Wolf(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
-                </div>
-            </MudCarouselItem>
-        </MudCarousel>
-    </MudCard>
-</MudContainer>
-<MudContainer Fixed="true" MaxWidth="MaxWidth.ExtraExtraLarge" Class="mt-4">
-    <!-- Intro Section -->
-    <MudGrid Justify="Justify.Center">
-        <MudItem xs="10">
+<MudCard>
+    <MudCarousel Class="mud-width-full" Style="height:600px;" ShowArrows="false" ShowBullets="false" EnableSwipeGesture="false" AutoCycle="true" TData="object">
+        <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Primary">
+            <div class="d-flex" style="height:100%">
+                <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center"
+                Height="1280" Width="1920" Src="images/BrownBear(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
+            </div>
+        </MudCarouselItem>
+        <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Secondary">
+            <div class="d-flex" style="height:100%">
+                <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center"
+                Height="1280" Width="1920" Src="images/Meerkats(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
+            </div>
+        </MudCarouselItem>
+        <MudCarouselItem Transition="@Transition.Slide">
+            <div class="d-flex" style="height:100%">
+                <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center"
+                Height="1280" Width="1920" Src="images/Wolf(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
+            </div>
+        </MudCarouselItem>
+    </MudCarousel>
+</MudCard>
+
+<MudContainer Fixed="true" MaxWidth="MaxWidth.ExtraExtraLarge">
+    <MudGrid Class="my-4" Justify="Justify.Center">
+        <!-- Intro Section -->
+        <MudItem xs="12">
             <MudCard Style="@($"Background:{Colors.Brown.Lighten1};")" Class="d-flex justify-center align-center">
                 <MudCardHeader>
                     <CardHeaderContent>
@@ -42,585 +41,567 @@
                 </MudCardHeader>
                 <MudDivider />
                 <MudCardContent>
-                    <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
+                    <MudBreadcrumbs Items="_quizitems"></MudBreadcrumbs>
                 </MudCardContent>
             </MudCard>
         </MudItem>
-    </MudGrid>
-    <MudContainer>
-        <MudText Typo="Typo.h4" Align="Align.Center">Search for what you need!</MudText>
-        <MudGrid Class="ma-4 ps-4" Justify="Justify.Center">
-            <MudItem xs="12" sm="10" md="6">
-                <MudCard Elevation="3" Class="rounded-lg pb-4">
-                    <MudCardHeader>
-                        <CardHeaderContent>
-                            <MudText Typo="Typo.h5" Align="Align.Center">Key Stages:</MudText>
-                        </CardHeaderContent>
-                    </MudCardHeader>
-                    <MudCardContent>
-                        <div class="d-flex justify-center">
-                            <MudText Typo="Typo.h6" Class="ml-1 mt-5">Search for what level you need!</MudText>
-                        </div>
-                        <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                <MudButton OnClick="@(() => chooseKs(0))" Variant="Variant.Filled" Color="Color.Primary">KS1</MudButton>
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                <MudButton OnClick="@(() => chooseKs(1))" Variant="Variant.Filled" Color="Color.Primary">KS2</MudButton>
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                <MudButton OnClick="@(() => chooseKs(2))" Variant="Variant.Filled" Color="Color.Primary">KS3</MudButton>
-                            </MudListItem>
-                        </MudList>
-                    </MudCardContent>
-                </MudCard>
-            </MudItem>
-            <MudItem xs="12" sm="10" md="6">
-                <MudCard Elevation="3" Class="rounded-lg pb-4">
-                    <MudCardHeader>
-                        <CardHeaderContent>
-                            <MudText Typo="Typo.h5" Align="Align.Center">Subjects:</MudText>
-                        </CardHeaderContent>
-                    </MudCardHeader>
-                    <MudCardContent>
-                        <div class="d-flex justify-center">
-                            <MudText Typo="Typo.h6" Class="ml-1 mt-5">Search for what subject you need!</MudText>
-                        </div>
-                        <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                <MudButton OnClick="@(() => chooseSub(0))" Variant="Variant.Filled" Color="Color.Primary">Mathematics</MudButton>
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                <MudButton OnClick="@(() => chooseSub(1))" Variant="Variant.Filled" Color="Color.Primary">Science</MudButton>
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                <MudButton OnClick="@(() => chooseSub(2))" Variant="Variant.Filled" Color="Color.Primary">English</MudButton>
-                            </MudListItem>
-                        </MudList>
-                    </MudCardContent>
-                </MudCard>
-            </MudItem>
-            <MudItem xs="12" sm="12" md="12">
-                <MudCard Elevation="3" Class="rounded-lg pb-4">
-                    <MudCardContent>
-                        <MudText Typo="Typo.h3" Align="Align.Center">Submit Selection</MudText>
-                        <MudText Typo="Typo.h6" Align="Align.Center"> Please press the button below to submit your selected options and search for corresponding quizes.</MudText>
-                    </MudCardContent>
-                    <MudCardContent Class="d-flex justify-center align-center">
-                        <MudStack>
-                            <MudButton Disabled="@_processingSubmit" OnClick="ProcessSubmit" @bind-Completed="_searchComplete" Variant="Variant.Filled" Color="Color.Primary">
-                                @if (_processingSubmit == true)
-                                {
-                                    <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                                    <MudText Class="ms-2">Processing</MudText>
-                                }
-                                else
-                                {
-                                    <MudText>Submit Search!</MudText>
-                                }
-                            </MudButton>
-                            @if (mainSearchError == true)
+        <MudItem xs="12" sm="12" md="12">
+            <MudText Typo="Typo.h4" Align="Align.Center">Search for an excercise!</MudText>
+        </MudItem>
+        <MudItem xs="12" sm="10" md="6">
+            <MudCard Elevation="3" Class="rounded-lg pb-4">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5" Align="Align.Center">Key Stages:</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <div class="d-flex justify-center">
+                        <MudText Typo="Typo.h6" Class="ml-1 mt-5">Search for what level you need!</MudText>
+                    </div>
+                    <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
+                        <MudListItem Icon="@Icons.Material.Filled.Check">
+                            <MudButton OnClick="@(() => chooseKs(0))" Variant="Variant.Filled" Color="Color.Primary">KS1</MudButton>
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.Check">
+                            <MudButton OnClick="@(() => chooseKs(1))" Variant="Variant.Filled" Color="Color.Primary">KS2</MudButton>
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.Check">
+                            <MudButton OnClick="@(() => chooseKs(2))" Variant="Variant.Filled" Color="Color.Primary">KS3</MudButton>
+                        </MudListItem>
+                    </MudList>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" sm="10" md="6">
+            <MudCard Elevation="3" Class="rounded-lg pb-4">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5" Align="Align.Center">Subjects:</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <div class="d-flex justify-center">
+                        <MudText Typo="Typo.h6" Class="ml-1 mt-5">Search for what subject you need!</MudText>
+                    </div>
+                    <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
+                        <MudListItem Icon="@Icons.Material.Filled.Check">
+                            <MudButton OnClick="@(() => chooseSub(0))" Variant="Variant.Filled" Color="Color.Primary">Mathematics</MudButton>
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.Check">
+                            <MudButton OnClick="@(() => chooseSub(1))" Variant="Variant.Filled" Color="Color.Primary">Science</MudButton>
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.Check">
+                            <MudButton OnClick="@(() => chooseSub(2))" Variant="Variant.Filled" Color="Color.Primary">English</MudButton>
+                        </MudListItem>
+                    </MudList>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" sm="12" md="12">
+            <MudCard Elevation="3" Class="rounded-lg pb-4">
+                <MudCardContent>
+                    <MudText Typo="Typo.h3" Align="Align.Center">Submit Selection</MudText>
+                    <MudText Typo="Typo.h6" Align="Align.Center"> Please press the button below to submit your selected options and search for corresponding quizes.</MudText>
+                </MudCardContent>
+                <MudCardContent Class="d-flex justify-center align-center">
+                    <MudStack>
+                        <MudButton Disabled="@_processingSubmit" OnClick="ProcessSubmit" @bind-Completed="_searchComplete" Variant="Variant.Filled" Color="Color.Primary">
+                            @if (_processingSubmit == true)
                             {
-                                <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Center">Error! Ensure you have selected both a keystage & Subject.</MudAlert>
+                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                <MudText Class="ms-2">Processing</MudText>
                             }
                             else
                             {
-                                <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Center">Please first select a keystage and a subject before you submit to not encounter an error!</MudAlert>
+                                <MudText>Submit Search!</MudText>
                             }
+                        </MudButton>
+                        @if (mainSearchError == true)
+                        {
+                            <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Center">Error! Ensure you have selected both a keystage & Subject.</MudAlert>
+                        }
+                        else
+                        {
+                            <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Center">Please first select a keystage and a subject before you submit to not encounter an error!</MudAlert>
+                        }
 
-                            @if (validSearch == true)
-                            {
-                                <MudCard>
-                                    <MudCardContent>
-                                        <MudText Typo="Typo.body2" Align="Align.Center">Please select which quiz you would like to load in.</MudText>
-                                        <MudSelect Label="Select Level" @bind-Value="SelectedQuizLevel">
-                                            @for (int i = 1; i <= 3; i++)
-                                            {
-                                                int num = i;
-                                                <MudSelectItem Value="@num">@num</MudSelectItem>
-                                            }
-                                        </MudSelect>
-                                        <MudButton Disabled="@_processingFullSubmit" OnClick="ProcessFullSubmit" @bind-Completed="_searchFullComplete" Variant="Variant.Filled" Color="Color.Primary">
-                                            @if (_processingFullSubmit == true && validFullSearch == true)
-                                            {
-                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                                                <MudText Class="ms-2">Processing</MudText>
-                                            }
-                                            else
-                                            {
-                                                <MudText>Load Question!</MudText>
-                                            }
-                                        </MudButton>
-                                    </MudCardContent>
-                                </MudCard>
+                        @if (validSearch == true)
+                        {
+                            <MudCard>
+                                <MudCardContent>
+                                    <MudText Typo="Typo.body2" Align="Align.Center">Please select which quiz you would like to load in.</MudText>
+                                    <MudSelect Label="Select Level" @bind-Value="SelectedQuizLevel">
+                                        @for (int i = 1; i <= 3; i++)
+                                        {
+                                            int num = i;
+                                            <MudSelectItem Value="@num">@num</MudSelectItem>
+                                        }
+                                    </MudSelect>
+                                    <MudButton Disabled="@_processingFullSubmit" OnClick="ProcessFullSubmit" @bind-Completed="_searchFullComplete" Variant="Variant.Filled" Color="Color.Primary">
+                                        @if (_processingFullSubmit == true && validFullSearch == true)
+                                        {
+                                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                            <MudText Class="ms-2">Processing</MudText>
+                                        }
+                                        else
+                                        {
+                                            <MudText>Load Question!</MudText>
+                                        }
+                                    </MudButton>
+                                </MudCardContent>
+                            </MudCard>
 
-                            }
-                        </MudStack>
-                    </MudCardContent>
+                        }
+                    </MudStack>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        @if (validFullSearch == true && validSearch == true)
+        {
+            <MudItem xs="12" sm="12" md="12">
+                <MudCard Class="flex-auto d-flex py-8 mud-theme-white" Elevation="6">
+                    <MudStepper ShowResetButton CenterLabels="true" OnPreviewInteraction="OnPreviewInteractionQuestionair">
+                        <MudStep Title="Question 1" HasError="@(_step1Complete==false)">
+                            <MudCard>
+                                <MudCardHeader>
+                                    <MudText Typo="Typo.h4">Question No.1</MudText>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    <MudText Typo="Typo.body1" Align="Align.Center">@SQLquizdata.Quiz1Question</MudText>
+                                    <MudGrid Justify="Justify.SpaceEvenly">
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(0))"> @SQLquizdata.Quiz1Ans1 </MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(1))"> @SQLquizdata.Quiz1Ans2 </MudButton>
+                                        <MudFlexBreak />
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(2))"> @SQLquizdata.Quiz1Ans3 </MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(3))"> @SQLquizdata.Quiz1Ans4 </MudButton>
+                                    </MudGrid>
+                                    @* <MudHidden Breakpoint="@Breakpoint.Xs">
+                                </MudHidden>*@
+                                    <MudButton Disabled="@_processing1" OnClick="ProcessSomething1" @bind-Completed="_step1Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                                        @if (_processing1)
+                                        {
+                                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                            <MudText Class="ms-2">Processing</MudText>
+                                        }
+                                        else
+                                        {
+                                            <MudText>Submit Answer</MudText>
+                                        }
+                                    </MudButton>
+                                </MudCardContent>
+                            </MudCard>
+                        </MudStep>
+                        <MudStep Title="Question 2" HasError="@(_step2Complete==false)">
+                            <MudCard>
+
+                                <MudCardHeader>
+                                    <MudText Typo="Typo.h4">Question No.2</MudText>
+                                    <MudText>@SQLquizdata.Quiz2Question</MudText>
+                                </MudCardHeader>
+
+                                <MudCardContent>
+                                    <MudGrid Justify="Justify.SpaceEvenly">
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(0))"> @SQLquizdata.Quiz2Ans1</MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(1))"> @SQLquizdata.Quiz2Ans2</MudButton>
+                                        <MudFlexBreak />
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(2))"> @SQLquizdata.Quiz2Ans3</MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(3))"> @SQLquizdata.Quiz2Ans4</MudButton>
+                                    </MudGrid>
+
+                                    <MudHidden Breakpoint="@Breakpoint.Xs">
+                                    </MudHidden>
+
+                                    <MudButton Disabled="@_processing2" OnClick="ProcessSomething2" Variant="Variant.Outlined" Color="Color.Primary" Class="mt-4">
+                                        @if (_processing2)
+                                        {
+                                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                            <MudText Class="ms-2">Processing</MudText>
+                                        }
+                                        else
+                                        {
+                                            <MudText>Confirm Selection</MudText>
+                                        }
+                                    </MudButton>
+                                </MudCardContent>
+                            </MudCard>
+                        </MudStep>
+                        <MudStep Title="Question 3" HasError="@(_step3Complete==false)">
+                            <MudCard>
+                                <MudCardHeader>
+                                    <MudText Typo="Typo.h4">Question No.3</MudText>
+                                    <MudText>@SQLquizdata.Quiz3Question</MudText>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    <MudGrid Justify="Justify.SpaceEvenly">
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(0))"> @SQLquizdata.Quiz3Ans1</MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(1))"> @SQLquizdata.Quiz3Ans2</MudButton>
+                                        <MudFlexBreak />
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(2))"> @SQLquizdata.Quiz3Ans3</MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(3))"> @SQLquizdata.Quiz3Ans4</MudButton>
+                                    </MudGrid>
+                                    <MudHidden Breakpoint="@Breakpoint.Xs">
+                                    </MudHidden>
+                                    <MudButton Disabled="@_processing3" OnClick="ProcessSomething3" @bind-Completed="_step3Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                                        @if (_processing3)
+                                        {
+                                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                            <MudText Class="ms-2">Processing</MudText>
+                                        }
+                                        else
+                                        {
+                                            <MudText>Submit Answer</MudText>
+                                        }
+                                    </MudButton>
+                                </MudCardContent>
+                            </MudCard>
+                        </MudStep>
+                        <MudStep Title="Question 4" HasError="@(_step4Complete==false)">
+                            <MudCard>
+                                <MudCardHeader>
+                                    <MudText Typo="Typo.h4">Question No.4</MudText>
+                                    <MudText>@SQLquizdata.Quiz4Question</MudText>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    <MudGrid Justify="Justify.SpaceEvenly">
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(0))"> @SQLquizdata.Quiz4Ans1</MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(1))"> @SQLquizdata.Quiz4Ans2</MudButton>
+                                        <MudFlexBreak />
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(2))"> @SQLquizdata.Quiz4Ans3</MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(3))"> @SQLquizdata.Quiz4Ans4</MudButton>
+                                    </MudGrid>
+                                    <MudHidden Breakpoint="@Breakpoint.Xs">
+                                    </MudHidden>
+                                    <MudButton Disabled="@_processing4" OnClick="ProcessSomething4" @bind-Completed="_step4Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                                        @if (_processing4)
+                                        {
+                                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                            <MudText Class="ms-2">Processing</MudText>
+                                        }
+                                        else
+                                        {
+                                            <MudText>Submit Answer</MudText>
+                                        }
+                                    </MudButton>
+                                </MudCardContent>
+                            </MudCard>
+                        </MudStep>
+                        <MudStep Title="Question 5" HasError="@(_step5Complete==false)">
+                            <MudCard>
+                                <MudCardHeader>
+                                    <MudText Typo="Typo.h4">Question No.5</MudText>
+                                    <MudText>@SQLquizdata.Quiz5Question</MudText>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    <MudGrid Justify="Justify.SpaceEvenly">
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(0))"> @SQLquizdata.Quiz5Ans1</MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(1))"> @SQLquizdata.Quiz5Ans2</MudButton>
+                                        <MudFlexBreak />
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(2))"> @SQLquizdata.Quiz5Ans3</MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(3))"> @SQLquizdata.Quiz5Ans4</MudButton>
+                                    </MudGrid>
+                                    <MudHidden Breakpoint="@Breakpoint.Xs">
+                                    </MudHidden>
+                                    <MudButton Disabled="@_processing5" OnClick="ProcessSomething5" @bind-Completed="_step5Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                                        @if (_processing5)
+                                        {
+                                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                            <MudText Class="ms-2">Processing</MudText>
+                                        }
+                                        else
+                                        {
+                                            <MudText>Submit Answer</MudText>
+                                        }
+                                    </MudButton>
+                                </MudCardContent>
+                            </MudCard>
+                        </MudStep>
+                        <MudStep Title="Question 6" HasError="@(_step6Complete==false)">
+                            <MudCard>
+                                <MudCardHeader>
+                                    <MudText Typo="Typo.h4">Question No.6</MudText>
+                                    <MudText>@SQLquizdata.Quiz6Question</MudText>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    <MudGrid Justify="Justify.SpaceEvenly">
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(0))"> @SQLquizdata.Quiz6Ans1</MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(1))"> @SQLquizdata.Quiz6Ans2</MudButton>
+                                        <MudFlexBreak />
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(2))"> @SQLquizdata.Quiz6Ans3</MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(3))"> @SQLquizdata.Quiz6Ans4</MudButton>
+                                    </MudGrid>
+                                    <MudHidden Breakpoint="@Breakpoint.Xs">
+                                    </MudHidden>
+                                    <MudButton Disabled="@_processing6" OnClick="ProcessSomething6" @bind-Completed="_step6Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                                        @if (_processing6)
+                                        {
+                                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                            <MudText Class="ms-2">Processing</MudText>
+                                        }
+                                        else
+                                        {
+                                            <MudText>Submit Answer</MudText>
+                                        }
+                                    </MudButton>
+                                </MudCardContent>
+                            </MudCard>
+                        </MudStep>
+                        <MudStep Title="Question 7" HasError="@(_step7Complete==false)">
+                            <MudCard>
+                                <MudCardHeader>
+                                    <MudText Typo="Typo.h4">Question No.7</MudText>
+                                    <MudText>@SQLquizdata.Quiz7Question</MudText>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    <MudGrid Justify="Justify.SpaceEvenly">
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(0))"> @SQLquizdata.Quiz7Ans1</MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(1))"> @SQLquizdata.Quiz7Ans2</MudButton>
+                                        <MudFlexBreak />
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(2))"> @SQLquizdata.Quiz7Ans3</MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(3))"> @SQLquizdata.Quiz7Ans4</MudButton>
+                                    </MudGrid>
+                                    <MudHidden Breakpoint="@Breakpoint.Xs">
+                                    </MudHidden>
+                                    <MudButton Disabled="@_processing7" OnClick="ProcessSomething7" @bind-Completed="_step7Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                                        @if (_processing7)
+                                        {
+                                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                            <MudText Class="ms-2">Processing</MudText>
+                                        }
+                                        else
+                                        {
+                                            <MudText>Submit Answer</MudText>
+                                        }
+                                    </MudButton>
+                                </MudCardContent>
+                            </MudCard>
+                        </MudStep>
+                        <MudStep Title="Question 8" HasError="@(_step8Complete==false)">
+                            <MudCard>
+                                <MudCardHeader>
+                                    <MudText Typo="Typo.h4">Question No.8</MudText>
+                                    <MudText>@SQLquizdata.Quiz8Question</MudText>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    <MudGrid Justify="Justify.SpaceEvenly">
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(0))"> @SQLquizdata.Quiz8Ans1</MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(1))"> @SQLquizdata.Quiz8Ans2</MudButton>
+                                        <MudFlexBreak />
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(2))"> @SQLquizdata.Quiz8Ans3</MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(3))"> @SQLquizdata.Quiz8Ans4</MudButton>
+                                    </MudGrid>
+                                    <MudHidden Breakpoint="@Breakpoint.Xs">
+                                    </MudHidden>
+                                    <MudButton Disabled="@_processing8" OnClick="ProcessSomething8" @bind-Completed="_step8Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                                        @if (_processing8)
+                                        {
+                                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                            <MudText Class="ms-2">Processing</MudText>
+                                        }
+                                        else
+                                        {
+                                            <MudText>Submit Answer</MudText>
+                                        }
+                                    </MudButton>
+                                </MudCardContent>
+                            </MudCard>
+                        </MudStep>
+                        <MudStep Title="Question 9" HasError="@(_step9Complete==false)">
+                            <MudCard>
+                                <MudCardHeader>
+                                    <MudText Typo="Typo.h4">Question No.9</MudText>
+                                    <MudText>@SQLquizdata.Quiz9Question</MudText>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    <MudGrid Justify="Justify.SpaceEvenly">
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(0))"> @SQLquizdata.Quiz9Ans1</MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(1))"> @SQLquizdata.Quiz9Ans2</MudButton>
+                                        <MudFlexBreak />
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(2))"> @SQLquizdata.Quiz9Ans3</MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(3))"> @SQLquizdata.Quiz9Ans4</MudButton>
+                                    </MudGrid>
+                                    <MudHidden Breakpoint="@Breakpoint.Xs">
+                                    </MudHidden>
+                                    <MudButton Disabled="@_processing9" OnClick="ProcessSomething9" @bind-Completed="_step9Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                                        @if (_processing9)
+                                        {
+                                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                            <MudText Class="ms-2">Processing</MudText>
+                                        }
+                                        else
+                                        {
+                                            <MudText>Submit Answer</MudText>
+                                        }
+                                    </MudButton>
+                                </MudCardContent>
+                            </MudCard>
+                        </MudStep>
+                        <MudStep Title="Question 10" HasError="@(_step10Complete==false)">
+                            <MudCard>
+                                <MudCardHeader>
+                                    <MudText Typo="Typo.h4">Question No.10</MudText>
+                                    <MudText>@SQLquizdata.Quiz10Question</MudText>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    <MudGrid Justify="Justify.SpaceEvenly">
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(0))"> @SQLquizdata.Quiz10Ans1</MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(1))"> @SQLquizdata.Quiz10Ans2</MudButton>
+                                        <MudFlexBreak />
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(2))"> @SQLquizdata.Quiz10Ans3</MudButton>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(3))"> @SQLquizdata.Quiz10Ans4</MudButton>
+                                    </MudGrid>
+                                    <MudHidden Breakpoint="@Breakpoint.Xs">
+                                    </MudHidden>
+                                    <MudButton Disabled="@_processing10" OnClick="ProcessSomething10" @bind-Completed="_step10Complete" Variant="Variant.Outlined" Color="Color.Primary">
+                                        @if (_processing10)
+                                        {
+                                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                                            <MudText Class="ms-2">Processing</MudText>
+                                        }
+                                        else
+                                        {
+                                            <MudText>Submit Answer</MudText>
+                                        }
+                                    </MudButton>
+                                </MudCardContent>
+                            </MudCard>
+                        </MudStep>
+                    </MudStepper>
+                    <MudAlert Severity="Severity.Info"> At times the questions may not load in please press one of the coloured buttons in the center and it should load in. We are very sorry for the inconvenience however we are working on it to fix this issue, Thank you for undertsanding and enjoy!</MudAlert>
                 </MudCard>
             </MudItem>
-            @if (validFullSearch == true && validSearch == true)
-            {
-                <MudItem xs="12" sm="12" md="12">
-                    <MudCard Class="flex-auto d-flex py-8 mud-theme-white" Elevation="6">
-                        <MudStepper ShowResetButton CenterLabels="true" OnPreviewInteraction="OnPreviewInteractionQuestionair">
-                            <MudStep Title="Question 1" HasError="@(_step1Complete==false)">
-                                <MudCard>
-                                    <MudCardHeader>
-                                        <MudText Typo="Typo.h4">Question No.1</MudText>
-                                    </MudCardHeader>
-                                    <MudCardContent>
-                                        <MudText Typo="Typo.body1" Align="Align.Center">@SQLquizdata.Quiz1Question</MudText>
-                                        <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(0))"> @SQLquizdata.Quiz1Ans1 </MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(1))"> @SQLquizdata.Quiz1Ans2 </MudButton>
-                                            <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(2))"> @SQLquizdata.Quiz1Ans3 </MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _1ButtonQuiz(3))"> @SQLquizdata.Quiz1Ans4 </MudButton>
-                                        </MudGrid>
-                                        @* <MudHidden Breakpoint="@Breakpoint.Xs">
-                                        </MudHidden>*@
-                                        <MudButton Disabled="@_processing1" OnClick="ProcessSomething1" @bind-Completed="_step1Complete" Variant="Variant.Outlined" Color="Color.Primary">
-                                            @if (_processing1)
-                                            {
-                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                                                <MudText Class="ms-2">Processing</MudText>
-                                            }
-                                            else
-                                            {
-                                                <MudText>Submit Answer</MudText>
-                                            }
-                                        </MudButton>
-                                    </MudCardContent>
-                                </MudCard>
-                            </MudStep>
-                            <MudStep Title="Question 2" HasError="@(_step2Complete==false)">
-                                <MudCard>
-
-                                    <MudCardHeader>
-                                        <MudText Typo="Typo.h4">Question No.2</MudText>
-                                        <MudText>@SQLquizdata.Quiz2Question</MudText>
-                                    </MudCardHeader>
-
-                                    <MudCardContent>
-                                        <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(0))"> @SQLquizdata.Quiz2Ans1</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(1))"> @SQLquizdata.Quiz2Ans2</MudButton>
-                                            <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(2))"> @SQLquizdata.Quiz2Ans3</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _2ButtonQuiz(3))"> @SQLquizdata.Quiz2Ans4</MudButton>
-                                        </MudGrid>
-
-                                        <MudHidden Breakpoint="@Breakpoint.Xs">
-                                        </MudHidden>
-
-                                        <MudButton Disabled="@_processing2" OnClick="ProcessSomething2" Variant="Variant.Outlined" Color="Color.Primary" Class="mt-4">
-                                            @if (_processing2)
-                                            {
-                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                                                <MudText Class="ms-2">Processing</MudText>
-                                            }
-                                            else
-                                            {
-                                                <MudText>Confirm Selection</MudText>
-                                            }
-                                        </MudButton>
-                                    </MudCardContent>
-                                </MudCard>
-                            </MudStep>
-                            <MudStep Title="Question 3" HasError="@(_step3Complete==false)">
-                                <MudCard>
-                                    <MudCardHeader>
-                                        <MudText Typo="Typo.h4">Question No.3</MudText>
-                                        <MudText>@SQLquizdata.Quiz3Question</MudText>
-                                    </MudCardHeader>
-                                    <MudCardContent>
-                                        <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(0))"> @SQLquizdata.Quiz3Ans1</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(1))"> @SQLquizdata.Quiz3Ans2</MudButton>
-                                            <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(2))"> @SQLquizdata.Quiz3Ans3</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _3ButtonQuiz(3))"> @SQLquizdata.Quiz3Ans4</MudButton>
-                                        </MudGrid>
-                                        <MudHidden Breakpoint="@Breakpoint.Xs">
-                                        </MudHidden>
-                                        <MudButton Disabled="@_processing3" OnClick="ProcessSomething3" @bind-Completed="_step3Complete" Variant="Variant.Outlined" Color="Color.Primary">
-                                            @if (_processing3)
-                                            {
-                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                                                <MudText Class="ms-2">Processing</MudText>
-                                            }
-                                            else
-                                            {
-                                                <MudText>Submit Answer</MudText>
-                                            }
-                                        </MudButton>
-                                    </MudCardContent>
-                                </MudCard>
-                            </MudStep>
-                            <MudStep Title="Question 4" HasError="@(_step4Complete==false)">
-                                <MudCard>
-                                    <MudCardHeader>
-                                        <MudText Typo="Typo.h4">Question No.4</MudText>
-                                        <MudText>@SQLquizdata.Quiz4Question</MudText>
-                                    </MudCardHeader>
-                                    <MudCardContent>
-                                        <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(0))"> @SQLquizdata.Quiz4Ans1</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(1))"> @SQLquizdata.Quiz4Ans2</MudButton>
-                                            <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(2))"> @SQLquizdata.Quiz4Ans3</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _4ButtonQuiz(3))"> @SQLquizdata.Quiz4Ans4</MudButton>
-                                        </MudGrid>
-                                        <MudHidden Breakpoint="@Breakpoint.Xs">
-                                        </MudHidden>
-                                        <MudButton Disabled="@_processing4" OnClick="ProcessSomething4" @bind-Completed="_step4Complete" Variant="Variant.Outlined" Color="Color.Primary">
-                                            @if (_processing4)
-                                            {
-                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                                                <MudText Class="ms-2">Processing</MudText>
-                                            }
-                                            else
-                                            {
-                                                <MudText>Submit Answer</MudText>
-                                            }
-                                        </MudButton>
-                                    </MudCardContent>
-                                </MudCard>
-                            </MudStep>
-                            <MudStep Title="Question 5" HasError="@(_step5Complete==false)">
-                                <MudCard>
-                                    <MudCardHeader>
-                                        <MudText Typo="Typo.h4">Question No.5</MudText>
-                                        <MudText>@SQLquizdata.Quiz5Question</MudText>
-                                    </MudCardHeader>
-                                    <MudCardContent>
-                                        <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(0))"> @SQLquizdata.Quiz5Ans1</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(1))"> @SQLquizdata.Quiz5Ans2</MudButton>
-                                            <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(2))"> @SQLquizdata.Quiz5Ans3</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _5ButtonQuiz(3))"> @SQLquizdata.Quiz5Ans4</MudButton>
-                                        </MudGrid>
-                                        <MudHidden Breakpoint="@Breakpoint.Xs">
-                                        </MudHidden>
-                                        <MudButton Disabled="@_processing5" OnClick="ProcessSomething5" @bind-Completed="_step5Complete" Variant="Variant.Outlined" Color="Color.Primary">
-                                            @if (_processing5)
-                                            {
-                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                                                <MudText Class="ms-2">Processing</MudText>
-                                            }
-                                            else
-                                            {
-                                                <MudText>Submit Answer</MudText>
-                                            }
-                                        </MudButton>
-                                    </MudCardContent>
-                                </MudCard>
-                            </MudStep>
-                            <MudStep Title="Question 6" HasError="@(_step6Complete==false)">
-                                <MudCard>
-                                    <MudCardHeader>
-                                        <MudText Typo="Typo.h4">Question No.6</MudText>
-                                        <MudText>@SQLquizdata.Quiz6Question</MudText>
-                                    </MudCardHeader>
-                                    <MudCardContent>
-                                        <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(0))"> @SQLquizdata.Quiz6Ans1</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(1))"> @SQLquizdata.Quiz6Ans2</MudButton>
-                                            <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(2))"> @SQLquizdata.Quiz6Ans3</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _6ButtonQuiz(3))"> @SQLquizdata.Quiz6Ans4</MudButton>
-                                        </MudGrid>
-                                        <MudHidden Breakpoint="@Breakpoint.Xs">
-                                        </MudHidden>
-                                        <MudButton Disabled="@_processing6" OnClick="ProcessSomething6" @bind-Completed="_step6Complete" Variant="Variant.Outlined" Color="Color.Primary">
-                                            @if (_processing6)
-                                            {
-                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                                                <MudText Class="ms-2">Processing</MudText>
-                                            }
-                                            else
-                                            {
-                                                <MudText>Submit Answer</MudText>
-                                            }
-                                        </MudButton>
-                                    </MudCardContent>
-                                </MudCard>
-                            </MudStep>
-                            <MudStep Title="Question 7" HasError="@(_step7Complete==false)">
-                                <MudCard>
-                                    <MudCardHeader>
-                                        <MudText Typo="Typo.h4">Question No.7</MudText>
-                                        <MudText>@SQLquizdata.Quiz7Question</MudText>
-                                    </MudCardHeader>
-                                    <MudCardContent>
-                                        <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(0))"> @SQLquizdata.Quiz7Ans1</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(1))"> @SQLquizdata.Quiz7Ans2</MudButton>
-                                            <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(2))"> @SQLquizdata.Quiz7Ans3</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _7ButtonQuiz(3))"> @SQLquizdata.Quiz7Ans4</MudButton>
-                                        </MudGrid>
-                                        <MudHidden Breakpoint="@Breakpoint.Xs">
-                                        </MudHidden>
-                                        <MudButton Disabled="@_processing7" OnClick="ProcessSomething7" @bind-Completed="_step7Complete" Variant="Variant.Outlined" Color="Color.Primary">
-                                            @if (_processing7)
-                                            {
-                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                                                <MudText Class="ms-2">Processing</MudText>
-                                            }
-                                            else
-                                            {
-                                                <MudText>Submit Answer</MudText>
-                                            }
-                                        </MudButton>
-                                    </MudCardContent>
-                                </MudCard>
-                            </MudStep>
-                            <MudStep Title="Question 8" HasError="@(_step8Complete==false)">
-                                <MudCard>
-                                    <MudCardHeader>
-                                        <MudText Typo="Typo.h4">Question No.8</MudText>
-                                        <MudText>@SQLquizdata.Quiz8Question</MudText>
-                                    </MudCardHeader>
-                                    <MudCardContent>
-                                        <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(0))"> @SQLquizdata.Quiz8Ans1</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(1))"> @SQLquizdata.Quiz8Ans2</MudButton>
-                                            <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(2))"> @SQLquizdata.Quiz8Ans3</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _8ButtonQuiz(3))"> @SQLquizdata.Quiz8Ans4</MudButton>
-                                        </MudGrid>
-                                        <MudHidden Breakpoint="@Breakpoint.Xs">
-                                        </MudHidden>
-                                        <MudButton Disabled="@_processing8" OnClick="ProcessSomething8" @bind-Completed="_step8Complete" Variant="Variant.Outlined" Color="Color.Primary">
-                                            @if (_processing8)
-                                            {
-                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                                                <MudText Class="ms-2">Processing</MudText>
-                                            }
-                                            else
-                                            {
-                                                <MudText>Submit Answer</MudText>
-                                            }
-                                        </MudButton>
-                                    </MudCardContent>
-                                </MudCard>
-                            </MudStep>
-                            <MudStep Title="Question 9" HasError="@(_step9Complete==false)">
-                                <MudCard>
-                                    <MudCardHeader>
-                                        <MudText Typo="Typo.h4">Question No.9</MudText>
-                                        <MudText>@SQLquizdata.Quiz9Question</MudText>
-                                    </MudCardHeader>
-                                    <MudCardContent>
-                                        <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(0))"> @SQLquizdata.Quiz9Ans1</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(1))"> @SQLquizdata.Quiz9Ans2</MudButton>
-                                            <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(2))"> @SQLquizdata.Quiz9Ans3</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _9ButtonQuiz(3))"> @SQLquizdata.Quiz9Ans4</MudButton>
-                                        </MudGrid>
-                                        <MudHidden Breakpoint="@Breakpoint.Xs">
-                                        </MudHidden>
-                                        <MudButton Disabled="@_processing9" OnClick="ProcessSomething9" @bind-Completed="_step9Complete" Variant="Variant.Outlined" Color="Color.Primary">
-                                            @if (_processing9)
-                                            {
-                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                                                <MudText Class="ms-2">Processing</MudText>
-                                            }
-                                            else
-                                            {
-                                                <MudText>Submit Answer</MudText>
-                                            }
-                                        </MudButton>
-                                    </MudCardContent>
-                                </MudCard>
-                            </MudStep>
-                            <MudStep Title="Question 10" HasError="@(_step10Complete==false)">
-                                <MudCard>
-                                    <MudCardHeader>
-                                        <MudText Typo="Typo.h4">Question No.10</MudText>
-                                        <MudText>@SQLquizdata.Quiz10Question</MudText>
-                                    </MudCardHeader>
-                                    <MudCardContent>
-                                        <MudGrid Justify="Justify.SpaceEvenly">
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(0))"> @SQLquizdata.Quiz10Ans1</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(1))"> @SQLquizdata.Quiz10Ans2</MudButton>
-                                            <MudFlexBreak />
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(2))"> @SQLquizdata.Quiz10Ans3</MudButton>
-                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _10ButtonQuiz(3))"> @SQLquizdata.Quiz10Ans4</MudButton>
-                                        </MudGrid>
-                                        <MudHidden Breakpoint="@Breakpoint.Xs">
-                                        </MudHidden>
-                                        <MudButton Disabled="@_processing10" OnClick="ProcessSomething10" @bind-Completed="_step10Complete" Variant="Variant.Outlined" Color="Color.Primary">
-                                            @if (_processing10)
-                                            {
-                                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                                                <MudText Class="ms-2">Processing</MudText>
-                                            }
-                                            else
-                                            {
-                                                <MudText>Submit Answer</MudText>
-                                            }
-                                        </MudButton>
-                                    </MudCardContent>
-                                </MudCard>
-                            </MudStep>
-                        </MudStepper>
-                    </MudCard>
-                </MudItem>
-            }
-            else if (validSearch == true && (validFullSearch == false || validFullSearch == null))
-            {
-                <MudItem xs="12" sm="12" md="12">
-                    <MudAlert Severity="Severity.Info">To start a quiz select a quiz level and submit the search!</MudAlert>
-                </MudItem>
-            }
-            else if (ShowUserAnswers == true)
-            {
-                <MudItem xs="12" sm="12" md="12">
-                    <MudCard Class="flex-auto d-flex py-8 mud-theme-white" Elevation="6">
-                        <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
-                            <MudTabPanel Text="Chart">
-                                <MudGrid>
-                                    <MudItem xs="6">
-                                        <MudChart ChartType="ChartType.Donut" Width="300px" Height="300px" InputData="@result" InputLabels="@labels">
-                                            <CustomGraphics>
-                                                <text class="donut-inner-text" x="47%" y="35%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">Total</text>
-                                                <text class="donut-inner-text" x="47%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@result.Sum().ToString()/10</text>
-                                            </CustomGraphics>
-                                        </MudChart>
-                                    </MudItem>
-                                    <MudItem xs="6">
-                                        @*Add a support text like oh well done or others depending on how many the user got correct*@
-                                    </MudItem>
-                                </MudGrid>
-                            </MudTabPanel>
-                            <MudTabPanel Text="Summary">
-                                <MudDataGrid Items="@_quizResultsTable" Dense="true" Hover="true" Bordered="true" Breakpoint="Breakpoint.Sm">
-                                    <Columns>
-                                        <!-- Manually define which values show in each column -->
-                                        <Column Field="QuestionNr" Title="Participant" />
-                                        <Column Field="QuestionText" Title="Correct" />
-                                        <Column Field="QuestionIfCorrect" Title="Incorrect" />
-                                    </Columns>
-                                </MudDataGrid>
+        }
+        else if (validSearch == true && (validFullSearch == false || validFullSearch == null))
+        {
+            <MudItem xs="12" sm="12" md="12">
+                <MudAlert Severity="Severity.Info">To start a quiz select a quiz level and submit the search!</MudAlert>
+            </MudItem>
+        }
+        else if (ShowUserAnswers == true)
+        {
+            <MudItem xs="12" sm="12" md="12">
+                <MudCard Class="flex-auto d-flex py-8 mud-theme-white" Elevation="6">
+                    <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
+                        <MudTabPanel Text="Chart">
+                            <MudGrid>
+                                <MudItem xs="6">
+                                    <MudChart ChartType="ChartType.Donut" Width="300px" Height="300px" InputData="@result" InputLabels="@labels">
+                                        <CustomGraphics>
+                                            <text class="donut-inner-text" x="47%" y="35%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">Total</text>
+                                            <text class="donut-inner-text" x="47%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@result.Sum().ToString()/10</text>
+                                        </CustomGraphics>
+                                    </MudChart>
+                                </MudItem>
+                                <MudItem xs="6">
+                                    @*Add a support text like oh well done or others depending on how many the user got correct*@
+                                </MudItem>
+                            </MudGrid>
+                        </MudTabPanel>
+                        <MudTabPanel Text="Summary">
+                            @* <MudDataGrid Items="@_quizResultsTable" Dense="true" Hover="true" Bordered="true" Breakpoint="Breakpoint.Sm">
+                        <Columns>
+                        <!-- Manually define which values show in each column -->
+                        <Column Field="QuestionNr" Title="Participant" />
+                        <Column Field="QuestionText" Title="Correct" />
+                        <Column Field="QuestionIfCorrect" Title="Incorrect" />
+                        </Columns>
+                        </MudDataGrid> *@
 
 
 
 
-                            </MudTabPanel>
-                        </MudTabs>
-                    </MudCard>
-                </MudItem>
-            }
-
-            @* <MudCard Class="pa-4 mt-3">
-                    <MudCardHeader>
-                        <MudCardContent>
-                            <MudText Typo="Typo.h6">@Questions[SelectedQuestionIndex].Question1</MudText>
-                        </MudCardContent>
-                    </MudCardHeader>
-                    <MudCardContent>
-                        <MudTextField Label="Your Answer:" @bind-Value="@UserAnswers[Questions[SelectedQuestionIndex].QuizId]" />
-                    </MudCardContent>           
-                    <MudCardActions>
-                        <MudButton OnClick="PreviousQuestion" Disabled="@(SelectedQuestionIndex == 0)">Previous</MudButton>
-                        <MudButton OnClick="NextQuestion" Disabled="@(SelectedQuestionIndex == Questions.Count - 1)">Next</MudButton>
-                        <MudButton OnClick="CheckAnswer" Color="Color.Secondary">Check Answer</MudButton>
-                    </MudCardActions>            
-                </MudCard> *@
-
-
-        </MudGrid>
-    </MudContainer>
-    <MudPaper Class="footer-background" Elevation="1">
-        <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="py-6">
-            <MudGrid Spacing="3">
-                <!-- Column 1: Social Media Links -->
-                <MudItem xs="12" sm="3">
-                    <MudText Typo="Typo.h6" Class="mb-2">Follow Us</MudText>
-                    <MudGrid Class="d-flex">
-                        <MudItem xs="2">
-                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.Facebook" Href="https://www.facebook.com" Target="_blank" Color="Color.Primary" />
-                        </MudItem>
-                        <MudItem xs="2">
-                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.Twitter" Href="https://www.twitter.com" Target="_blank" Color="Color.Primary" />
-                        </MudItem>
-                        <MudItem xs="2">
-                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.Instagram" Href="https://www.instagram.com" Target="_blank" Color="Color.Primary" />
-                        </MudItem>
-                        <MudItem xs="2">
-                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.YouTube" Href="https://www.youtube.com" Target="_blank" Color="Color.Primary" />
-                        </MudItem>
-                        <MudItem xs="2">
-                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.TikTok" Href="https://www.tiktok.com" Target="_blank" Color="Color.Primary" />
-                        </MudItem>
-                    </MudGrid>
-                </MudItem>
-
-                <!-- Column 2: Contact Us -->
-                <MudItem xs="12" sm="3">
-                    <MudText Typo="Typo.h6" Class="mb-2">Contact Us</MudText>
-                    <MudList Dense="true" T="string">
-                        <MudListItem>
-                            <MudIcon Icon="@Icons.Material.Filled.Phone" Class="me-2" />
-                            <span>+44 1234 567890</span>
-                        </MudListItem>
-                        <MudListItem>
-                            <MudIcon Icon="@Icons.Material.Filled.Email" Class="me-2" />
-                            <span>info@zooexample.com</span>
-                        </MudListItem>
-                        <MudListItem>
-                            <MudIcon Icon="@Icons.Material.Filled.LocationOn" Class="me-2" />
-                            <span>123 Zoo Street, City, UK</span>
-                        </MudListItem>
-                    </MudList>
-                </MudItem>
-
-                <!-- Column 3: Opening Hours -->
-                <MudItem xs="12" sm="3">
-                    <MudText Typo="Typo.h6" Class="mb-2">Opening Hours</MudText>
-                    <MudList Dense="true" T="string">
-                        <MudListItem>Monday - Friday: 9:00 AM - 5:00 PM</MudListItem>
-                        <MudListItem>Saturday - Sunday: 10:00 AM - 6:00 PM</MudListItem>
-                        <MudListItem>Bank Holidays: 10:00 AM - 4:00 PM</MudListItem>
-                    </MudList>
-                </MudItem>
-
-                <!-- Column 4: Policies and Links -->
-                <MudItem xs="12" sm="3">
-                    <MudText Typo="Typo.h6" Class="mb-2">Links</MudText>
-                    <MudList Dense="true" T="string">
-                        <MudListItem>
-                            <MudLink Disabled="true" Href="/privacy-policy" Color="Color.Primary">Privacy Policy</MudLink>
-                        </MudListItem>
-                        <MudListItem>
-                            <MudLink Disabled="true" Href="/terms-of-service" Color="Color.Primary">Terms of Service</MudLink>
-                        </MudListItem>
-                        <MudListItem>
-                            <MudLink Disabled="true" Href="/cookies-policy" Color="Color.Primary">Cookies Policy</MudLink>
-                        </MudListItem>
-                        <MudListItem>
-                            <MudLink Disabled="true" Href="/careers" Color="Color.Primary">Careers</MudLink>
-                        </MudListItem>
-                    </MudList>
-                </MudItem>
-            </MudGrid>
-
-            <MudDivider Class="my-4" />
-
-            <!-- Copyright Section -->
-            <MudText Typo="Typo.caption" Align="Align.Center">
-                &copy; 2024 Zoo Example. All rights reserved. |
-                <MudLink Disabled="true" Href="/privacy-policy" Color="Color.Primary">Privacy Policy</MudLink> |
-                <MudLink Disabled="true" Href="/terms-of-service" Color="Color.Primary">Terms of Service</MudLink>
-            </MudText>
-        </MudContainer>
-    </MudPaper>
+                        </MudTabPanel>
+                    </MudTabs>
+                </MudCard>
+            </MudItem>
+        }
+    </MudGrid>
 </MudContainer>
+
+<MudCard Class="footer-background" Elevation="1">
+    <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="py-6">
+        <MudGrid Spacing="3">
+            <!-- Column 1: Social Media Links -->
+            <MudItem xs="12" sm="3">
+                <MudText Typo="Typo.h6" Class="mb-2">Follow Us</MudText>
+                <MudGrid Class="d-flex">
+                    <MudItem xs="2">
+                        <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.Facebook" Href="https://www.facebook.com" Target="_blank" Color="Color.Primary" />
+                    </MudItem>
+                    <MudItem xs="2">
+                        <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.Twitter" Href="https://www.twitter.com" Target="_blank" Color="Color.Primary" />
+                    </MudItem>
+                    <MudItem xs="2">
+                        <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.Instagram" Href="https://www.instagram.com" Target="_blank" Color="Color.Primary" />
+                    </MudItem>
+                    <MudItem xs="2">
+                        <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.YouTube" Href="https://www.youtube.com" Target="_blank" Color="Color.Primary" />
+                    </MudItem>
+                    <MudItem xs="2">
+                        <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.TikTok" Href="https://www.tiktok.com" Target="_blank" Color="Color.Primary" />
+                    </MudItem>
+                </MudGrid>
+            </MudItem>
+
+            <!-- Column 2: Contact Us -->
+            <MudItem xs="12" sm="3">
+                <MudText Typo="Typo.h6" Class="mb-2">Contact Us</MudText>
+                <MudList Dense="true" T="string">
+                    <MudListItem>
+                        <MudIcon Icon="@Icons.Material.Filled.Phone" Class="me-2" />
+                        <span>+44 1234 567890</span>
+                    </MudListItem>
+                    <MudListItem>
+                        <MudIcon Icon="@Icons.Material.Filled.Email" Class="me-2" />
+                        <span>info@zooexample.com</span>
+                    </MudListItem>
+                    <MudListItem>
+                        <MudIcon Icon="@Icons.Material.Filled.LocationOn" Class="me-2" />
+                        <span>123 Zoo Street, City, UK</span>
+                    </MudListItem>
+                </MudList>
+            </MudItem>
+
+            <!-- Column 3: Opening Hours -->
+            <MudItem xs="12" sm="3">
+                <MudText Typo="Typo.h6" Class="mb-2">Opening Hours</MudText>
+                <MudList Dense="true" T="string">
+                    <MudListItem>Monday - Friday: 9:00 AM - 5:00 PM</MudListItem>
+                    <MudListItem>Saturday - Sunday: 10:00 AM - 6:00 PM</MudListItem>
+                    <MudListItem>Bank Holidays: 10:00 AM - 4:00 PM</MudListItem>
+                </MudList>
+            </MudItem>
+
+            <!-- Column 4: Policies and Links -->
+            <MudItem xs="12" sm="3">
+                <MudText Typo="Typo.h6" Class="mb-2">Links</MudText>
+                <MudList Dense="true" T="string">
+                    <MudListItem>
+                        <MudLink Disabled="true" Href="/privacy-policy" Color="Color.Primary">Privacy Policy</MudLink>
+                    </MudListItem>
+                    <MudListItem>
+                        <MudLink Disabled="true" Href="/terms-of-service" Color="Color.Primary">Terms of Service</MudLink>
+                    </MudListItem>
+                    <MudListItem>
+                        <MudLink Disabled="true" Href="/cookies-policy" Color="Color.Primary">Cookies Policy</MudLink>
+                    </MudListItem>
+                    <MudListItem>
+                        <MudLink Disabled="true" Href="/careers" Color="Color.Primary">Careers</MudLink>
+                    </MudListItem>
+                </MudList>
+            </MudItem>
+        </MudGrid>
+
+        <MudDivider Class="my-4" />
+
+        <!-- Copyright Section -->
+        <MudText Typo="Typo.caption" Align="Align.Center">
+            &copy; 2024 Zoo Example. All rights reserved. |
+            <MudLink Disabled="true" Href="/privacy-policy" Color="Color.Primary">Privacy Policy</MudLink> |
+            <MudLink Disabled="true" Href="/terms-of-service" Color="Color.Primary">Terms of Service</MudLink>
+        </MudText>
+    </MudContainer>
+</MudCard>
 
 
 @code {
@@ -645,7 +626,7 @@
     private int? chosenSub;
     private bool _processingSubmit = false;
     private bool mainSearchError = false;
-    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
+    private List<BreadcrumbItem> _quizitems = new List<BreadcrumbItem>
     {
         new BreadcrumbItem("Home", href: "/"),
         new BreadcrumbItem("Memberships", href: "/membership"),

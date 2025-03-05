@@ -1,452 +1,96 @@
 ﻿@page "/membership"
 
-<PageTitle>Membership</PageTitle>
+<PageTitle>Memberships</PageTitle>
 
-<MudContainer Fixed="true" MaxWidth="MaxWidth.ExtraLarge" Class="mt-4">
-    <MudCard>
-        <MudCarousel Class="mud-width-full" Style="height:600px;" ShowArrows="false" ShowBullets="false" EnableSwipeGesture="false" AutoCycle="true" TData="object">
-            <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Primary">
-                <div class="d-flex" style="height:100%">
-                    <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center"
-                    Height="1280" Width="1920" Src="images/BrownBear(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
-                </div>
-            </MudCarouselItem>
-            <MudCarouselItem Transition="@Transition.Slide" Color="@Color.Secondary">
-                <div class="d-flex" style="height:100%">
-                    <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center"
-                    Height="1280" Width="1920" Src="images/Meerkats(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
-                </div>
-            </MudCarouselItem>
-            <MudCarouselItem Transition="@Transition.Slide">
-                <div class="d-flex" style="height:100%">
-                    <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" ObjectPosition="@ObjectPosition.Center"
-                    Height="1280" Width="1920" Src="images/Wolf(1).jpg" Alt="Image Error! We sincerly apologise for this issue." Elevation="25" />
-                </div>
-            </MudCarouselItem>
-        </MudCarousel>
-    </MudCard>
-</MudContainer>
-
-<MudContainer Fixed="true" MaxWidth="MaxWidth.ExtraLarge" Class="mt-4">
-    <!-- Intro Section -->
-    <MudCard>
-        <MudCardContent>
-            <MudGrid Justify="Justify.Center">
-                <MudItem xs="8">
-                    <MudCard Style="@($"Background:{Colors.Brown.Lighten1};")" Class="d-flex justify-center align-center">
-                        <MudCardHeader>
-                            <CardHeaderContent>
-                                <MudText Align="Align.Center" Typo="Typo.h2">Memberships</MudText>
-                            </CardHeaderContent>
-                        </MudCardHeader>
-                        <MudDivider />
-                        <MudCardContent>
-                            <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
-                        </MudCardContent>
-                    </MudCard>
-                </MudItem>
-            </MudGrid>
-        </MudCardContent>
-    </MudCard>
-
-
-
-
-
-
-
-
-
-    <MudContainer>
-        <MudText Typo="Typo.h4" Align="Align.Center">Search for what you need!</MudText>
-        <MudGrid Class="mt-8" Justify="Justify.SpaceEvenly">
-            <MudItem xs="12" sm="6" md="6">
-                <MudCard Elevation="3" Class="rounded-lg pb-4">
-                    <MudCardHeader>
-                        <CardHeaderContent>
-                            <MudText Typo="Typo.h5" Align="Align.Center">Key Stages:</MudText>
-                        </CardHeaderContent>
-                    </MudCardHeader>
-                    <MudCardContent>
-                        <div class="d-flex justify-center">
-                            <MudText Typo="Typo.h6" Class="ml-1 mt-5">Search for what level you need!</MudText>
-                        </div>
-                        <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                <MudButton OnClick="@(() => chooseKs(0))" Variant="Variant.Filled" Color="Color.Primary">KS1</MudButton>
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                <MudButton OnClick="@(() => chooseKs(1))" Variant="Variant.Filled" Color="Color.Primary">KS2</MudButton>
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                <MudButton OnClick="@(() => chooseKs(2))" Variant="Variant.Filled" Color="Color.Primary">KS3aaa</MudButton>
-                            </MudListItem>
-                        </MudList>
-                    </MudCardContent>
-                </MudCard>
-            </MudItem>
-
-            <MudItem xs="12" sm="6" md="6">
-                <MudCard Elevation="3" Class="rounded-lg pb-4">
-                    <MudCardHeader>
-                        <CardHeaderContent>
-                            <MudText Typo="Typo.h5" Align="Align.Center">Subjects:</MudText>
-                        </CardHeaderContent>
-                    </MudCardHeader>
-                    <MudCardContent>
-                        <div class="d-flex justify-center">
-                            <MudText Typo="Typo.h6" Class="ml-1 mt-5">Search for what subject you need!</MudText>
-                        </div>
-                        <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                <MudButton OnClick="@(() => chooseSub(0))" Variant="Variant.Filled" Color="Color.Primary">Mathematics</MudButton>
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                <MudButton OnClick="@(() => chooseSub(1))" Variant="Variant.Filled" Color="Color.Primary">Science</MudButton>
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Check">
-                                <MudButton OnClick="@(() => chooseSub(2))" Variant="Variant.Filled" Color="Color.Primary">English</MudButton>
-                            </MudListItem>
-                        </MudList>
-                    </MudCardContent>
-                </MudCard>
-            </MudItem>
-
-            <MudItem xs="12" sm="6" md="12">
-                <MudCard Elevation="3" Class="rounded-lg pb-4">
-                    <MudCardHeader>
-                        <CardHeaderContent>
-                            <MudText Typo="Typo.h3" Align="Align.Center">Submit Selection</MudText>
-                            <MudText Typo="Typo.h6" Align="Align.Center"> Please press the button below to submit your selected options and search for corresponding quizes.</MudText>
-                        </CardHeaderContent>
-                    </MudCardHeader>
-                    <MudCardContent Class="d-flex justify-center align-center">
-                        <MudButton Disabled="@_processingSubmit" OnClick="ProcessSubmit" @bind-Completed="_searchComplete" Variant="Variant.Filled" Color="Color.Primary">
-                            @if (_processingSubmit)
-                            {
-                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                                <MudText Class="ms-2">Processing</MudText>
-                            }
-                            else
-                            {
-                                <MudText>Submit Search!</MudText>
-                            }
-                        </MudButton>
-                    </MudCardContent>
-                </MudCard>
-            </MudItem>
-
-            <MudItem>
-                <MudCard>
-
-                </MudCard>
-            </MudItem>
-        </MudGrid>
-    </MudContainer>
-
-
-
-
-
-
-
-
-
-
-
-    <MudPaper Class="footer-background" Elevation="1">
-        <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="py-6">
-            <MudGrid Spacing="3">
-                <!-- Column 1: Social Media Links -->
-                <MudItem xs="12" sm="3">
-                    <MudText Typo="Typo.h6" Class="mb-2">Follow Us</MudText>
-                    <MudGrid Class="d-flex">
-                        <MudItem xs="2">
-                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.Facebook" Href="https://www.facebook.com" Target="_blank" Color="Color.Primary" />
-                        </MudItem>
-                        <MudItem xs="2">
-                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.Twitter" Href="https://www.twitter.com" Target="_blank" Color="Color.Primary" />
-                        </MudItem>
-                        <MudItem xs="2">
-                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.Instagram" Href="https://www.instagram.com" Target="_blank" Color="Color.Primary" />
-                        </MudItem>
-                        <MudItem xs="2">
-                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.YouTube" Href="https://www.youtube.com" Target="_blank" Color="Color.Primary" />
-                        </MudItem>
-                        <MudItem xs="2">
-                            <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.TikTok" Href="https://www.tiktok.com" Target="_blank" Color="Color.Primary" />
-                        </MudItem>
-                    </MudGrid>
-                </MudItem>
-
-                <!-- Column 2: Contact Us -->
-                <MudItem xs="12" sm="3">
-                    <MudText Typo="Typo.h6" Class="mb-2">Contact Us</MudText>
-                    <MudList Dense="true" T="string">
-                        <MudListItem>
-                            <MudIcon Icon="@Icons.Material.Filled.Phone" Class="me-2" />
-                            <span>+44 1234 567890</span>
-                        </MudListItem>
-                        <MudListItem>
-                            <MudIcon Icon="@Icons.Material.Filled.Email" Class="me-2" />
-                            <span>info@zooexample.com</span>
-                        </MudListItem>
-                        <MudListItem>
-                            <MudIcon Icon="@Icons.Material.Filled.LocationOn" Class="me-2" />
-                            <span>123 Zoo Street, City, UK</span>
-                        </MudListItem>
-                    </MudList>
-                </MudItem>
-
-                <!-- Column 3: Opening Hours -->
-                <MudItem xs="12" sm="3">
-                    <MudText Typo="Typo.h6" Class="mb-2">Opening Hours</MudText>
-                    <MudList Dense="true" T="string">
-                        <MudListItem>Monday - Friday: 9:00 AM - 5:00 PM</MudListItem>
-                        <MudListItem>Saturday - Sunday: 10:00 AM - 6:00 PM</MudListItem>
-                        <MudListItem>Bank Holidays: 10:00 AM - 4:00 PM</MudListItem>
-                    </MudList>
-                </MudItem>
-
-                <!-- Column 4: Policies and Links -->
-                <MudItem xs="12" sm="3">
-                    <MudText Typo="Typo.h6" Class="mb-2">Links</MudText>
-                    <MudList Dense="true" T="string">
-                        <MudListItem>
-                            <MudLink Disabled="true" Href="/privacy-policy" Color="Color.Primary">Privacy Policy</MudLink>
-                        </MudListItem>
-                        <MudListItem>
-                            <MudLink Disabled="true" Href="/terms-of-service" Color="Color.Primary">Terms of Service</MudLink>
-                        </MudListItem>
-                        <MudListItem>
-                            <MudLink Disabled="true" Href="/cookies-policy" Color="Color.Primary">Cookies Policy</MudLink>
-                        </MudListItem>
-                        <MudListItem>
-                            <MudLink Disabled="true" Href="/careers" Color="Color.Primary">Careers</MudLink>
-                        </MudListItem>
-                    </MudList>
-                </MudItem>
-            </MudGrid>
-
-            <MudDivider Class="my-4" />
-
-            <!-- Copyright Section -->
-            <MudText Typo="Typo.caption" Align="Align.Center">
-                &copy; 2024 Zoo Example. All rights reserved. |
-                <MudLink Disabled="true" Href="/privacy-policy" Color="Color.Primary">Privacy Policy</MudLink> |
-                <MudLink Disabled="true" Href="/terms-of-service" Color="Color.Primary">Terms of Service</MudLink>
-            </MudText>
-        </MudContainer>
-    </MudPaper>
-
-</MudContainer>
-
-
-@code {
-    private bool? _searchComplete;
-    private string? submitKS;
-    private string? submitSUB;
-    private string? chosenKs;
-    private string? chosenSub;
-
-
-    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
-    {
-        new BreadcrumbItem("Home", href: "/"),
-        new BreadcrumbItem("Memberships", href: "/membership"),
-    };
-
-    private bool _processingSubmit = false;
-    private async Task ProcessSubmit()
-    {
-        _searchComplete = false;
-        _processingSubmit = true;
-        chosenKs = submitKS;
-        chosenSub = submitSUB;
-        await Task.Delay(1000);
-        _processingSubmit = false;
-        _searchComplete = true;
-    }
-
-    private void chooseSub(int id)
-    {
-        switch (id)
-        {
-            case 0:
-                chosenSub = "Mathematics";
-                break;
-            case 1:
-                chosenSub = "Science";
-                break;
-            case 2:
-                chosenSub = "Englsih";
-                break;
-        }
-    }
-    private void chooseKs(int id)
-    {
-        switch (id)
-        {
-            case 0:
-                chosenKs = "1";
-                break;
-            case 1:
-                chosenKs = "2";
-                break;
-            case 2:
-                chosenKs = "3";
-                break;
-        }
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@* <MudCard>
+<MudCard>
     <MudCardMedia Height="600" Image="images/PolarBear(1).jpg"/>
 </MudCard>
-<MudPaper Style="d-flex justify-center align-center">
-    <MudContainer Class="mx-auto pa-6">
-        <MudCardHeader>
-            <MudGrid Justify="Justify.Center">
-                <MudItem xs="8">
-                    <MudCard Style="@($"Background:{Colors.Brown.Lighten1};")" Class="d-flex justify-center align-center">
+<MudContainer Fixed="true" MaxWidth="MaxWidth.ExtraExtraLarge">
+    <MudGrid Justify="Justify.Center" Class="my-4">
+        <MudItem xs="12" sm="10">
+            <MudCard Style="@($"Background:{Colors.Brown.Lighten1};")" Class="d-flex justify-center align-center">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Align="Align.Center" Typo="Typo.h2">Memberships</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudDivider />
+                <MudCardContent>
+                    <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" sm="10">
+            <MudCard>
+                <MudCardContent>
+                    <MudText Align="Align.Center" Typo="Typo.h5">Become a part of the Zoo's community and visit time and time again!</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12">
+            <MudGrid Class="mt-4" Spacing="3">
+                <MudItem xs="12" sm="4" md="4">
+                    <MudCard>
                         <MudCardHeader>
                             <CardHeaderContent>
-                                <MudText Align="Align.Center" Typo="Typo.h2">Memberships</MudText>
-                            </CardHeaderContent>
-                        </MudCardHeader>
-                        <MudDivider/>
-                        <MudCardContent>
-                            <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
-                        </MudCardContent>
-                    </MudCard>
-                </MudItem>
-                <MudItem xs="10">
-                    <MudCard Style="@($"Background:{Colors.LightGreen.Darken1};")">
-                        <MudCardContent>
-                            <MudText Align="Align.Center" Typo="Typo.h5">Become a part of the Zoo's community and visit time and time again!</MudText>
-                        </MudCardContent>  
-                    </MudCard>
-                </MudItem>
-            </MudGrid>
-        </MudCardHeader>
-        <MudContainer>
-            <MudItem>
-                <MudCard Style="@($"Background:{Colors.LightGreen.Darken3};")" Elevation="0">
-                    <MudGrid>
-                        <MudItem xs="12" sm="6" md="4">
-                            <MudCard Style="@($"Background:{Colors.LightGreen.Darken1};")" Elevation="5" Class="rounded-lg pb-4">
-                                <MudCardHeader>
-                                    <CardHeaderContent>
-                                        <MudIcon Color="Color.Dark" Class="mx-auto my-auto d-flex align-center" Icon="@Icons.Material.Filled.CardMembership" Style="font-size: 4rem;" />
-                                    </CardHeaderContent>
-                                </MudCardHeader>
-                                <MudCardContent>
-                                    <MudText Align="Align.Center" Typo="Typo.h6">Unlimited Visits for 12 Months</MudText>
-                                </MudCardContent>
-                            </MudCard>
-                        </MudItem>
-                        <MudItem xs="12" sm="6" md="4">
-                            <MudCard Style="@($"Background:{Colors.LightGreen.Darken1};")" Elevation="5" Class="rounded-lg pb-4">
-                                <MudCardHeader>
-                                    <CardHeaderContent>
-                                        <MudIcon Color="Color.Dark" Class="mx-auto my-auto d-flex align-center" Icon="@Icons.Material.Outlined.ShoppingBag" Style="font-size: 4rem;" />
-                                    </CardHeaderContent>
-                                </MudCardHeader>
-                                <MudCardContent>
-                                    <MudText Align="Align.Center" Typo="Typo.h6">Discounts on our Food, Drinks & Retail</MudText>
-                                </MudCardContent>
-                            </MudCard>
-                        </MudItem>
-                        <MudItem xs="12" sm="6" md="4">
-                            <MudCard Style="@($"Background:{Colors.LightGreen.Darken1};")" Elevation="5" Class="rounded-lg pb-4">
-                                <MudCardHeader>
-                                    <CardHeaderContent>
-                                        <MudIcon Color="Color.Dark" Class="mx-auto my-auto d-flex align-center" Icon="@Icons.Material.Filled.Hotel" Style="font-size: 4rem;" />
-                                    </CardHeaderContent>
-                                </MudCardHeader>
-                                <MudCardContent>
-                                    <MudText Align="Align.Center" Typo="Typo.h6">Discounts on our Hotel Stays.</MudText>
-                                </MudCardContent>
-                            </MudCard>
-                        </MudItem>
-                    </MudGrid>
-                </MudCard>
-            </MudItem>
-        </MudContainer>
-    </MudContainer>
-    <MudContainer Style="@($"Background:{Colors.LightGreen.Darken3};")" Class="mx-auto pa-6">
-        <MudCardHeader>
-            <MudGrid>
-                <MudItem xs="8">
-                    <MudCard Style="@($"Background:{Colors.LightGreen.Darken1};")" Class="pa-md-6 mx-lg-auto d-flex align-center flex-grow-1 gap-4">
-                        <MudCardHeader>
-                            <CardHeaderContent>
-                                <MudText Align="Align.Start" Typo="Typo.h6">No Two Visits Are The Same With Annual Membership</MudText>
+                                <MudIcon Color="Color.Dark" Class="mx-auto my-auto d-flex align-center" Icon="@Icons.Material.Filled.CardMembership" Style="font-size: 4rem;" />
                             </CardHeaderContent>
                         </MudCardHeader>
                         <MudCardContent>
-                            <MudText Align="Align.Start" Typo="Typo.body1">Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah</MudText>
+                            <MudText Align="Align.Center" Typo="Typo.h6">Unlimited Visits for 12 Months</MudText>
                         </MudCardContent>
                     </MudCard>
                 </MudItem>
-                <MudItem xs="4">
-                    <MudCard Style="@($"Background:{Colors.LightGreen.Darken1};")">
+                <MudItem xs="12" sm="4" md="4">
+                    <MudCard>
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudIcon Color="Color.Dark" Class="mx-auto my-auto d-flex align-center" Icon="@Icons.Material.Outlined.ShoppingBag" Style="font-size: 4rem;" />
+                            </CardHeaderContent>
+                        </MudCardHeader>
                         <MudCardContent>
-                            <MudImage Src="images/Tiger(1).jpg" Alt="Brown Bear" Elevation="25" Class="rounded-lg" Fluid="true" ObjectFit="ObjectFit.Cover" />
+                            <MudText Align="Align.Center" Typo="Typo.h6">Discounts on our Food, Drinks & Retail</MudText>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+                <MudItem xs="12" sm="4" md="4">
+                    <MudCard>
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudIcon Color="Color.Dark" Class="mx-auto my-auto d-flex align-center" Icon="@Icons.Material.Filled.Hotel" Style="font-size: 4rem;" />
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudText Align="Align.Center" Typo="Typo.h6">Discounts on our Hotel Stays.</MudText>
                         </MudCardContent>
                     </MudCard>
                 </MudItem>
             </MudGrid>
-        </MudCardHeader>
-    </MudContainer>
-    <MudContainer>
-        <MudCard Elevation="0" Style="@($"Background:{Colors.LightGreen.Darken3};")">
-            <MudGrid>
-                <MudItem xs="15" sm="8" md="12">
-                    <MudCard Style="@($"Background:{Colors.Orange.Accent2};")" Elevation="25" Class="rounded-lg pb-4">
-                        <MudCardMedia Image="images/Capybara(1).jpg" Height="400"/> 
+        </MudItem>
+        <MudItem xs="12">
+            <MudGrid Class="mt-4" Spacing="3">
+                <MudItem xs="12" sm="12" md="4" Style="display:flex;">
+                    <MudImage Src="images/Tiger(1).jpg" Alt="Brown Bear" Class="rounded-lg" Fluid="true" ObjectFit="ObjectFit.Cover" />
+                </MudItem>
+                <MudItem xs="12" sm="12" md="8" Style="display:flex;">
+                    <MudCard>
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Align="Align.Center" Typo="Typo.h6">No Two Visits Are The Same With Annual Membership</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudText Align="Align.Justify" Typo="Typo.body1">Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah</MudText>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            </MudGrid>
+        </MudItem>
+        <MudItem xs="12">
+            <MudGrid Class="mt-4" Spacing="3" Justify="Justify.Center">
+                <MudItem xs="12" sm="10" md="4" Style="display:flex; justify-content: center;">
+                    <MudCard>
+                        <MudCardMedia Image="images/Capybara(1).jpg" Height="400" />
                         <MudCardHeader>
                             <CardHeaderContent>
                                 <MudText Typo="Typo.h5" Align="Align.Center">Premium Membership</MudText>
@@ -501,14 +145,14 @@
                                 </MudListItem>
                             </MudList>
                         </MudCardContent>
-                        <MudCardActions Class="d-flex justify-start">
-                            <MudButton Style="@($"Background:{Colors.LightGreen.Darken1};")" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Href="/membership">SEE MEMBERSHIP OFFERS</MudButton>
+                        <MudCardActions Class="d-flex justify-end">
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Href="/membership">SEE MEMBERSHIP OFFERS</MudButton>
                         </MudCardActions>
                     </MudCard>
                 </MudItem>
-                <MudItem xs="15" sm="8" md="12">
-                    <MudCard Style="@($"Background:{Colors.Orange.Accent2};")" Elevation="25" Class="rounded-lg pb-4">
-                        <MudCardMedia Image="images/SnowLeopards(1).jpg" Height="400"/>
+                <MudItem xs="12" sm="10" md="4" Style="display:flex; justify-content: center;">
+                    <MudCard>
+                        <MudCardMedia Image="images/SnowLeopards(1).jpg" Height="400" />
                         <MudCardHeader>
                             <CardHeaderContent>
                                 <MudText Typo="Typo.h5" Align="Align.Center">Standard Membership</MudText>
@@ -540,14 +184,14 @@
                             </MudList>
                             <MudText></MudText>
                         </MudCardContent>
-                        <MudCardActions Class="d-flex justify-start">
-                            <MudButton Style="@($"Background:{Colors.LightGreen.Darken1};")" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Href="/membership">SEE MEMBERSHIP OFFERS</MudButton>
+                        <MudCardActions Class="d-flex justify-end">
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Href="/membership">SEE MEMBERSHIP OFFERS</MudButton>
                         </MudCardActions>
                     </MudCard>
                 </MudItem>
-                <MudItem xs="15" sm="8" md="12">
-                    <MudCard Style="@($"Background:{Colors.Orange.Accent2};")" Elevation="25" Class="rounded-lg pb-4">
-                        <MudCardMedia Image="images/Tiger(2).jpg" Height="400"/>
+                <MudItem xs="12" sm="10" md="4" Style="display:flex; justify-content: center;">
+                    <MudCard>
+                        <MudCardMedia Image="images/Tiger(2).jpg" Height="400" />
                         <MudCardHeader>
                             <CardHeaderContent>
                                 <MudText Typo="Typo.h5" Align="Align.Center">Little Tiger Membership (Under 6s)</MudText>
@@ -566,13 +210,98 @@
                                 </MudListItem>
                             </MudList>
                         </MudCardContent>
-                        <MudCardActions Class="d-flex justify-start">
-                            <MudButton Style="@($"Background:{Colors.LightGreen.Darken1};")" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Href="/membership">SIGN UP TO LITTLE TIGER MEMBERSHIP</MudButton>
+                        <MudCardActions Class="d-flex justify-end">
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Href="/membership">SIGN UP TO LITTLE TIGER MEMBERSHIP</MudButton>
                         </MudCardActions>
                     </MudCard>
                 </MudItem>
             </MudGrid>
-        </MudCard>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+<MudPaper Class="footer-background" Elevation="1">
+    <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="py-6">
+        <MudGrid Spacing="3">
+            <!-- Column 1: Social Media Links -->
+            <MudItem xs="12" sm="3">
+                <MudText Typo="Typo.h6" Class="mb-2">Follow Us</MudText>
+                <MudGrid Class="d-flex">
+                    <MudItem xs="2">
+                        <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.Facebook" Href="https://www.facebook.com" Target="_blank" Color="Color.Primary" />
+                    </MudItem>
+                    <MudItem xs="2">
+                        <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.Twitter" Href="https://www.twitter.com" Target="_blank" Color="Color.Primary" />
+                    </MudItem>
+                    <MudItem xs="2">
+                        <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.Instagram" Href="https://www.instagram.com" Target="_blank" Color="Color.Primary" />
+                    </MudItem>
+                    <MudItem xs="2">
+                        <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.YouTube" Href="https://www.youtube.com" Target="_blank" Color="Color.Primary" />
+                    </MudItem>
+                    <MudItem xs="2">
+                        <MudIconButton Disabled="true" Icon="@Icons.Custom.Brands.TikTok" Href="https://www.tiktok.com" Target="_blank" Color="Color.Primary" />
+                    </MudItem>
+                </MudGrid>
+            </MudItem>
+
+            <!-- Column 2: Contact Us -->
+            <MudItem xs="12" sm="3">
+                <MudText Typo="Typo.h6" Class="mb-2">Contact Us</MudText>
+                <MudList Dense="true" T="string">
+                    <MudListItem>
+                        <MudIcon Icon="@Icons.Material.Filled.Phone" Class="me-2" />
+                        <span>+44 1234 567890</span>
+                    </MudListItem>
+                    <MudListItem>
+                        <MudIcon Icon="@Icons.Material.Filled.Email" Class="me-2" />
+                        <span>info@zooexample.com</span>
+                    </MudListItem>
+                    <MudListItem>
+                        <MudIcon Icon="@Icons.Material.Filled.LocationOn" Class="me-2" />
+                        <span>123 Zoo Street, City, UK</span>
+                    </MudListItem>
+                </MudList>
+            </MudItem>
+
+            <!-- Column 3: Opening Hours -->
+            <MudItem xs="12" sm="3">
+                <MudText Typo="Typo.h6" Class="mb-2">Opening Hours</MudText>
+                <MudList Dense="true" T="string">
+                    <MudListItem>Monday - Friday: 9:00 AM - 5:00 PM</MudListItem>
+                    <MudListItem>Saturday - Sunday: 10:00 AM - 6:00 PM</MudListItem>
+                    <MudListItem>Bank Holidays: 10:00 AM - 4:00 PM</MudListItem>
+                </MudList>
+            </MudItem>
+
+            <!-- Column 4: Policies and Links -->
+            <MudItem xs="12" sm="3">
+                <MudText Typo="Typo.h6" Class="mb-2">Links</MudText>
+                <MudList Dense="true" T="string">
+                    <MudListItem>
+                        <MudLink Disabled="true" Href="/privacy-policy" Color="Color.Primary">Privacy Policy</MudLink>
+                    </MudListItem>
+                    <MudListItem>
+                        <MudLink Disabled="true" Href="/terms-of-service" Color="Color.Primary">Terms of Service</MudLink>
+                    </MudListItem>
+                    <MudListItem>
+                        <MudLink Disabled="true" Href="/cookies-policy" Color="Color.Primary">Cookies Policy</MudLink>
+                    </MudListItem>
+                    <MudListItem>
+                        <MudLink Disabled="true" Href="/careers" Color="Color.Primary">Careers</MudLink>
+                    </MudListItem>
+                </MudList>
+            </MudItem>
+        </MudGrid>
+
+        <MudDivider Class="my-4" />
+
+        <!-- Copyright Section -->
+        <MudText Typo="Typo.caption" Align="Align.Center">
+            &copy; 2024 Zoo Example. All rights reserved. |
+            <MudLink Disabled="true" Href="/privacy-policy" Color="Color.Primary">Privacy Policy</MudLink> |
+            <MudLink Disabled="true" Href="/terms-of-service" Color="Color.Primary">Terms of Service</MudLink>
+        </MudText>
     </MudContainer>
 </MudPaper>
 
@@ -582,5 +311,5 @@
         new BreadcrumbItem("Home", href: "/"),
         new BreadcrumbItem("Memberships", href: "/membership"),
     };
-} *@
+}
 
