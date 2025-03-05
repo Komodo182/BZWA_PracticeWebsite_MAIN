@@ -163,7 +163,7 @@
             {
                 <MudItem xs="12" sm="12" md="12">
                     <MudCard Class="flex-auto d-flex py-8 mud-theme-white" Elevation="6">
-                        <MudStepper ShowResetButton CenterLabels="true" OnPreviewInteraction="OnPreviewInteraction">
+                        <MudStepper ShowResetButton CenterLabels="true" OnPreviewInteraction="OnPreviewInteractionQuestionair">
                             <MudStep Title="Question 1" HasError="@(_step1Complete==false)">
                                 <MudCard>
                                     <MudCardHeader>
@@ -478,6 +478,44 @@
                     <MudAlert Severity="Severity.Info">To start a quiz select a quiz level and submit the search!</MudAlert>
                 </MudItem>
             }
+            else if (ShowUserAnswers == true)
+            {
+                <MudItem xs="12" sm="12" md="12">
+                    <MudCard Class="flex-auto d-flex py-8 mud-theme-white" Elevation="6">
+                        <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
+                            <MudTabPanel Text="Chart">
+                                <MudGrid>
+                                    <MudItem xs="6">
+                                        <MudChart ChartType="ChartType.Donut" Width="300px" Height="300px" InputData="@result" InputLabels="@labels">
+                                            <CustomGraphics>
+                                                <text class="donut-inner-text" x="47%" y="35%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">Total</text>
+                                                <text class="donut-inner-text" x="47%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@result.Sum().ToString()/10</text>
+                                            </CustomGraphics>
+                                        </MudChart>
+                                    </MudItem>
+                                    <MudItem xs="6">
+                                        @*Add a support text like oh well done or others depending on how many the user got correct*@
+                                    </MudItem>
+                                </MudGrid>
+                            </MudTabPanel>
+                            <MudTabPanel Text="Summary">
+                                <MudDataGrid Items="@_quizResultsTable" Dense="true" Hover="true" Bordered="true" Breakpoint="Breakpoint.Sm">
+                                    <Columns>
+                                        <!-- Manually define which values show in each column -->
+                                        <Column Field="QuestionNr" Title="Participant" />
+                                        <Column Field="QuestionText" Title="Correct" />
+                                        <Column Field="QuestionIfCorrect" Title="Incorrect" />
+                                    </Columns>
+                                </MudDataGrid>
+
+
+
+
+                            </MudTabPanel>
+                        </MudTabs>
+                    </MudCard>
+                </MudItem>
+            }
 
             @* <MudCard Class="pa-4 mt-3">
                     <MudCardHeader>
@@ -588,7 +626,7 @@
 @code {
     [Inject]
     IDialogService DialogService { get; set; }
-    private ISnackbar Snackbwear { get; set; }
+    private ISnackbar Snackbar { get; set; }
 
     private int SelectedQuizLevel;
     private List<Question> Questions = new();
@@ -622,6 +660,7 @@
         _processingSubmit = true;
         validFullSearch = null;
         validSearch = false;
+        ShowUserAnswers = false;
         await Task.Delay(3000);
         //(submitKS != null && Questions.Count > 0 && SelectedQuestionIndex >=0 && submitSUB != null && Questions.Count > 0 && SelectedQuestionIndex >=0)
         if (chosenSub != null || chosenSub !=0 && chosenKs != null || chosenKs !=0)
@@ -640,25 +679,6 @@
         _searchComplete = true;
     }
 
-
-
-
-
-
-
-    // private async Task LoadQuestions()
-    // {
-    //     List<Quiz> Quizzes = await CustomerService.GetQuizzes(submitKS, submitSUB);
-    //     if (Quizzes.Count != 0)
-    //     {
-    //         Questions = await CustomerService.GetQuestions(Quizzes[0].QuizId);
-    //         UserAnswers.Clear();
-    //         foreach (var question in Questions)
-    //         {
-    //             UserAnswers[question.QuizId] = "";
-    //         }
-    //     }
-    // }
     private quiz SQLquizdata = new quiz();
     private async Task LoadQuestions()
     {
@@ -674,13 +694,6 @@
             if (SQLquizdata == null) SQLquizdata = new quiz();
         }
     }
-
-
-
-
-
-
-
 
 
     private bool? _searchFullComplete;
@@ -870,27 +883,32 @@
     private string? Quiz9UserAns;
     private string? Quiz10UserAns;
 
-    private DateTime? _date;
-    private DateTime? _datechosen = DateTime.Today;
-    private DateTime _minDate = DateTime.Now.Date;
-    private string fName { get; set; }
-    private string lName { get; set; }
-    private string email { get; set; }
-    private string phone { get; set; }
-    private string address { get; set; }
-    private string CreditCardNumber { get; set; }
-    private string CVV { get; set; }
-    private string ExpirationDate { get; set; }
+    private int correctAnsTot = 0;
+    private int incorrectAnsTot = 0;
+    private string Ans1Check = "NULL";
+    private string Ans2Check = "NULL";
+    private string Ans3Check = "NULL";
+    private string Ans4Check = "NULL";
+    private string Ans5Check = "NULL";
+    private string Ans6Check = "NULL";
+    private string Ans7Check = "NULL";
+    private string Ans8Check = "NULL";
+    private string Ans9Check = "NULL";
+    private string Ans10Check = "NULL";
+
+    private bool ShowUserAnswers = false;
 
     private bool _processing1 = false;
     private async Task ProcessSomething1()
     {
         _step1Complete = false;
         _processing1 = true;
-
         await Task.Delay(500);
         _processing1 = false;
-        _step1Complete = true;
+        if (Quiz1UserAns != null)
+        {
+            _step1Complete = true;
+        }
     }
     private void _1ButtonQuiz(int id)
     {
@@ -916,10 +934,12 @@
     {
         _step2Complete = false;
         _processing2 = true;
-
         await Task.Delay(500);
         _processing2 = false;
-        _step2Complete = true;
+        if (Quiz2UserAns != null)
+        {
+            _step2Complete = true;
+        }
     }
     private void _2ButtonQuiz(int id)
     {
@@ -945,10 +965,12 @@
     {
         _step3Complete = false;
         _processing3 = true;
-
         await Task.Delay(500);
         _processing3 = false;
-        _step3Complete = true;
+        if (Quiz3UserAns != null)
+        {
+            _step3Complete = true;
+        }
     }
     private void _3ButtonQuiz(int id)
     {
@@ -974,10 +996,12 @@
     {
         _step4Complete = false;
         _processing4 = true;
-
         await Task.Delay(500);
         _processing4 = false;
-        _step4Complete = true;
+        if (Quiz4UserAns != null)
+        {
+            _step4Complete = true;
+        }
     }
     private void _4ButtonQuiz(int id)
     {
@@ -1003,10 +1027,12 @@
     {
         _step5Complete = false;
         _processing5 = true;
-
         await Task.Delay(500);
         _processing5 = false;
-        _step5Complete = true;
+        if (Quiz5UserAns != null)
+        {
+            _step5Complete = true;
+        }
     }
     private void _5ButtonQuiz(int id)
     {
@@ -1032,10 +1058,12 @@
     {
         _step6Complete = false;
         _processing6 = true;
-
         await Task.Delay(500);
         _processing6 = false;
-        _step6Complete = true;
+        if (Quiz6UserAns != null)
+        {
+            _step6Complete = true;
+        }
     }
     private void _6ButtonQuiz(int id)
     {
@@ -1061,10 +1089,12 @@
     {
         _step7Complete = false;
         _processing7 = true;
-
         await Task.Delay(500);
-        _processing3 = false;
-        _step3Complete = true;
+        _processing7 = false;
+        if (Quiz7UserAns != null)
+        {
+            _step7Complete = true;
+        }
     }
     private void _7ButtonQuiz(int id)
     {
@@ -1090,10 +1120,12 @@
     {
         _step8Complete = false;
         _processing8 = true;
-
         await Task.Delay(500);
         _processing8 = false;
-        _step4Complete = true;
+        if (Quiz8UserAns != null)
+        {
+            _step8Complete = true;
+        }
     }
     private void _8ButtonQuiz(int id)
     {
@@ -1119,10 +1151,12 @@
     {
         _step9Complete = false;
         _processing9 = true;
-
         await Task.Delay(500);
         _processing9 = false;
-        _step9Complete = true;
+        if (Quiz9UserAns != null)
+        {
+            _step9Complete = true;
+        }
     }
     private void _9ButtonQuiz(int id)
     {
@@ -1148,10 +1182,12 @@
     {
         _step10Complete = false;
         _processing10 = true;
-
         await Task.Delay(500);
         _processing10 = false;
-        _step10Complete = true;
+        if (Quiz10UserAns != null)
+        {
+            _step10Complete = true;
+        }
     }
     private void _10ButtonQuiz(int id)
     {
@@ -1172,111 +1208,49 @@
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //private quiz SQLquizdata = new quiz();
-
-    // protected override async Task OnInitializedAsync()
+    // public async Task<(int correctAnsTot, int incorrectAnsTot)> UserAnsCheckFinal(quiz data)
     // {
-    //     SQLquizdata = await CustomerService.GetQuizData(SelectedQuizLevel); // Fetch data from service
-    //     if (SQLquizdata == null) SQLquizdata = new quiz(); // Avoid null reference errors
+    //     int correctAnsTot = 0;
+    //     int incorrectAnsTot = 0;
+
+    //     if (Quiz1UserAns == data.Quiz1TrueAns) correctAnsTot++; else incorrectAnsTot++;
+    //     if (Quiz2UserAns == data.Quiz2TrueAns) correctAnsTot++; else incorrectAnsTot++;
+    //     if (Quiz3UserAns == data.Quiz3TrueAns) correctAnsTot++; else incorrectAnsTot++;
+    //     if (Quiz4UserAns == data.Quiz4TrueAns) correctAnsTot++; else incorrectAnsTot++;
+    //     if (Quiz5UserAns == data.Quiz5TrueAns) correctAnsTot++; else incorrectAnsTot++;
+    //     if (Quiz6UserAns == data.Quiz6TrueAns) correctAnsTot++; else incorrectAnsTot++;
+    //     if (Quiz7UserAns == data.Quiz7TrueAns) correctAnsTot++; else incorrectAnsTot++;
+    //     if (Quiz8UserAns == data.Quiz8TrueAns) correctAnsTot++; else incorrectAnsTot++;
+    //     if (Quiz9UserAns == data.Quiz9TrueAns) correctAnsTot++; else incorrectAnsTot++;
+    //     if (Quiz10UserAns == data.Quiz10TrueAns) correctAnsTot++; else incorrectAnsTot++;
+    //     Console.WriteLine(correctAnsTot);
+    //     Console.WriteLine(incorrectAnsTot);
+    //     return (correctAnsTot, incorrectAnsTot);
     // }
 
-    // public class UserQuizAnswers
-    // {
-    //     public Dictionary<int, int> Answers { get; set; } = new Dictionary<int, int>();
-
-    //     public void StoreAnswer(int questionId, int selectedAnswer)
-    //     {
-    //         if (Answers.ContainsKey(questionId))
-    //         {
-    //             Answers[questionId] = selectedAnswer;
-    //         }
-    //         else
-    //         {
-    //             Answers.Add(questionId, selectedAnswer);
-    //         }
-    //     }
-
-    //     public int? GetAnswer(int questionId)
-    //     {
-    //         return Answers.ContainsKey(questionId) ? Answers[questionId] : null;
-    //     }
-
-    //     public async Task UserAnsCheckFinal(quiz data)
-    //     {
-    //         int CorrectAnsTot = 0;
-    //         int IncorrectAnsTot = 0;
-    //         if (Quiz1UserAns == data.Quiz1TrueAns)
-    //         {
-    //             CorrectAnsTot += 1;
-    //         }
-    //         else
-    //         {
-    //             IncorrectAnsTot += 1;
-    //         }
-    //         if (user.Quiz2UserAns == data.Quiz2TrueAns)
-    //         {
-    //             CorrectAnsTot += 1;
-    //         }
-    //         else
-    //         {
-    //             IncorrectAnsTot += 1;
-    //         }
-    //         if (user.Quiz3UserAns == data.Quiz3TrueAns)
-    //         {
-    //             CorrectAnsTot += 1;
-    //         }
-    //         else
-    //         {
-    //             IncorrectAnsTot += 1;
-    //         }
-    //     }
-    // }
-
-    public async Task<(int correctAnsTot, int incorrectAnsTot)> UserAnsCheckFinal(quiz data)
+    private async Task UserAnsCheckFinal()
     {
-        int correctAnsTot = 0;
-        int incorrectAnsTot = 0;
+        correctAnsTot = 0;
+        incorrectAnsTot = 0;
+        if (Quiz1UserAns == SQLquizdata.Quiz1TrueAns) { correctAnsTot++; Ans1Check = "Correct"; } else { incorrectAnsTot++; Ans1Check = "Incorrect"; }
+        if (Quiz2UserAns == SQLquizdata.Quiz2TrueAns) { correctAnsTot++; Ans2Check = "Correct"; } else { incorrectAnsTot++; Ans2Check = "Incorrect"; }
+        if (Quiz3UserAns == SQLquizdata.Quiz3TrueAns) { correctAnsTot++; Ans3Check = "Correct"; } else { incorrectAnsTot++; Ans3Check = "Incorrect"; }
+        if (Quiz4UserAns == SQLquizdata.Quiz4TrueAns) { correctAnsTot++; Ans4Check = "Correct"; } else { incorrectAnsTot++; Ans4Check = "Incorrect"; }
+        if (Quiz5UserAns == SQLquizdata.Quiz5TrueAns) { correctAnsTot++; Ans5Check = "Correct"; } else { incorrectAnsTot++; Ans5Check = "Incorrect"; }
+        if (Quiz6UserAns == SQLquizdata.Quiz6TrueAns) { correctAnsTot++; Ans6Check = "Correct"; } else { incorrectAnsTot++; Ans6Check = "Incorrect"; }
+        if (Quiz7UserAns == SQLquizdata.Quiz7TrueAns) { correctAnsTot++; Ans7Check = "Correct"; } else { incorrectAnsTot++; Ans7Check = "Incorrect"; }
+        if (Quiz8UserAns == SQLquizdata.Quiz8TrueAns) { correctAnsTot++; Ans8Check = "Correct"; } else { incorrectAnsTot++; Ans8Check = "Incorrect"; }
+        if (Quiz9UserAns == SQLquizdata.Quiz9TrueAns) { correctAnsTot++; Ans9Check = "Correct"; } else { incorrectAnsTot++; Ans9Check = "Incorrect"; }
+        if (Quiz10UserAns == SQLquizdata.Quiz10TrueAns) { correctAnsTot++; Ans10Check = "Correct"; } else { incorrectAnsTot++; Ans10Check = "Incorrect"; }
 
-        if (Quiz1UserAns == data.Quiz1TrueAns) correctAnsTot++; else incorrectAnsTot++;
-        if (Quiz2UserAns == data.Quiz2TrueAns) correctAnsTot++; else incorrectAnsTot++;
-        if (Quiz3UserAns == data.Quiz3TrueAns) correctAnsTot++; else incorrectAnsTot++;
-        if (Quiz4UserAns == data.Quiz4TrueAns) correctAnsTot++; else incorrectAnsTot++;
-        if (Quiz5UserAns == data.Quiz5TrueAns) correctAnsTot++; else incorrectAnsTot++;
-        if (Quiz6UserAns == data.Quiz6TrueAns) correctAnsTot++; else incorrectAnsTot++;
-        if (Quiz7UserAns == data.Quiz7TrueAns) correctAnsTot++; else incorrectAnsTot++;
-        if (Quiz8UserAns == data.Quiz8TrueAns) correctAnsTot++; else incorrectAnsTot++;
-        if (Quiz9UserAns == data.Quiz9TrueAns) correctAnsTot++; else incorrectAnsTot++;
-        if (Quiz10UserAns == data.Quiz10TrueAns) correctAnsTot++; else incorrectAnsTot++;
         Console.WriteLine(correctAnsTot);
         Console.WriteLine(incorrectAnsTot);
-        return (correctAnsTot, incorrectAnsTot);
     }
 
 
 
 
-
-
-
-
-
-
-
-
-    private async Task OnPreviewInteraction(StepperInteractionEventArgs arg)
+    private async Task OnPreviewInteractionQuestionair(StepperInteractionEventArgs arg)
     {
         if (arg.Action == StepAction.Complete)
         {
@@ -1295,30 +1269,72 @@
         switch (arg.StepIndex)
         {
             case 0:
-                if ((_step1Complete != true) || (_date < _minDate) || (_date == null))
+                if ((_step1Complete != true))
                 {
-                    await DialogService.ShowMessageBox("Error", "You have not selected a date in the step 1.");
+                    await DialogService.ShowMessageBox("Error", "You have not answered question 1 yet.");
                     arg.Cancel = true;
                 }
                 break;
             case 1:
                 if ((_step2Complete != true))
                 {
-                    await DialogService.ShowMessageBox("Error", "You have not submitted any tickets.");
+                    await DialogService.ShowMessageBox("Error", "You have not answered question 2 yet.");
                     arg.Cancel = true;
                 }
                 break;
             case 2:
                 if ((_step3Complete != true))
                 {
-                    await DialogService.ShowMessageBox("Error", "You have not put in the required billing information.");
+                    await DialogService.ShowMessageBox("Error", "You have not answered question 3 yet.");
                     arg.Cancel = true;
                 }
                 break;
             case 3:
                 if ((_step4Complete != true))
                 {
-                    await DialogService.ShowMessageBox("Error", "You have not submitted any valid card information.");
+                    await DialogService.ShowMessageBox("Error", "You have not answered question 4 yet.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 4:
+                if ((_step5Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "You have not answered question 5 yet.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 5:
+                if ((_step6Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "You have not answered question 6 yet.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 6:
+                if ((_step7Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "You have not answered question 7 yet.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 7:
+                if ((_step8Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "You have not answered question 8 yet.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 8:
+                if ((_step9Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "You have not answered question 9 yet.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 9:
+                if ((_step10Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "You have not answered question 10 yet.");
                     arg.Cancel = true;
                 }
                 break;
@@ -1332,76 +1348,103 @@
             case 1:
                 if (_step1Complete != true)
                 {
-                    await DialogService.ShowMessageBox("Error", "Finish step 'Date' first.");
+                    await DialogService.ShowMessageBox("Error", "Answer questions: '1' first.");
                     arg.Cancel = true;
                 }
                 break;
             case 2:
                 if ((_step1Complete != true) || (_step2Complete != true))
                 {
-                    await DialogService.ShowMessageBox("Error", "Finish step 1 and 2 first.");
+                    await DialogService.ShowMessageBox("Error", "Answer questions: '1,2' first.");
                     arg.Cancel = true;
                 }
                 break;
             case 3:
                 if ((_step1Complete != true) || (_step2Complete != true) || (_step3Complete != true))
                 {
-                    await DialogService.ShowMessageBox("Error", "Finish step 1,2 and 3 first.");
+                    await DialogService.ShowMessageBox("Error", "Answer questions: '1,2,3' first.");
                     arg.Cancel = true;
                 }
                 break;
             case 4:
                 if ((_step1Complete != true) || (_step2Complete != true) || (_step3Complete != true) || (_step4Complete != true))
                 {
-                    await DialogService.ShowMessageBox("Error", "Finish step 1,2,3 and 4 first.");
+                    await DialogService.ShowMessageBox("Error", "Answer questions: '1,2,3,4' first.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 5:
+                if ((_step1Complete != true) || (_step2Complete != true) || (_step3Complete != true) || (_step4Complete != true) || (_step5Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "Answer questions: '1,2,3,4,5' first.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 6:
+                if ((_step1Complete != true) || (_step2Complete != true) || (_step3Complete != true) || (_step4Complete != true) || (_step6Complete != true) || (_step7Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "Answer questions: '1,2,3,4,5,6' first.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 7:
+                if ((_step1Complete != true) || (_step2Complete != true) || (_step3Complete != true) || (_step4Complete != true) || (_step6Complete != true) || (_step7Complete != true) || (_step8Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "Answer questions: '1,2,3,4,5,6,7' first.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 8:
+                if ((_step1Complete != true) || (_step2Complete != true) || (_step3Complete != true) || (_step4Complete != true) || (_step6Complete != true) || (_step7Complete != true) || (_step8Complete != true) || (_step9Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "Answer questions: '1,2,3,4,5,6,7,8' first.");
+                    arg.Cancel = true;
+                }
+                break;
+            case 9:
+                if ((_step1Complete != true) || (_step2Complete != true) || (_step3Complete != true) || (_step4Complete != true) || (_step6Complete != true) || (_step7Complete != true) || (_step8Complete != true) || (_step9Complete != true) || (_step10Complete != true))
+                {
+                    await DialogService.ShowMessageBox("Error", "Answer questions: '1,2,3,4,5,6,7,8,9' first.");
                     arg.Cancel = true;
                 }
                 break;
         }
     }
 
-    public class Ticket
+    private async Task CompleteQuiz()
     {
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public int Quantity { get; set; }
-        public DateTime? Date { get; set; }
-    }
-
-    private List<Ticket> ConfirmedTickets = new();
-    private List<Ticket> Tickets = new List<Ticket>
-    {
-        new Ticket { Name = "Admission - Adult (16+)", Price = 19.99M, Quantity = 0 },
-        new Ticket { Name = "Admission - Child (6-15)", Price = 14.99M, Quantity = 0 },
-        new Ticket { Name = "Admission - Senior (65+)", Price = 17.99M, Quantity = 0 },
-        new Ticket { Name = "Admission - Student", Price = 17.99M, Quantity = 0 },
-        new Ticket { Name = "Admission - Under 6s", Price = 0.00M, Quantity = 0 },
-        new Ticket { Name = "Admission - Disabled Adult (16+)", Price = 14.99M, Quantity = 0 },
-        new Ticket { Name = "Admission - Disabled Child (6-15)", Price = 9.99M, Quantity = 0 },
-        new Ticket { Name = "Admission - Disabled Senior (65+)", Price = 11.99M, Quantity = 0 },
-        new Ticket { Name = "Admission - Disabled Student", Price = 11.99M, Quantity = 0 },
-        new Ticket { Name = "Admission - Disabled Carer", Price = 8.00M, Quantity = 0 }
-    };
-
-    private async Task ConfirmSelectionAsync()
-    {
-        // Save only tickets with quantity > 0
-        ConfirmedTickets = Tickets
-            .Where(ticket => ticket.Quantity > 0)
-            .Select(ticket => new Ticket
-                {
-                    Name = ticket.Name,
-                    Quantity = ticket.Quantity,
-                    Date = _datechosen
-                })
-            .ToList();
-    }
-
-    private async Task CompletePayment()
-    {
+        UserAnsCheckFinal();
         await Task.Delay(500);
-        //Snackbar?.Add("Payment successful! Thank you for your purchase.", Severity.Success);
+        if (correctAnsTot != 0 || incorrectAnsTot != 0)
+        {
+            ShowUserAnswers = true;
+        }
+
+        
     }
+    public double[] result => new double[] {correctAnsTot, incorrectAnsTot};
+    public string[] labels = {"Correct", "Incorrect"};
+
+    public class QuizResultTable
+    {
+        public int QuestionNr { get; set; }
+        public string QuestionText {get; set; }
+        public string QuestionIfCorrect {get; set; }
+    }
+    
+    // private List<QuizResultTable> _quizResultsTable = new()
+    // {
+    //     new QuizResultTable { QuestionNr = 1, QuestionText = SQLquizdata.Quiz1Question, QuestionIfCorrect = Ans1Check},
+    //     new QuizResultTable { QuestionNr = 2, QuestionText = SQLquizdata.Quiz2Question, QuestionIfCorrect = Ans2Check},
+    //     new QuizResultTable { QuestionNr = 3, QuestionText = SQLquizdata.Quiz3Question, QuestionIfCorrect = Ans3Check},
+    //     new QuizResultTable { QuestionNr = 4, QuestionText = SQLquizdata.Quiz4Question, QuestionIfCorrect = Ans4Check},
+    //     new QuizResultTable { QuestionNr = 5, QuestionText = SQLquizdata.Quiz5Question, QuestionIfCorrect = Ans5Check},
+    //     new QuizResultTable { QuestionNr = 6, QuestionText = SQLquizdata.Quiz6Question, QuestionIfCorrect = Ans6Check},
+    //     new QuizResultTable { QuestionNr = 7, QuestionText = SQLquizdata.Quiz7Question, QuestionIfCorrect = Ans7Check},
+    //     new QuizResultTable { QuestionNr = 8, QuestionText = SQLquizdata.Quiz8Question, QuestionIfCorrect = Ans8Check},
+    //     new QuizResultTable { QuestionNr = 9, QuestionText = SQLquizdata.Quiz9Question, QuestionIfCorrect = Ans9Check},
+    //     new QuizResultTable { QuestionNr = 10, QuestionText = SQLquizdata.Quiz10Question, QuestionIfCorrect = Ans10Check}
+    // };
 
 
 
@@ -1411,6 +1454,87 @@
 
 
 
+
+    public class QuizManager // Replace with your actual class name
+{
+    private List<QuizResultTable> _quizResultsTable;
+
+    // Declare SQLquizdata and AnsXCheck as fields or pass them into the constructor
+    private quiz SQLquizdata;  // Or whatever your actual data source is
+    private string Ans1Check, Ans2Check, Ans3Check, Ans4Check, Ans5Check, Ans6Check, Ans7Check, Ans8Check, Ans9Check, Ans10Check;
+
+    // Constructor to initialize the data
+    public QuizManager(quiz quizData, string ans1, string ans2, string ans3, string ans4, string ans5, string ans6, string ans7, string ans8, string ans9, string ans10)
+    {
+        // Assign the parameters to the fields
+        SQLquizdata = quizData;
+        Ans1Check = ans1;
+        Ans2Check = ans2;
+        Ans3Check = ans3;
+        Ans4Check = ans4;
+        Ans5Check = ans5;
+        Ans6Check = ans6;
+        Ans7Check = ans7;
+        Ans8Check = ans8;
+        Ans9Check = ans9;
+        Ans10Check = ans10;
+
+        // Initialize the quizResultsTable in the constructor
+        _quizResultsTable = new List<QuizResultTable>
+        {
+            new QuizResultTable { 
+                QuestionNr = 1, 
+                QuestionText = SQLquizdata?.Quiz1Question ?? "No Question", 
+                QuestionIfCorrect = Ans1Check == "NotAnswered" ? "Answer not provided" : (Ans1Check == SQLquizdata?.Quiz1TrueAns ? "Correct" : "Incorrect")
+            },
+            new QuizResultTable { 
+                QuestionNr = 2, 
+                QuestionText = SQLquizdata?.Quiz2Question ?? "No Question", 
+                QuestionIfCorrect = Ans2Check == "NotAnswered" ? "Answer not provided" : (Ans2Check == SQLquizdata?.Quiz2TrueAns ? "Correct" : "Incorrect")
+            },
+            new QuizResultTable { 
+                QuestionNr = 3, 
+                QuestionText = SQLquizdata?.Quiz3Question ?? "No Question", 
+                QuestionIfCorrect = Ans3Check == "NotAnswered" ? "Answer not provided" : (Ans3Check == SQLquizdata?.Quiz3TrueAns ? "Correct" : "Incorrect")
+            },
+            new QuizResultTable { 
+                QuestionNr = 4, 
+                QuestionText = SQLquizdata?.Quiz4Question ?? "No Question", 
+                QuestionIfCorrect = Ans4Check == "NotAnswered" ? "Answer not provided" : (Ans4Check == SQLquizdata?.Quiz4TrueAns ? "Correct" : "Incorrect")
+            },
+            new QuizResultTable { 
+                QuestionNr = 5, 
+                QuestionText = SQLquizdata?.Quiz5Question ?? "No Question", 
+                QuestionIfCorrect = Ans5Check == "NotAnswered" ? "Answer not provided" : (Ans5Check == SQLquizdata?.Quiz5TrueAns ? "Correct" : "Incorrect")
+            },
+            new QuizResultTable { 
+                QuestionNr = 6, 
+                QuestionText = SQLquizdata?.Quiz6Question ?? "No Question", 
+                QuestionIfCorrect = Ans6Check == "NotAnswered" ? "Answer not provided" : (Ans6Check == SQLquizdata?.Quiz6TrueAns ? "Correct" : "Incorrect")
+            },
+            new QuizResultTable { 
+                QuestionNr = 7, 
+                QuestionText = SQLquizdata?.Quiz7Question ?? "No Question", 
+                QuestionIfCorrect = Ans7Check == "NotAnswered" ? "Answer not provided" : (Ans7Check == SQLquizdata?.Quiz7TrueAns ? "Correct" : "Incorrect")
+            },
+            new QuizResultTable { 
+                QuestionNr = 8, 
+                QuestionText = SQLquizdata?.Quiz8Question ?? "No Question", 
+                QuestionIfCorrect = Ans8Check == "NotAnswered" ? "Answer not provided" : (Ans8Check == SQLquizdata?.Quiz8TrueAns ? "Correct" : "Incorrect")
+            },
+            new QuizResultTable { 
+                QuestionNr = 9, 
+                QuestionText = SQLquizdata?.Quiz9Question ?? "No Question", 
+                QuestionIfCorrect = Ans9Check == "NotAnswered" ? "Answer not provided" : (Ans9Check == SQLquizdata?.Quiz9TrueAns ? "Correct" : "Incorrect")
+            },
+            new QuizResultTable { 
+                QuestionNr = 10, 
+                QuestionText = SQLquizdata?.Quiz10Question ?? "No Question", 
+                QuestionIfCorrect = Ans10Check == "NotAnswered" ? "Answer not provided" : (Ans10Check == SQLquizdata?.Quiz10TrueAns ? "Correct" : "Incorrect")
+            }
+        };
+    }
+}
 
 
 
