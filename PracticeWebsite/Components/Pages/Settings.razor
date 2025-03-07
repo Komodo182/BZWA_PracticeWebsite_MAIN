@@ -31,21 +31,13 @@
                 </MudItem>
             </MudGrid>
         </MudCardHeader>
-        @if (customer == null)
+        
+
+        @if (UserSession.IsLoggedIn == false)
         {
             <MudGrid Justify="Justify.Center">
-                <MudItem xs="12" sm="6" md="10">
-                    <MudCard Elevation="25" Class="rounded-lg pb-4">
-                        <MudText Typo="Typo.body1" Align="Align.Center">Please log in to see your account details.</MudText>
-
-                        <MudGrid Justify="Justify.Center" Class="mt-4">
-                            <MudItem>
-                                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="NavigateToLogin" Class="mt-4" Style="font-size: 1.5rem; padding: 0.75rem 1.5rem; width: 200px;">
-                                    Log In
-                                </MudButton>
-                            </MudItem>
-                        </MudGrid>
-                    </MudCard>
+                <MudItem xs="12" sm="10" md="10">
+                    <MudAlert SEverity="Severity.Error"> Please log in using the button on the top right of the page on the appbar for it to allow for access to settings.</MudAlert>
                 </MudItem>
             </MudGrid>
         }
@@ -71,16 +63,16 @@
                                             <MudCardContent>
                                                 <MudGrid>
                                                     <MudItem xs="12" sm="6">
-                                                        <MudText Typo="Typo.body1"><strong>Username:</strong> @customer.Username</MudText>
+                                                        <MudText Typo="Typo.body1"><strong>Username:</strong> @UserSession.CurrentUsername</MudText>
                                                     </MudItem>
                                                     <MudItem xs="12" sm="6">
-                                                        <MudText Typo="Typo.body1"><strong>Email:</strong> @customer.Email</MudText>
+                                                        <MudText Typo="Typo.body1"><strong>Email:</strong> @LogInCustomer.Email</MudText>
                                                     </MudItem>
                                                     <MudItem xs="12" sm="6">
-                                                        <MudText Typo="Typo.body1"><strong>Post Code:</strong> @customer.Postcode</MudText>
+                                                        <MudText Typo="Typo.body1"><strong>Post Code:</strong> @LogInCustomer.Postcode</MudText>
                                                     </MudItem>
                                                     <MudItem xs="12" sm="6">
-                                                        <MudText Typo="Typo.body1"><strong>Phone Number:</strong> @customer.PhoneNumber</MudText>
+                                                        <MudText Typo="Typo.body1"><strong>Phone Number:</strong> @LogInCustomer.PhoneNumber</MudText>
                                                     </MudItem>
                                                 </MudGrid>
                                             </MudCardContent>
@@ -105,7 +97,7 @@
                                             <MudCardContent>
                                                 <MudText Typo="Typo.body1">Change your password and manage security settings below.</MudText>
                                                 <br />
-                                                <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="NavigateToChangePassword">Change Password</MudButton>
+                                                <MudButton Disabled="true" Variant="Variant.Outlined" Color="Color.Primary" OnClick="NavigateToChangePassword">Change Password</MudButton>
                                             </MudCardContent>
                                         </MudCard>
                                     </MudCardContent>
@@ -128,7 +120,7 @@
                                             <MudCardContent>
                                                 <MudText Typo="Typo.h5">Account Actions</MudText>
                                                 <MudDivider Class="my-2" />
-                                                <MudButton Variant="Variant.Outlined" Color="Color.Error" OnClick="ShowDeleteConfirmation">Delete Account</MudButton>
+                                                <MudButton Disabled = "true" Variant="Variant.Outlined" Color="Color.Error" OnClick="ShowDeleteConfirmation">Delete Account</MudButton>
 
                                                 @if (showDeleteConfirmation)
                                                 {
@@ -163,6 +155,7 @@
 
 
 @code {
+    private Customer LogInCustomer = new Customer();
     private Customer? customer;
     private bool showDeleteConfirmation = false;
     protected override async Task OnInitializedAsync()
@@ -200,18 +193,18 @@
 
     private void NavigateToChangePassword()
     {
-        NavigationManager.NavigateTo("/changePassword");
+        NavigationManager.NavigateTo("/");
     }
 
     private void NavigateToLogin()
     {
-        NavigationManager.NavigateTo("/login");
+        NavigationManager.NavigateTo("/");
     }
 
     private void Logout()
     {
         UserSession.Logout();
-        NavigationManager.NavigateTo("/login"); // Redirect to login page
+        NavigationManager.NavigateTo("/"); // Redirect to login page
     }
 
     private bool first = true;

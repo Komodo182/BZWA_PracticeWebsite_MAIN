@@ -477,9 +477,9 @@
                 <MudAlert Severity="Severity.Info">To start a quiz select a quiz level and submit the search!</MudAlert>
             </MudItem>
         }
-        else if (ShowUserAnswers == true)
+        @if (ShowUserAnswers == true)
         {
-            <MudItem xs="12" sm="12" md="12">
+            <MudItem xs="12" sm="12" md="8">
                 <MudCard Class="flex-auto d-flex py-8 mud-theme-white" Elevation="6">
                     <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
                         <MudTabPanel Text="Chart">
@@ -488,7 +488,7 @@
                                     <MudChart ChartType="ChartType.Donut" Width="300px" Height="300px" InputData="@result" InputLabels="@labels">
                                         <CustomGraphics>
                                             <text class="donut-inner-text" x="47%" y="35%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">Total</text>
-                                            <text class="donut-inner-text" x="47%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@result.Sum().ToString()/10</text>
+                                            <text class="donut-inner-text" x="47%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@correctAnsTot/10</text>
                                         </CustomGraphics>
                                     </MudChart>
                                 </MudItem>
@@ -1168,6 +1168,7 @@
         if (Quiz10UserAns != null)
         {
             _step10Complete = true;
+            CompleteQuiz();
         }
     }
     private void _10ButtonQuiz(int id)
@@ -1236,16 +1237,16 @@
         if (arg.Action == StepAction.Complete)
         {
             // occurrs when clicking next
-            await ControlStepCompletion(arg);
+            await ControlStepCompletionQuiz(arg);
         }
         else if (arg.Action == StepAction.Activate)
         {
             // occurrs when clicking a step header with the mouse
-            await ControlStepNavigation(arg);
+            await ControlStepNavigationQuiz(arg);
         }
     }
 
-    private async Task ControlStepCompletion(StepperInteractionEventArgs arg)
+    private async Task ControlStepCompletionQuiz(StepperInteractionEventArgs arg)
     {
         switch (arg.StepIndex)
         {
@@ -1322,7 +1323,7 @@
         }
     }
 
-    private async Task ControlStepNavigation(StepperInteractionEventArgs arg)
+    private async Task ControlStepNavigationQuiz(StepperInteractionEventArgs arg)
     {
         switch (arg.StepIndex)
         {
@@ -1396,12 +1397,7 @@
     {
         UserAnsCheckFinal();
         await Task.Delay(500);
-        if (correctAnsTot != 0 || incorrectAnsTot != 0)
-        {
-            ShowUserAnswers = true;
-        }
-
-        
+        ShowUserAnswers = true;
     }
     public double[] result => new double[] {correctAnsTot, incorrectAnsTot};
     public string[] labels = {"Correct", "Incorrect"};
